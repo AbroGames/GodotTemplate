@@ -11,9 +11,9 @@ config_version=5
 [application]
 
 config/name="GodotTemplate"
-run/main_scene="uid://dl8uxtthaxd0t"
+run/main_scene="uid://ceu2k3e77qmv2"
 config/features=PackedStringArray("4.4", "C#", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="uid://dy5ljuga61dg4"
 
 [dotnet]
 
