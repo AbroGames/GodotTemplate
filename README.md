@@ -11,10 +11,10 @@
 
 ### Создание проектов в Godot и Rider 
 
-Создаем новый проект. Необходимо в Project Path руками указать путь, чтобы сохранить регистр. 
+Создаем новый проект. Необходимо в Project Path руками указать путь, чтобы сохранить регистр.  
 <img width="400" height="429" alt="image" src="https://github.com/user-attachments/assets/1c76b953-7ca7-4e00-b1f5-10e7f5f338f7" />
 
-В редакторе создаем в любом месте C# скрипт и открываем его, чтобы создался проект в Rider и Solution для C#.
+В редакторе создаем в любом месте C# скрипт и открываем его, чтобы создался проект в Rider и Solution для C#.  
 <img width="400" height="344" alt="image" src="https://github.com/user-attachments/assets/ad7d14ba-d346-41b0-b2d4-2bf6f39fb954" />
 
 ### Настройка экспорта
