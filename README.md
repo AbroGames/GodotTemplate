@@ -6,7 +6,7 @@
 
 
 1. Чтобы в Godot настроить интеграцию с Rider, необходимо зайти в Editor -> Editor Settings -> Dotnet -> Editor. В списке External Editor выбрать JetBrains Rider и очистить значение Custom Exec Path Args.  
-2. [Опционально] Чтобы иметь возможность при экспорте изменять свойства exe файла, необходимо указать путь до rcedit в Editor -> Editor Settings -> Export -> Windows -> rcedit.
+2. [Опционально] Чтобы иметь возможность при экспорте изменять свойства exe файла, необходимо указать путь до [rcedit](https://github.com/electron/rcedit/releases) в Editor -> Editor Settings -> Export -> Windows -> rcedit.
 
 ### Создание проектов в Godot и Rider 
 
