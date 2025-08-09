@@ -60,7 +60,8 @@
 .editorconfig  
 .gitignore  
 
-Перенести icon.svg в Assets/Textures/icon.svg
+Перенести icon.svg в Assets/Textures/icon.svg  
+Перенести исходники из папки Lib проекта GodotTemplate в новый проект.
 
 Если был перенос исходников, то необходимо во всех исходниках переименовать GodotTemplate в название проекта.
 
@@ -69,3 +70,21 @@
 Project -> Project Settings -> Application -> Run -> Main Scene = Scenes/Root/Root.tscn  
 Project -> Project Settings -> Application -> Config -> Icon = res://Assets/Textures/icon.svg
 
+### Настройка зависимости Lib в Rider
+
+Сделаем так, чтобы основной проект мог ссылаться на классы из Lib, но не наоборот.  
+Если Lib попытается использовать класс из основного проекта, то получим ошибку компиляции и в Rider и в Godot.  
+При билде в Godot также происходит полный ребилд проекта Lib.  
+
+Создаем новый проект "Lib".  
+<img width="800" height="684" alt="image" src="https://github.com/user-attachments/assets/ae790d62-2930-4c7f-a218-17ea0218e36a" />
+
+В настройках указываем имя "Lib", больше ничего не меняем.  
+<img width="800" height="600" alt="image" src="https://github.com/user-attachments/assets/40a03166-a43c-44ec-8a19-b74a040a2500" />
+
+Открываем файл проекта (*.csproj).  
+В этом файле первую строку заменяем на ```<Project Sdk="Godot.NET.Sdk/4.4.1">```  
+<img width="800" height="717" alt="image" src="https://github.com/user-attachments/assets/3311b613-cc4e-4556-b933-edd1031e26f2" />
+
+Переключаем в Rider Explorer в режим File System (сверху). В папке Lib удаляем папки bin и obj.   
+<img width="400" height="523" alt="image" src="https://github.com/user-attachments/assets/1384cb55-733e-4c49-9a1b-b489f27b5c7f" />
