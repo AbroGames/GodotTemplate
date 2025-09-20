@@ -5,6 +5,7 @@ using Serilog;
 
 namespace KludgeBox.Godot.Nodes.Process;
 
+// ReSharper disable once Godot.MissingParameterlessConstructor
 public partial class ProcessDeadChecker : Node
 {
     

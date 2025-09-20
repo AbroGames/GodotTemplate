@@ -4,6 +4,7 @@ using Serilog;
 
 namespace KludgeBox.Godot.Nodes.Process;
 
+// ReSharper disable once Godot.MissingParameterlessConstructor
 public partial class ProcessShutdowner : Node
 {
     
@@ -16,7 +17,7 @@ public partial class ProcessShutdowner : Node
         NotificationExitTree
     ];
     
-    private readonly ILogger _logger = LogFactory.GetForStatic<ProcessShutdowner>();
+    private readonly ILogger _logger = LogFactory.GetForStatic<ProcessShutdowner>(); //TODO Проверить этот и другие логеры в либе, а можно ли их внедрить через DI?
     
     private readonly int _processPid;
     private readonly Func<int, string> _logMessageGenerator = pid => $"Kill process {pid}.";
