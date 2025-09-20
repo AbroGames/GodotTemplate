@@ -4,6 +4,18 @@
     <EnableDynamicLoading>true</EnableDynamicLoading>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="KludgeBox\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="KludgeBox\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="KludgeBox\KludgeBox.csproj" />
+  </ItemGroup>
+
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
     <ItemGroup>
       <DirectoriesToCreate Include="$(ProjectDir)bin\win-64" />
