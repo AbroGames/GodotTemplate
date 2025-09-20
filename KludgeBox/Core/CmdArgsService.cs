@@ -1,8 +1,6 @@
-﻿using System;
-using System.Linq;
-using Godot;
+﻿using Godot;
 
-namespace KludgeBox;
+namespace KludgeBox.Core;
 
 public class CmdArgsService
 {

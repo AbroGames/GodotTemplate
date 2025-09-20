@@ -1,6 +1,6 @@
 ﻿using System;
 using Godot;
-using KludgeBox.DI.Access;
+using KludgeBox.Reflection.Access;
 
 namespace KludgeBox.DI.Requests.DependencyCreation;
 

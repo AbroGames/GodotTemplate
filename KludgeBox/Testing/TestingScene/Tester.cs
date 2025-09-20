@@ -1,7 +1,6 @@
-using System.Collections.Generic;
 using Godot;
 
-namespace Tests.TestingScene;
+namespace KludgeBox.Testing.TestingScene;
 
 public partial class Tester : Node
 {

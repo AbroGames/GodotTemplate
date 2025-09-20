@@ -1,8 +1,6 @@
-﻿using System;
-using System.Linq;
-using KludgeBox.DI.Access;
+﻿using KludgeBox.Reflection.Access;
 
-namespace KludgeBox.DI.Requests;
+namespace KludgeBox.DI.Requests.NotNullCheck;
 
 public class NotNullCheckRequestScanner : IProcessingRequestScanner
 {

@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Reflection;
+﻿using System.Reflection;
 
-namespace KludgeBox.DI.Access;
+namespace KludgeBox.Reflection.Access;
 
 public class MemberAccessor : IMemberAccessor
 {

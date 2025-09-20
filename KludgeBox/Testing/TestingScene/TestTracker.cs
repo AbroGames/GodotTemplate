@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using Godot;
+﻿using Godot;
 
-namespace Tests.TestingScene;
+namespace KludgeBox.Testing.TestingScene;
 
 public partial class TestTracker : HBoxContainer
 {

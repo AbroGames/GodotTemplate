@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Tests.TestingScene;
+﻿namespace KludgeBox.Testing.Asserting;
 
 public abstract class AssertException : Exception
 {

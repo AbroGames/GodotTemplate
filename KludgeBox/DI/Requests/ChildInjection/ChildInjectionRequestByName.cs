@@ -1,9 +1,9 @@
 ﻿using Godot;
 using Humanizer;
-using KludgeBox.DI.Access;
 using KludgeBox.DI.Exceptions;
+using KludgeBox.Reflection.Access;
 
-namespace KludgeBox.DI.Requests;
+namespace KludgeBox.DI.Requests.ChildInjection;
 
 public class ChildInjectionRequestByName : IProcessingRequest
 {

@@ -1,7 +1,7 @@
-﻿using KludgeBox.DI.Access;
-using KludgeBox.Logging;
+﻿using KludgeBox.Logging;
+using KludgeBox.Reflection.Access;
 
-namespace KludgeBox.DI.Requests;
+namespace KludgeBox.DI.Requests.LoggerInjection;
 
 public class LoggerInjectionRequest : IProcessingRequest
 {

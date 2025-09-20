@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Tests.TestingScene;
+﻿namespace KludgeBox.Testing;
 
 /// <summary>
 /// Attribute that should be used to mark test methods.

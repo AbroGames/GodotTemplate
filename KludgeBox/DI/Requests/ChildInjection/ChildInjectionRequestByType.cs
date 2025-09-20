@@ -1,11 +1,9 @@
-﻿using System;
-using System.Linq;
-using Godot;
+﻿using Godot;
 using Godot.Collections;
-using KludgeBox.DI.Access;
 using KludgeBox.DI.Exceptions;
+using KludgeBox.Reflection.Access;
 
-namespace KludgeBox.DI.Requests;
+namespace KludgeBox.DI.Requests.ChildInjection;
 
 public class ChildInjectionRequestByType : IProcessingRequest
 {

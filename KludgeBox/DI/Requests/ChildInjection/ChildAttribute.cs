@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace KludgeBox.DI.Requests;
+﻿namespace KludgeBox.DI.Requests.ChildInjection;
 
 [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property)]
 public sealed class ChildAttribute : Attribute

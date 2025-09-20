@@ -1,6 +1,6 @@
 ﻿using Godot;
 
-namespace Tests.TestingScene;
+namespace KludgeBox.Testing;
 
 /// <summary>
 /// Test node. All test classes must inherit from this. To create test methods, make a public void SomeTestName() method and mark it with the <see cref="TestAttribute"/>.

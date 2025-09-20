@@ -1,9 +1,9 @@
 ﻿using Godot;
-using KludgeBox.DI.Access;
 using KludgeBox.Logging;
+using KludgeBox.Reflection.Access;
 using Serilog;
 
-namespace KludgeBox.DI.Requests;
+namespace KludgeBox.DI.Requests.NotNullCheck;
 
 public class NotNullCheckRequest : IProcessingRequest
 {

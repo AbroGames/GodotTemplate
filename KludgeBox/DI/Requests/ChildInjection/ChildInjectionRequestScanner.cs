@@ -1,7 +1,6 @@
-﻿using System;
-using KludgeBox.DI.Access;
+﻿using KludgeBox.Reflection.Access;
 
-namespace KludgeBox.DI.Requests;
+namespace KludgeBox.DI.Requests.ChildInjection;
 
 
 

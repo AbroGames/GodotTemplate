@@ -1,6 +1,6 @@
-﻿using KludgeBox.DI.Access;
+﻿using KludgeBox.Reflection.Access;
 
-namespace KludgeBox.DI.Requests;
+namespace KludgeBox.DI.Requests.LoggerInjection;
 
 public class LoggerInjectionRequestScanner : IProcessingRequestScanner
 {

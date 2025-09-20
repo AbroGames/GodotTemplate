@@ -1,10 +1,10 @@
 ﻿using Godot;
 using Humanizer;
-using KludgeBox.DI.Access;
 using KludgeBox.DI.Exceptions;
+using KludgeBox.Reflection.Access;
 using StringExtensions = Godot.StringExtensions;
 
-namespace KludgeBox.DI.Requests;
+namespace KludgeBox.DI.Requests.ParentInjection;
 
 public class ParentInjectionRequestByName : IProcessingRequest
 {

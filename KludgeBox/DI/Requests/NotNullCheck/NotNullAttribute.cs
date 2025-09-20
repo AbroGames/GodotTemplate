@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace KludgeBox.DI.Requests;
+﻿namespace KludgeBox.DI.Requests.NotNullCheck;
 
 [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property)]
 public class NotNullAttribute : Attribute

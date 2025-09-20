@@ -1,9 +1,8 @@
-﻿using System;
-using Godot;
-using KludgeBox.DI.Access;
+﻿using Godot;
 using KludgeBox.DI.Exceptions;
+using KludgeBox.Reflection.Access;
 
-namespace KludgeBox.DI.Requests;
+namespace KludgeBox.DI.Requests.ParentInjection;
 
 public class ParentInjectionRequestByType : IProcessingRequest
 {

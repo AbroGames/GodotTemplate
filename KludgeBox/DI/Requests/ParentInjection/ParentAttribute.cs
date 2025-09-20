@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace KludgeBox.DI.Requests;
+﻿namespace KludgeBox.DI.Requests.ParentInjection;
 
 [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property)]
 public sealed class ParentAttribute : Attribute
