@@ -17,12 +17,12 @@ public class StringCompressService
         return DecompressGzip(compressedBytes);
     }
     
-    public byte[] CompressGzip(string text)
+    public byte[] CompressGzip(string text, CompressionLevel level = CompressionLevel.Optimal)
     {
         byte[] rawBytes = Encoding.UTF8.GetBytes(text);
 
         using var output = new MemoryStream();
-        using var gzip = new GZipStream(output, CompressionLevel.Optimal);
+        using var gzip = new GZipStream(output, level);
         
         gzip.Write(rawBytes, 0, rawBytes.Length);
         return output.ToArray();
