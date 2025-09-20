@@ -1,6 +1,4 @@
-using System;
-
-namespace Fantoria.Lib.Utils.Cooldown;
+namespace KludgeBox.Core.Cooldown;
 
 public class AutoCooldown : Cooldown
 {

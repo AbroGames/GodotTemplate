@@ -1,21 +1,25 @@
 ﻿using Godot;
+using KludgeBox.DI.Requests.NotNullCheck;
+using KludgeBox.Logging;
+using Serilog;
 
 namespace KludgeBox.Core;
 
 public class CmdArgsService
 {
 
-    protected string[] CmdArgs { get; } = OS.GetCmdlineArgs();
+    protected readonly string[] CmdArgs = OS.GetCmdlineArgs();
+    private readonly ILogger _logger = LogFactory.GetForStatic<CmdArgsService>();
 
     public void LogCmdArgs()
     {
         if (!CmdArgs.IsEmpty())
         {
-            Log.Info("Cmd args: " + CmdArgs.Join());
+            _logger.Information("Cmd args: " + CmdArgs.Join());
         }
         else
         {
-            Log.Info("Cmd args is empty");
+            _logger.Information("Cmd args is empty");
         }
     }
 
@@ -32,7 +36,7 @@ public class CmdArgsService
             int argPos = CmdArgs.ToList().IndexOf(paramName);
             if (argPos == -1)
             {
-                if (logIfEmpty) Log.Info($"Arg {paramName} not setup.");
+                if (logIfEmpty) _logger.Information($"Arg {paramName} not setup.");
                 return arg;
             }
 
@@ -40,10 +44,10 @@ public class CmdArgsService
         }
         catch
         {
-            Log.Warning($"Error while arg {paramName} setup."); //TODO Добавить возможность настроить сервис, чтобы ничего не логировалось (ни в сatch, ни просто) 
+            _logger.Warning($"Error while arg {paramName} setup."); //TODO Добавить возможность настроить сервис, чтобы ничего не логировалось (ни в сatch, ни просто) 
         }
         
-        Log.Info($"{paramName}: {arg}");
+        _logger.Information($"{paramName}: {arg}");
         return arg;
     }
 
@@ -61,7 +65,7 @@ public class CmdArgsService
         }
         catch (Exception ex) when (ex is FormatException || ex is OverflowException)
         {
-            Log.Warning($"Arg {paramName} can't convert to Int32");
+            _logger.Warning($"Arg {paramName} can't convert to Int32");
         }
 
         return arg;
@@ -81,7 +85,7 @@ public class CmdArgsService
         }
         catch (Exception ex) when (ex is FormatException || ex is OverflowException)
         {
-            Log.Warning($"Arg {paramName} can't convert to Int32");
+            _logger.Warning($"Arg {paramName} can't convert to Int32");
         }
 
         return arg;

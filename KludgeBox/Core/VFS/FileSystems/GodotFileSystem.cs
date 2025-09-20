@@ -1,12 +1,9 @@
-﻿using System;
-using System.ComponentModel;
-using System.IO;
-using System.Linq;
-using Fantoria.Lib.Utils.VFS.Base;
+﻿using System.ComponentModel;
 using Godot;
+using KludgeBox.Core.VFS.Base;
 using FileAccess = Godot.FileAccess;
 
-namespace Fantoria.Lib.Utils.VFS.FileSystems;
+namespace KludgeBox.Core.VFS.FileSystems;
 
 public enum GodotFsRoot
 {

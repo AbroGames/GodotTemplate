@@ -1,8 +1,6 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using Fantoria.Lib.Utils.VFS.Base;
+﻿using KludgeBox.Core.VFS.Base;
 
-namespace Fantoria.Lib.Utils.VFS.FileSystems;
+namespace KludgeBox.Core.VFS.FileSystems;
 
 /// <summary>
 /// Provides access to the part of another FileSystem.

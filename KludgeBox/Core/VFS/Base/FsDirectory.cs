@@ -1,10 +1,6 @@
 // ReSharper disable UnusedMember.Global
 
-using System;
-using System.Collections.Generic;
-using System.IO;
-
-namespace Fantoria.Lib.Utils.VFS.Base;
+namespace KludgeBox.Core.VFS.Base;
 
 public class FsDirectory : FsEntry
 {

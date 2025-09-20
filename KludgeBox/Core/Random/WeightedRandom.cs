@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 
-namespace Fantoria.Lib.Utils.Random
+namespace KludgeBox.Core.Random
 {
 	/// <summary>
 	/// Represents a weighted random picker that can randomly select stored items based on their weight.
@@ -104,7 +102,7 @@ namespace Fantoria.Lib.Utils.Random
 		private int GetWeightedRandomIndexFromPrefixSumOfWeights()
 		{
 			var totalWeight = _prefixSumOfWeights[^1];
-			var randomValue = LibService.Rand.Range(totalWeight);
+			var randomValue = KludgeBoxServices.Rand.Range(totalWeight);
 
 			for (var i = 0; i < _prefixSumOfWeights.Count; i++) {
 				if (randomValue < _prefixSumOfWeights[i]) {

@@ -1,7 +1,6 @@
-using System;
-using Fantoria.Lib.Utils.VFS.Base;
+using KludgeBox.Core.VFS.Base;
 
-namespace Fantoria.Lib.Utils.VFS.FileSystems;
+namespace KludgeBox.Core.VFS.FileSystems;
 
 public abstract class ArchiveFileSystem : FileSystem, IDisposable
 {

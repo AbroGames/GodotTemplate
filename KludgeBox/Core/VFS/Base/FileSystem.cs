@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
+﻿using System.Text;
 
-namespace Fantoria.Lib.Utils.VFS.Base;
+namespace KludgeBox.Core.VFS.Base;
 
 /// <summary>
 /// Abstract base class for all VFS implementations.

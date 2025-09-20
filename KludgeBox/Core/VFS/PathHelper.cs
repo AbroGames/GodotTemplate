@@ -1,11 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 
-namespace Fantoria.Lib.Utils.VFS;
+namespace KludgeBox.Core.VFS;
 
 public static class PathHelper
 {

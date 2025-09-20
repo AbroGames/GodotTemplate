@@ -1,9 +1,12 @@
 using Godot;
+using KludgeBox.Logging;
+using Serilog;
 
 namespace KludgeBox.Godot.Nodes.Process;
 
 public partial class ProcessShutdowner : Node
 {
+    
     private static readonly long[] ProcessShutdownNotificationTypes =
     [
         NotificationWMCloseRequest, 
@@ -12,7 +15,9 @@ public partial class ProcessShutdowner : Node
         NotificationPredelete,
         NotificationExitTree
     ];
-
+    
+    private readonly ILogger _logger = LogFactory.GetForStatic<ProcessShutdowner>();
+    
     private readonly int _processPid;
     private readonly Func<int, string> _logMessageGenerator = pid => $"Kill process {pid}.";
     
@@ -32,7 +37,7 @@ public partial class ProcessShutdowner : Node
 
     public void Shutdown()
     {
-        Log.Info(_logMessageGenerator(_processPid));
+        _logger.Information(_logMessageGenerator(_processPid));
         OS.Kill(_processPid);
     }
 }

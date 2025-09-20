@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using Fantoria.Lib.Utils.VFS.Base;
+﻿using System.Text;
+using KludgeBox.Core.VFS.Base;
 
-namespace Fantoria.Lib.Utils.VFS.FileSystems;
+namespace KludgeBox.Core.VFS.FileSystems;
 
 public class MemoryFileSystem : FileSystem
 {

@@ -11,4 +11,4 @@ global using static KludgeBox.Godot.Extensions.VectorExtensions;
 //TODO global using Fantoria.Lib.Services.NotNullChecking;
 
 //TODO global using Fantoria.Lib.Services;
-//TODO global using static Fantoria.Lib.Services.LibService.Global;
+//TODO global using static Fantoria.Lib.Services.KludgeBoxServices.Global;

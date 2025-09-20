@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using Fantoria.Lib.Utils.VFS.Base;
+﻿using KludgeBox.Core.VFS.Base;
 
-namespace Fantoria.Lib.Utils.VFS.FileSystems;
+namespace KludgeBox.Core.VFS.FileSystems;
 
 /// <summary>
 /// Allows to merge FileSystems. Added FileSystems will add new files or overwrite existing files.

@@ -1,6 +1,6 @@
-﻿using Fantoria.Lib.Utils.VFS.Base;
+﻿using KludgeBox.Core.VFS.Base;
 
-namespace Fantoria.Lib.Utils.VFS;
+namespace KludgeBox.Core.VFS;
 
 public static class FsExtensions
 {

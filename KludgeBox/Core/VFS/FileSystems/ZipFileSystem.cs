@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.IO.Compression;
-using System.Linq;
-using Fantoria.Lib.Utils.VFS.Base;
+﻿using System.IO.Compression;
+using KludgeBox.Core.VFS.Base;
 
-namespace Fantoria.Lib.Utils.VFS.FileSystems;
+namespace KludgeBox.Core.VFS.FileSystems;
 
 public class ZipFileSystem : ArchiveFileSystem
 {

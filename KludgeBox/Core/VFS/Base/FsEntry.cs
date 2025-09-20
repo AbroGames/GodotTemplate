@@ -1,6 +1,4 @@
-using System;
-
-namespace Fantoria.Lib.Utils.VFS.Base;
+namespace KludgeBox.Core.VFS.Base;
 
 public class FsEntry : IEquatable<FsEntry>
 {

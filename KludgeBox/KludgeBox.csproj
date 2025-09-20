@@ -14,13 +14,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Content Include="Core\Cooldown\AutoCooldown.cs.uid" />
-        <Content Include="Core\Cooldown\Cooldown.cs.uid" />
-        <Content Include="Core\Cooldown\ManualCooldown.cs.uid" />
-        <Content Include="Core\Random\RandomDistribution.cs.uid" />
-        <Content Include="Core\Random\WeightedRandom.cs.uid" />
-        <Content Include="Core\VFS\FsExtensions.cs.uid" />
-        <Content Include="Core\VFS\PathHelper.cs.uid" />
         <Content Include="Testing\README.md" /> <!-- TODO Remove and move to main readme -->
     </ItemGroup>
 

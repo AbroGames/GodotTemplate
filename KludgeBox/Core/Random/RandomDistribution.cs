@@ -1,6 +1,6 @@
 using Godot;
 
-namespace Fantoria.Lib.Utils.Random;
+namespace KludgeBox.Core.Random;
 
 /// <summary>
 /// The random distribution allows achieving a more reliable, yet still quite unpredictable randomness.
@@ -48,9 +48,9 @@ public class RandomDistribution
 	public bool TryProc()
 	{
 		// Generate random value for proc.
-		var random = LibService.Rand.Double;
+		var random = KludgeBoxServices.Rand.Double;
 
-		if (LibService.Rand.Chance(CurrentChance))
+		if (KludgeBoxServices.Rand.Chance(CurrentChance))
 		{
 			// if this execution is proc'd, then reset proc chance to base and return true.
 			CurrentChance = _constant;
