@@ -4,35 +4,52 @@ namespace KludgeBox.Core;
 
 public class CmdArgsService
 {
+
+    protected string[] CmdArgs { get; } = OS.GetCmdlineArgs();
+
+    public void LogCmdArgs()
+    {
+        if (!CmdArgs.IsEmpty())
+        {
+            Log.Info("Cmd args: " + CmdArgs.Join());
+        }
+        else
+        {
+            Log.Info("Cmd args is empty");
+        }
+    }
+
     public bool ContainsInCmdArgs(string paramName)
     {
-        return OS.GetCmdlineArgs().Contains(paramName);
+        return CmdArgs.Contains(paramName);
     }
     
-    public string GetStringFromCmdArgs(string paramName, string defaultValue = null)
+    public string GetStringFromCmdArgs(string paramName, string defaultValue = null, bool logIfEmpty = false)
     {
         string arg = defaultValue;
         try
         {
-            int argPos = OS.GetCmdlineArgs().ToList().IndexOf(paramName);
+            int argPos = CmdArgs.ToList().IndexOf(paramName);
             if (argPos == -1)
             {
+                if (logIfEmpty) Log.Info($"Arg {paramName} not setup.");
                 return arg;
             }
 
-            arg = OS.GetCmdlineArgs()[argPos + 1];
+            arg = CmdArgs[argPos + 1];
         }
         catch
         {
-            // do nothing
+            Log.Warning($"Error while arg {paramName} setup."); //TODO Добавить возможность настроить сервис, чтобы ничего не логировалось (ни в сatch, ни просто) 
         }
         
+        Log.Info($"{paramName}: {arg}");
         return arg;
     }
 
-    public int? GetIntFromCmdArgs(string paramName)
+    public int? GetIntFromCmdArgs(string paramName, bool logIfEmpty = false)
     {
-        string argAsString = GetStringFromCmdArgs(paramName);
+        string argAsString = GetStringFromCmdArgs(paramName, null, logIfEmpty);
         int? arg = null;
 
         try
@@ -42,17 +59,17 @@ public class CmdArgsService
                 arg = Convert.ToInt32(argAsString);
             }
         }
-        catch 
+        catch (Exception ex) when (ex is FormatException || ex is OverflowException)
         {
-            // do nothing
+            Log.Warning($"Arg {paramName} can't convert to Int32");
         }
 
         return arg;
     }
     
-    public int GetIntFromCmdArgs(string paramName, int defaultValue)
+    public int GetIntFromCmdArgs(string paramName, int defaultValue, bool logIfEmpty = false)
     {
-        string argAsString = GetStringFromCmdArgs(paramName, defaultValue.ToString());
+        string argAsString = GetStringFromCmdArgs(paramName, defaultValue.ToString(), logIfEmpty);
         int arg = defaultValue;
 
         try
@@ -62,9 +79,9 @@ public class CmdArgsService
                 arg = Convert.ToInt32(argAsString);
             }
         }
-        catch
+        catch (Exception ex) when (ex is FormatException || ex is OverflowException)
         {
-            // do nothing
+            Log.Warning($"Arg {paramName} can't convert to Int32");
         }
 
         return arg;
