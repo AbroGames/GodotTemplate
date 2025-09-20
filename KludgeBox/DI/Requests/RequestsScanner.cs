@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using KludgeBox.DI.Requests.ChildInjection;
+﻿using KludgeBox.DI.Requests.ChildInjection;
 using KludgeBox.DI.Requests.DependencyCreation;
 using KludgeBox.DI.Requests.LoggerInjection;
 using KludgeBox.DI.Requests.NotNullCheck;

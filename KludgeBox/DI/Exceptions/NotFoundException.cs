@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace KludgeBox.DI.Exceptions;
+﻿namespace KludgeBox.DI.Exceptions;
 
 public class NotFoundException : Exception
 {

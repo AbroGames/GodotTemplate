@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Serilog;
+﻿using Serilog;
 
 namespace KludgeBox.Logging;
 
