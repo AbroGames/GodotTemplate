@@ -1,7 +1,4 @@
-﻿// GodotSink.cs written by paulloz
-// https://gist.github.com/paulloz/a0a01539ed96298682005ce61ba33a90
-
-using System;
+﻿using System;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -34,9 +31,6 @@ public class RichGodotSink : ILogEventSink
         using TextWriter writer = new StringWriter();
         _formatter.Format(logEvent, writer);
         writer.Flush();
-
-        //foreach (string line in writer.ToString()?.Split('\n') ?? Array.Empty<string>())
-        //    GD.PrintRich($"{line}");
         
         GD.PrintRich(writer.ToString());
 
@@ -196,6 +190,7 @@ public class RichGodotSink : ILogEventSink
 
 public static partial class GodotSinkExtensions
 {
+    private const string DefaultGodotSinkOutputTemplate = "[{Timestamp:HH:mm:ss}] {Message:lj}";
 
     public static LoggerConfiguration GodotRich(this LoggerSinkConfiguration configuration,
                                             string outputTemplate = DefaultGodotSinkOutputTemplate,

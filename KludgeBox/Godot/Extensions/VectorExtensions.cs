@@ -1,10 +1,10 @@
-﻿global using static KludgeBox.Godot.Extensions.VectorExtensions;
-using Godot;
+﻿using Godot;
 
 namespace KludgeBox.Godot.Extensions;
 
 public static class VectorExtensions
 {
+    
     public static Vector2 Vec2() => Vector2.Zero;
     public static Vector2 Vec2(float x, float y) => new(x, y);
     public static Vector2 Vec2(float xy) => new(xy, xy);
@@ -12,8 +12,6 @@ public static class VectorExtensions
     public static Vector2 Vec2(double xy) => new((float)xy, (float)xy);
     public static Vector2 Vec2(Vector2I vec) => new(vec.X, vec.Y);
     public static Vector2 AsVec2(this Vector2I vec) => Vec2(vec);
-    
-    
     
     public static Vector2I Vec2I() => Vector2I.Zero;
     public static Vector2I Vec2I(int x, int y) => new(x, y);

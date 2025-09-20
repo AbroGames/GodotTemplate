@@ -33,9 +33,11 @@ public class NotNullCheckRequest : IProcessingRequest
                 _memberAccessor.Member.ReflectedType?.FullName,
                 _memberAccessor.Member.Name,
                 nodePathInfo);
-            
+
             if (_throwOnFail)
+            {
                 throw exception;
+            }
         }
     }
 }

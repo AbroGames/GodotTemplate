@@ -1,29 +1,23 @@
 <Project Sdk="Godot.NET.Sdk/4.4.1">
-  <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <EnableDynamicLoading>true</EnableDynamicLoading>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <EnableDynamicLoading>true</EnableDynamicLoading>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <Compile Remove="KludgeBox\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Remove="KludgeBox\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="KludgeBox\KludgeBox.csproj" />
-  </ItemGroup>
-
-  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
     <ItemGroup>
-      <DirectoriesToCreate Include="$(ProjectDir)bin\win-64" />
-      <DirectoriesToCreate Include="$(ProjectDir)bin\android" />
-      <FilesToCreate Include="$(ProjectDir)bin\.gdignore" />
+        <Compile Remove="KludgeBox\**"/>
+        <EmbeddedResource Remove="KludgeBox\**"/>
+        <ProjectReference Include="KludgeBox\KludgeBox.csproj"/>
     </ItemGroup>
-    <MakeDir Directories="@(DirectoriesToCreate)" />
-    <WriteLinesToFile File="@(FilesToCreate)" Lines="" Overwrite="true" />
-  </Target>
+    
+    <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+        <ItemGroup>
+            <DirectoriesToCreate Include="$(ProjectDir)bin\win-64"/>
+            <DirectoriesToCreate Include="$(ProjectDir)bin\android"/>
+            <FilesToCreate Include="$(ProjectDir)bin\.gdignore"/>
+        </ItemGroup>
+        <MakeDir Directories="@(DirectoriesToCreate)"/>
+        <WriteLinesToFile File="@(FilesToCreate)" Lines="" Overwrite="true"/>
+    </Target>
 
 </Project>

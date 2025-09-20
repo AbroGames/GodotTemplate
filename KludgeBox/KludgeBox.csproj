@@ -13,4 +13,8 @@
         <PackageReference Include="Serilog.Sinks.File" Version="7.0.0" />
     </ItemGroup>
 
+    <ItemGroup>
+        <Content Include="Testing\README.md" /> <!-- TODO Remove and move to main readme -->
+    </ItemGroup>
+
 </Project>

@@ -68,17 +68,6 @@ public class LogFactory
     {
         return GetBaseRichLoggerConfiguration();
     }
-    
-    private static LoggerConfiguration GetBasePrimitiveLoggerConfiguration()
-    {
-        var config = new LoggerConfiguration()
-            .Enrich.With<ShortSourceContextEnricher>()
-            .WriteTo.Async(wt => wt.GodotPrimitive(
-                outputTemplate: DefaultTemplate
-            ));
-        
-        return config;
-    }
 
     private static LoggerConfiguration GetBaseRichLoggerConfiguration()
     {
