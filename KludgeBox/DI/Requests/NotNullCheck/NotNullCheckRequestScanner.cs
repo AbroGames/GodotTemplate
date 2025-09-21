@@ -12,7 +12,7 @@ public class NotNullCheckRequestScanner : IProcessingRequestScanner
     {
         _notNullAttributeTypes = notNullAttributeTypes;
     }
-    public bool TryGetRequest(IMemberAccessor accessor, out IProcessingRequest? injectionRequest)
+    public bool TryGetRequest(IMemberAccessor accessor, out IProcessingRequest injectionRequest)
     {
         if (accessor.ValueType.IsValueType)
         {

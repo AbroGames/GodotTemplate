@@ -47,9 +47,9 @@ public class RequestsScanner
         return allRequests;
     }
 
-    public bool TryGetRequests(IProcessingRequestScanner scanner, IReadOnlyCollection<IMemberAccessor> accessors, out List<IProcessingRequest?> injectionRequest)
+    public bool TryGetRequests(IProcessingRequestScanner scanner, IReadOnlyCollection<IMemberAccessor> accessors, out List<IProcessingRequest> injectionRequest)
     {
-        List<IProcessingRequest?> requests = new ();
+        List<IProcessingRequest> requests = new ();
         bool hasRequests = false;
 
         foreach (var accessor in accessors)

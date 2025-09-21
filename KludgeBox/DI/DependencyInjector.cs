@@ -34,7 +34,7 @@ public class DependencyInjector
             {
                 request.ProcessOnInstance(instance);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 //TODO Log exception
                 throw;
@@ -44,7 +44,7 @@ public class DependencyInjector
 
     private InjectableTypeInfo GetInjectableTypeInfo(Type type)
     {
-        if (_injectableTypeInfos.TryGetValue(type, out InjectableTypeInfo? typeInfo))
+        if (_injectableTypeInfos.TryGetValue(type, out InjectableTypeInfo typeInfo))
         {
             return typeInfo;
         }

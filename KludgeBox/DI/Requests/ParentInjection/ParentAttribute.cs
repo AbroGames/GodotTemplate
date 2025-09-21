@@ -7,10 +7,10 @@ public sealed class ParentAttribute : Attribute
     private const By DefaultSearchBy = By.Type;
     public By SearchBy { get; }
     public bool DeepScan { get; }
-    public string? Name { get; }
+    public string Name { get; }
 
     
-    public ParentAttribute(By by, bool deep, string? name)
+    public ParentAttribute(By by, bool deep, string name)
     {
         SearchBy = by;
         DeepScan = deep;

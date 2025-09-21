@@ -4,7 +4,7 @@ namespace KludgeBox.DI.Requests.ParentInjection;
 
 public class ParentInjectionRequestScanner : IProcessingRequestScanner
 {
-    public bool TryGetRequest(IMemberAccessor accessor, out IProcessingRequest? injectionRequest)
+    public bool TryGetRequest(IMemberAccessor accessor, out IProcessingRequest injectionRequest)
     {
         if (!accessor.TryGetAttribute<ParentAttribute>(out var parentAttribute))
         {

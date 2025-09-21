@@ -7,9 +7,9 @@ public sealed class ChildAttribute : Attribute
     private const By DefaultSearchBy = By.Name;
     public By SearchBy { get; }
     public bool DeepScan { get; }
-    public string? Name { get; }
+    public string Name { get; }
 
-    public ChildAttribute(By by, bool deep, string? name)
+    public ChildAttribute(By by, bool deep, string name)
     {
         SearchBy = by;
         DeepScan = deep;

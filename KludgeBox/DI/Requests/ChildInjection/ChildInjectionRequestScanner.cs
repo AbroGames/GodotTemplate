@@ -6,7 +6,7 @@ namespace KludgeBox.DI.Requests.ChildInjection;
 
 public class ChildInjectionRequestScanner : IProcessingRequestScanner
 {
-    public bool TryGetRequest(IMemberAccessor accessor, out IProcessingRequest? injectionRequest)
+    public bool TryGetRequest(IMemberAccessor accessor, out IProcessingRequest injectionRequest)
     {
         if (!accessor.TryGetAttribute<ChildAttribute>(out var importAttribute))
         {

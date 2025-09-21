@@ -4,7 +4,7 @@ namespace KludgeBox.DI.Requests.LoggerInjection;
 
 public class LoggerInjectionRequestScanner : IProcessingRequestScanner
 {
-    public bool TryGetRequest(IMemberAccessor accessor, out IProcessingRequest? injectionRequest)
+    public bool TryGetRequest(IMemberAccessor accessor, out IProcessingRequest injectionRequest)
     {
         if (!accessor.TryGetAttribute<LoggerAttribute>(out _))
         {

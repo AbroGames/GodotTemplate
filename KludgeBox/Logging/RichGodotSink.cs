@@ -109,7 +109,7 @@ public class RichGodotSink : ILogEventSink
                 renderer.Invoke(logEvent, output);
         }
 
-        private Renderer RenderTimestamp(string? format)
+        private Renderer RenderTimestamp(string format)
         {
             Func<LogEvent, string> f = _formatProvider?.GetFormat(typeof(ICustomFormatter)) is ICustomFormatter formatter
                 ? (logEvent) => formatter.Format(format, logEvent.Timestamp, _formatProvider)
@@ -120,7 +120,7 @@ public class RichGodotSink : ILogEventSink
             return (logEvent, output) => output.Write(fw(logEvent));
         }
         
-        private void RenderMessageWithColor(LogEvent logEvent, TextWriter output, IFormatProvider? formatProvider)
+        private void RenderMessageWithColor(LogEvent logEvent, TextWriter output, IFormatProvider formatProvider)
         {
             foreach (var token in logEvent.MessageTemplate.Tokens)
             {
@@ -152,7 +152,7 @@ public class RichGodotSink : ILogEventSink
             }
         }
 
-        private Renderer RenderProperty(string propertyName, string? format)
+        private Renderer RenderProperty(string propertyName, string format)
         {
             return delegate (LogEvent logEvent, TextWriter output)
             {
@@ -191,7 +191,7 @@ public static partial class GodotSinkExtensions
 
     public static LoggerConfiguration GodotRich(this LoggerSinkConfiguration configuration,
                                             string outputTemplate = DefaultGodotSinkOutputTemplate,
-                                            IFormatProvider? formatProvider = null)
+                                            IFormatProvider formatProvider = null)
     {
         return configuration.Sink(new RichGodotSink(outputTemplate, formatProvider));
     }
