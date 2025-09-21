@@ -17,4 +17,7 @@
         <Content Include="Testing\README.md" /> <!-- TODO Remove and move to main readme -->
     </ItemGroup>
 
+    <PropertyGroup>
+        <NoWarn>CS0649</NoWarn>
+    </PropertyGroup>
 </Project>
