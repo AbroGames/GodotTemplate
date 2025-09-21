@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel;
 using Godot;
-using KludgeBox.Core.VFS.Base;
+using KludgeBox.VFS.Base;
 using FileAccess = Godot.FileAccess;
 
-namespace KludgeBox.Core.VFS.FileSystems;
+namespace KludgeBox.VFS.FileSystems;
 
 public enum GodotFsRoot
 {

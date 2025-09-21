@@ -27,7 +27,7 @@ public class LibInitializer
         
         _logger.Information("Lib initializing...");
         
-        KludgeBoxServices.CmdArgs.LogCmdArgs();
+        // Del: KludgeBoxServices.CmdArgs.LogCmdArgs();
         NodeNetworkExtensionsState.SetIsClientChecker(_nodeNetworkExtensionsIsClientChecker); //TODO Переделать на сервис, в котором задается стейт, а не статик
     }
 }

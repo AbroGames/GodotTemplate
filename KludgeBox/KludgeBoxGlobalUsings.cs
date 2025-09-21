@@ -8,7 +8,4 @@ global using static KludgeBox.Godot.Extensions.RectExtensions;
 global using static KludgeBox.Godot.Extensions.SpriteExtensions;
 global using static KludgeBox.Godot.Extensions.VectorExtensions;
 
-//TODO global using Fantoria.Lib.Services.NotNullChecking;
-
-//TODO global using Fantoria.Lib.Services;
-//TODO global using static Fantoria.Lib.Services.KludgeBoxServices.Global;
+global using static KludgeBox.KludgeBoxServices.Global;

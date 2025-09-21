@@ -22,7 +22,7 @@ public class DependencyInjector
     public RequestsScanner RequestsScanner { get; set; }
 
     private static Dictionary<Type, InjectableTypeInfo> _injectableTypeInfos = new();
-    public void Validate(object instance)
+    public void Process(object instance)
     {
         var type = instance.GetType();
         var injectableType = GetInjectableTypeInfo(type);

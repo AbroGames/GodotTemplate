@@ -1,5 +1,5 @@
 using Godot;
-using KludgeBox.Logging;
+using KludgeBox.DI.Requests.LoggerInjection;
 using Serilog;
 
 namespace KludgeBox.Godot.Nodes.Process;
@@ -16,14 +16,15 @@ public partial class ProcessShutdowner : Node
         NotificationPredelete,
         NotificationExitTree
     ];
-    
-    private readonly ILogger _logger = LogFactory.GetForStatic<ProcessShutdowner>(); //TODO Проверить этот и другие логеры в либе, а можно ли их внедрить через DI?
+
+    [Logger] private ILogger _log; //TODO Переделать другие логеры + отключить в проекте Warning, и в доку об отключении
     
     private readonly int _processPid;
     private readonly Func<int, string> _logMessageGenerator = pid => $"Kill process {pid}.";
     
     public ProcessShutdowner(int processPid, Func<int, string> logMessageGenerator = null)
     {
+        Di.Process(this);
         _processPid = processPid;
         if (logMessageGenerator != null) _logMessageGenerator = logMessageGenerator;
     }
@@ -38,7 +39,7 @@ public partial class ProcessShutdowner : Node
 
     public void Shutdown()
     {
-        _logger.Information(_logMessageGenerator(_processPid));
+        _log.Information(_logMessageGenerator(_processPid));
         OS.Kill(_processPid);
     }
 }

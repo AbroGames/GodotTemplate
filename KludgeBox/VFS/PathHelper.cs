@@ -1,8 +1,9 @@
 using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 
-namespace KludgeBox.Core.VFS;
+namespace KludgeBox.VFS;
 
+//TODO Оставить этот класс, остальной VFS удалить, этот класс перенести в Core
 public static class PathHelper
 {
     public static char DirectorySeparatorChar => '/';

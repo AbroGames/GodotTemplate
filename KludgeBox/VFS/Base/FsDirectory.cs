@@ -1,6 +1,6 @@
 // ReSharper disable UnusedMember.Global
 
-namespace KludgeBox.Core.VFS.Base;
+namespace KludgeBox.VFS.Base;
 
 public class FsDirectory : FsEntry
 {

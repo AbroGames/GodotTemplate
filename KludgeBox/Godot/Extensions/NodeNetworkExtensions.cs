@@ -44,7 +44,6 @@ public static class NodeNetworkExtensions
     }
 }
 
-// TODO Подумац с Бробухом как это можно порефакторить. Мб перенести в LibInitizlizer инициализацию других сервисов либы тоже
 // Required because NodeNetworkExtensions is included via global using, and we don't want to expose the _isClientChecker field there
 public static class NodeNetworkExtensionsState
 {

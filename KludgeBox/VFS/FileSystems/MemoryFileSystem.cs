@@ -1,7 +1,7 @@
 ﻿using System.Text;
-using KludgeBox.Core.VFS.Base;
+using KludgeBox.VFS.Base;
 
-namespace KludgeBox.Core.VFS.FileSystems;
+namespace KludgeBox.VFS.FileSystems;
 
 public class MemoryFileSystem : FileSystem
 {

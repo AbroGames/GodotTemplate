@@ -1,6 +1,6 @@
-﻿using KludgeBox.Core.VFS.Base;
+﻿using KludgeBox.VFS.Base;
 
-namespace KludgeBox.Core.VFS.FileSystems;
+namespace KludgeBox.VFS.FileSystems;
 
 /// <summary>
 /// Provides access to the part of another FileSystem.

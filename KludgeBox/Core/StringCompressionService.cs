@@ -3,8 +3,9 @@ using System.Text;
 
 namespace KludgeBox.Core;
 
-public class StringCompressService
+public class StringCompressionService
 {
+    
     public string CompressGzipBase64(string text)
     {
         byte[] compressedBytes = CompressGzip(text);

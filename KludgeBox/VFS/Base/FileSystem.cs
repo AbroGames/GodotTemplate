@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace KludgeBox.Core.VFS.Base;
+namespace KludgeBox.VFS.Base;
 
 /// <summary>
 /// Abstract base class for all VFS implementations.

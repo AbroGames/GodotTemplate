@@ -1,6 +1,6 @@
-﻿using KludgeBox.Core.VFS.Base;
+﻿using KludgeBox.VFS.Base;
 
-namespace KludgeBox.Core.VFS;
+namespace KludgeBox.VFS;
 
 public static class FsExtensions
 {

@@ -1,6 +1,6 @@
 ﻿using Godot;
 
-namespace KludgeBox.Core;
+namespace KludgeBox.Core.Random;
 
 /// <summary>
 /// Represents a pseudo-random number generator with the ability to save and restore its state.
