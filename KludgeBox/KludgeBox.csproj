@@ -2,7 +2,6 @@
     <PropertyGroup>
         <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
-        <!-- TODO Try enable <Nullable>enable</Nullable> -->
     </PropertyGroup>
 
     <ItemGroup>
@@ -11,10 +10,6 @@
         <PackageReference Include="Serilog" Version="4.3.1-dev-02373" />
         <PackageReference Include="Serilog.Sinks.Async" Version="2.1.0" />
         <PackageReference Include="Serilog.Sinks.File" Version="7.0.0" />
-    </ItemGroup>
-
-    <ItemGroup>
-        <Content Include="Testing\README.md" /> <!-- TODO Remove and move to main readme -->
     </ItemGroup>
 
     <PropertyGroup>

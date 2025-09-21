@@ -183,8 +183,7 @@ public static class NodeTreeExtensions
             }
         }).CallDeferred();
     }
-
-    // TODO To Service
+    
     /// <summary>
     /// Get full path for all children of this node
     /// </summary>
@@ -200,7 +199,6 @@ public static class NodeTreeExtensions
         return sb.ToString();
     }
     
-    // TODO To Service
     /// <summary>
     /// Get hash of all children of this node
     /// Can be used for compare Client/Server trees in debug
@@ -208,7 +206,6 @@ public static class NodeTreeExtensions
     public static string GetTreeHash(this Node node)
     {
         string inputString = node.GetFullTree();
-        //TODO Hashing process to service (and reuse it in WorldPersistenceData)
         byte[] inputBytes = Encoding.UTF8.GetBytes(inputString);
         byte[] hashBytes = MD5.HashData(inputBytes);
 
@@ -220,8 +217,7 @@ public static class NodeTreeExtensions
 
         return sb.ToString();
     }
-
-    // TODO To Service
+    
     /// <summary>
     /// Get data from each field and property with attribute [Export]
     /// </summary>

@@ -36,7 +36,6 @@ public class DependencyInjector
             }
             catch (Exception)
             {
-                //TODO Log exception
                 throw;
             }
         }

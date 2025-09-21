@@ -3,7 +3,6 @@ using KludgeBox.Godot.Nodes.Camera.Shifts;
 
 namespace KludgeBox.Godot.Nodes.Camera;
 
-//TODO Камера, Бронух хотел жестко тебя отрефакторить (например, сделать компонентом)
 public partial class Camera : Camera2D
 {
 	
