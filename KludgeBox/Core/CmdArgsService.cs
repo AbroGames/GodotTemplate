@@ -1,4 +1,5 @@
 ﻿using Godot;
+using KludgeBox.DI.Requests.LoggerInjection;
 using KludgeBox.Logging;
 using Serilog;
 
@@ -8,26 +9,44 @@ public class CmdArgsService
 {
 
     protected readonly string[] CmdArgs = OS.GetCmdlineArgs();
-    private readonly ILogger _logger = LogFactory.GetForStatic<CmdArgsService>();
+    
+    private bool _logIfEmpty; // Write message to log, then param doesn't exist in args
+    private bool _logIfException; // Write message to log, then we catch Exception while find/parsing param
+    private bool _logIfSuccessful; // Write message to log, then param successfully found
+    
+    [Logger] private ILogger _log;
+
+    public CmdArgsService(bool logIfEmpty = false, bool logIfException = true, bool logIfSuccessful = false)
+    {
+        Di.Process(this);
+        
+        _logIfEmpty = logIfEmpty;
+        _logIfException = logIfException;
+        _logIfSuccessful = logIfSuccessful;
+    }
 
     public void LogCmdArgs()
     {
         if (!CmdArgs.IsEmpty())
         {
-            _logger.Information("Cmd args: " + CmdArgs.Join());
+            _log.Information("Cmd args: " + CmdArgs.Join());
         }
         else
         {
-            _logger.Information("Cmd args is empty");
+            _log.Information("Cmd args is empty");
         }
     }
 
     public bool ContainsInCmdArgs(string paramName)
     {
-        return CmdArgs.Contains(paramName);
+        bool argFound = CmdArgs.Contains(paramName);
+        
+        if (argFound && _logIfSuccessful) _log.Information($"Arg found: \"{paramName}\"");
+        
+        return argFound;
     }
     
-    public string GetStringFromCmdArgs(string paramName, string defaultValue = null, bool logIfEmpty = false)
+    public string GetStringFromCmdArgs(string paramName, string defaultValue = null)
     {
         string arg = defaultValue;
         try
@@ -35,7 +54,7 @@ public class CmdArgsService
             int argPos = CmdArgs.ToList().IndexOf(paramName);
             if (argPos == -1)
             {
-                if (logIfEmpty) _logger.Information($"Arg {paramName} not setup.");
+                if (_logIfEmpty) _log.Information($"Arg {paramName} not setup.");
                 return arg;
             }
 
@@ -43,16 +62,16 @@ public class CmdArgsService
         }
         catch
         {
-            _logger.Warning($"Error while arg {paramName} setup."); //TODO Добавить возможность настроить сервис, чтобы ничего не логировалось (ни в сatch, ни просто) 
+            if (_logIfException) _log.Warning($"Error while arg {paramName} setup.");
         }
         
-        _logger.Information($"{paramName}: {arg}");
+        if (_logIfSuccessful) _log.Information($"Arg found: \"{paramName} {arg}\"");
         return arg;
     }
 
-    public int? GetIntFromCmdArgs(string paramName, bool logIfEmpty = false)
+    public int? GetIntFromCmdArgs(string paramName)
     {
-        string argAsString = GetStringFromCmdArgs(paramName, null, logIfEmpty);
+        string argAsString = GetStringFromCmdArgs(paramName, null);
         int? arg = null;
 
         try
@@ -64,15 +83,15 @@ public class CmdArgsService
         }
         catch (Exception ex) when (ex is FormatException || ex is OverflowException)
         {
-            _logger.Warning($"Arg {paramName} can't convert to Int32");
+            if (_logIfException) _log.Warning($"Arg {paramName} can't convert to Int32");
         }
 
         return arg;
     }
     
-    public int GetIntFromCmdArgs(string paramName, int defaultValue, bool logIfEmpty = false)
+    public int GetIntFromCmdArgs(string paramName, int defaultValue)
     {
-        string argAsString = GetStringFromCmdArgs(paramName, defaultValue.ToString(), logIfEmpty);
+        string argAsString = GetStringFromCmdArgs(paramName, defaultValue.ToString());
         int arg = defaultValue;
 
         try
@@ -84,7 +103,7 @@ public class CmdArgsService
         }
         catch (Exception ex) when (ex is FormatException || ex is OverflowException)
         {
-            _logger.Warning($"Arg {paramName} can't convert to Int32");
+            if (_logIfException) _log.Warning($"Arg {paramName} can't convert to Int32");
         }
 
         return arg;
