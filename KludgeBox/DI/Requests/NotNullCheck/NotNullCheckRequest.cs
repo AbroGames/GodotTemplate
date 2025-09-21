@@ -1,4 +1,5 @@
 ﻿using Godot;
+using KludgeBox.DI.Requests.LoggerInjection;
 using KludgeBox.Logging;
 using KludgeBox.Reflection.Access;
 using Serilog;
@@ -8,10 +9,14 @@ namespace KludgeBox.DI.Requests.NotNullCheck;
 public class NotNullCheckRequest : IProcessingRequest
 {
     private readonly IMemberAccessor _memberAccessor;
-    private readonly ILogger _logger = LogFactory.GetForStatic<NotNullCheckRequest>();
     private bool _throwOnFail;
+    
+    [Logger] private ILogger _log;
+    
     public NotNullCheckRequest(IMemberAccessor memberAccessor, bool throwOnFail)
     {
+        Di.Process(this);
+        
         _memberAccessor = memberAccessor;
         _throwOnFail = throwOnFail;
     }
@@ -29,7 +34,7 @@ public class NotNullCheckRequest : IProcessingRequest
 
             var exception = new NotNullCheckFailedException(
                 $"Value stored in {_memberAccessor.Member.ReflectedType?.FullName}.{_memberAccessor.Member.Name} is null.{nodePathInfo}");
-            _logger.Error(exception,"Not null check failed for {type}.{member}. {nodePathInfo}",
+            _log.Error(exception,"Not null check failed for {type}.{member}. {nodePathInfo}",
                 _memberAccessor.Member.ReflectedType?.FullName,
                 _memberAccessor.Member.Name,
                 nodePathInfo);

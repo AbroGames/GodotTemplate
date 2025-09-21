@@ -5,7 +5,7 @@ using Serilog;
 
 namespace KludgeBox;
 
-//TODO Bronuh: переделать/объединить с ServiceFactory
+//TODO Bronuh: переделать/объединить с ServiceFactory. _logger внедрять через Di по возможности.
 public class LibInitializer
 {
     private readonly ILogger _logger = LogFactory.GetForStatic<LibInitializer>();

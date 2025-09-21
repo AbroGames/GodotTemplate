@@ -17,7 +17,7 @@ public partial class ProcessShutdowner : Node
         NotificationExitTree
     ];
 
-    [Logger] private ILogger _log; //TODO Переделать другие логеры + отключить в проекте Warning, и в доку об отключении
+    [Logger] private ILogger _log;
     
     private readonly int _processPid;
     private readonly Func<int, string> _logMessageGenerator = pid => $"Kill process {pid}.";
@@ -25,6 +25,7 @@ public partial class ProcessShutdowner : Node
     public ProcessShutdowner(int processPid, Func<int, string> logMessageGenerator = null)
     {
         Di.Process(this);
+        
         _processPid = processPid;
         if (logMessageGenerator != null) _logMessageGenerator = logMessageGenerator;
     }
