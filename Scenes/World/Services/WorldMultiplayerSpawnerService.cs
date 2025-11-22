@@ -9,12 +9,12 @@ public partial class WorldMultiplayerSpawnerService : Node
     [Export] [NotNull] public PackedScene WorldMultiplayerSpawnerPackedScene { get; private set; }
     
     /// <summary>
-    /// You can use this method, if observableNode in scene tree.
-    /// If observableNode not in scene tree yet, you must use AddSpawnerToNode(Node observableNode, Node parentNode)
+    /// You can use this method, if <c>observableNode</c> <b>already in scene tree</b>.<br/>
+    /// If <c>observableNode</c> not in scene tree yet, you must use <c>AddSpawnerToNode(Node observableNode, Node parentNode)</c>.
     /// </summary>
     /// <param name="observableNode">
-    /// MultiplayerSpawner will observe this node and sync children of observableNode by network
-    /// MultiplayerSpawner will be added as sibling of this node
+    /// <see cref="MultiplayerSpawner"/> will observe this node and sync children of <c>observableNode</c> by network.<br/>
+    /// <see cref="MultiplayerSpawner"/> will be added as sibling of this node.
     /// </param>
     /// <returns>Created spawner</returns>
     public WorldMultiplayerSpawner AddSpawnerToNode(Node observableNode)
@@ -23,11 +23,11 @@ public partial class WorldMultiplayerSpawnerService : Node
     }
     
     /// <summary>
-    /// You must use this method, if observableNode not in scene tree yet.
-    /// If observableNode in scene tree, you can use AddSpawnerToNode(Node observableNode)
+    /// You must use this method, if <c>observableNode</c> <b>not in scene tree yet</b>.<br/>
+    /// If <c>observableNode</c> in scene tree, you can use <c>AddSpawnerToNode(Node observableNode)</c>.
     /// </summary>
-    /// <param name="observableNode">MultiplayerSpawner will observe this node and sync children of observableNode by network</param>
-    /// <param name="parentNode">MultiplayerSpawner will be added as child of this node</param>
+    /// <param name="observableNode"><see cref="MultiplayerSpawner"/> will observe this node and sync children of <c>observableNode</c> by network</param>
+    /// <param name="parentNode"><see cref="MultiplayerSpawner"/> will be added as child of this node</param>
     /// <returns>Created spawner</returns>
     public WorldMultiplayerSpawner AddSpawnerToNode(Node observableNode, Node parentNode)
     {

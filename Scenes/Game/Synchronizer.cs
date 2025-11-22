@@ -8,8 +8,9 @@ using Serilog;
 namespace GodotTemplate.Scenes.Game;
 
 /// <summary>
-/// Use for send player data (like nick, color etc.) to server.
-/// We must use synchronizer out of World, because in connecting process World children nodes don't exist.
+/// Use for send player data (like nick, color etc.) to server.<br/>
+/// We must use synchronizer out of <c>World</c>, because in connecting process <c>World</c> children nodes don't exist.<br/>
+/// But we need in synchronizer at connecting process.
 /// </summary>
 public partial class Synchronizer : Node
 {

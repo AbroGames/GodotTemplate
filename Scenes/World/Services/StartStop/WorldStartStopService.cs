@@ -10,8 +10,8 @@ public partial class WorldStartStopService : Node
     private readonly WorldTreeLoadService _worldTreeLoadService = new();
 
     /// <summary>
-    /// In shutdown process (TreeExit signal) we can't use Node.GetMultiplayer().IsServer() for checking, because after TreeExit Node.GetMultiplayer() returns null.
-    /// Also, Game.Network may have been disabled earlier, in which case it replaces the Peer with an OfflinePeer during the shutdown process.
+    /// In shutdown process (<see cref="Node.NotificationExitTree"/>) we can't use <c>Node.GetMultiplayer().IsServer()</c> for checking, because after TreeExit <c>Node.GetMultiplayer()</c> returns null.<br/>
+    /// Also, <c>Game.Network</c> may have been disabled earlier, in which case it replaces the <c>Peer</c> with an <c>OfflinePeer</c> during the shutdown process, therefore we cannot trust <c>Game.Network</c>.
     /// </summary>
     private bool _isServer;
 
