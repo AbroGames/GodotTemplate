@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GodotTemplate.Scenes.Game.Net;
+namespace GodotTemplate.Scenes.Game.Network;
 
 public class NetworkStateMachine
 {

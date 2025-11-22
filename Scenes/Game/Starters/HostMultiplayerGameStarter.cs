@@ -1,5 +1,4 @@
 ﻿using Godot;
-using GodotTemplate.Scenes.Game.Net;
 using GodotTemplate.Scripts.Content.LoadingScreen;
 using GodotTemplate.Scripts.Service.Settings;
 using KludgeBox.Godot.Nodes.Process;
@@ -25,13 +24,13 @@ public class HostMultiplayerGameStarter(int? port = null, string saveFileName = 
         PlayerSettings playerSettings = Services.PlayerSettings.GetPlayerSettings();
         World.World world = game.AddWorld();
         Synchronizer synchronizer = game.AddSynchronizer(playerSettings);
-        game.DoClient(() => game.AddHud());
-        Network network = game.AddNetwork();
+        Net.DoClient(() => game.AddHud());
+        Network.Network network = game.AddNetwork();
         
         Error error = network.HostServer(port ?? DefaultPort, true);
         if (error != Error.Ok)
         {
-            game.DoClient(HostFailedEventOnClient);
+            Net.DoClient(HostFailedEventOnClient);
             return;
         }
 
@@ -44,7 +43,7 @@ public class HostMultiplayerGameStarter(int? port = null, string saveFileName = 
             world.StartStopService.LoadGame(saveFileName, adminNickname);
         }
         network.OpenServer();
-        game.DoClient(synchronizer.StartSyncOnClient);
+        Net.DoClient(synchronizer.StartSyncOnClient);
     }
     
     private void HostFailedEventOnClient()

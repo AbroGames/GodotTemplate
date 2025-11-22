@@ -3,7 +3,7 @@ using GodotTemplate.Scenes.Game;
 using GodotTemplate.Scenes.Game.Starters;
 using MainMenu = GodotTemplate.Scenes.Screen.MainMenu.MainMenu;
 
-namespace GodotTemplate.Scripts.Service.MainScene;
+namespace GodotTemplate.Scripts.Service;
 
 public class MainSceneService
 {

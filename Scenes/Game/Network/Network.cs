@@ -2,7 +2,7 @@
 using KludgeBox.DI.Requests.LoggerInjection;
 using Serilog;
 
-namespace GodotTemplate.Scenes.Game.Net;
+namespace GodotTemplate.Scenes.Game.Network;
 
 public partial class Network : Node
 {

@@ -2,7 +2,7 @@
 using GodotTemplate.Scripts.Content.LoadingScreen;
 using LoadingScreenNode = GodotTemplate.Scenes.Screen.LoadingScreen.LoadingScreen;
 
-namespace GodotTemplate.Scripts.Service.LoadingScreen;
+namespace GodotTemplate.Scripts.Service;
 
 public class LoadingScreenService
 {

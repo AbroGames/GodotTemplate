@@ -1,7 +1,7 @@
 using Godot;
 using GodotTemplate.Scripts.Service.CmdArgs;
 
-namespace GodotTemplate.Scripts.Service.Process;
+namespace GodotTemplate.Scripts.Service;
 
 public class ProcessService
 {

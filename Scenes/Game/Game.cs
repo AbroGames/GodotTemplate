@@ -1,5 +1,4 @@
 ﻿using Godot;
-using GodotTemplate.Scenes.Game.Net;
 using GodotTemplate.Scenes.Game.Starters;
 using GodotTemplate.Scenes.Screen.Hud;
 using GodotTemplate.Scripts.Service.Settings;
@@ -15,7 +14,7 @@ public partial class Game : Node2D
     [Export] [NotNull] public NodeContainer HudContainer { get; set; }
     [Export] [NotNull] public GamePackedScenes PackedScenes { get; set; }
 
-    private Network _network;
+    private Network.Network _network;
     private Synchronizer _synchronizer;
 
     public override void _Ready()
@@ -54,10 +53,10 @@ public partial class Game : Node2D
         return _synchronizer;
     }
 
-    public Network AddNetwork()
+    public Network.Network AddNetwork()
     {
         _network?.QueueFree();
-        _network = new Network();
+        _network = new Network.Network();
         this.AddChildWithName(_network, "Network");
         return _network;
     }
