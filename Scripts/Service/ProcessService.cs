@@ -13,7 +13,7 @@ public class ProcessService
     
     public int StartNewDedicatedServerApplication(int port, string saveFileName, string adminNickname, bool showWindow)
     {
-        DedicatedServerArgs dedicatedServerArgs = new DedicatedServerArgs(!showWindow, port, saveFileName, adminNickname, OS.GetProcessId(), false);
+        DedicatedServerArgs dedicatedServerArgs = new DedicatedServerArgs(!showWindow, port, saveFileName, adminNickname, OS.GetProcessId(), false, false);
 
         return StartNewApplication(dedicatedServerArgs.GetArrayToStartDedicatedServer());
     }

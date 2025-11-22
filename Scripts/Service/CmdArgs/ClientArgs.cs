@@ -1,11 +1,17 @@
 namespace GodotTemplate.Scripts.Service.CmdArgs;
 
-public readonly record struct ClientArgs(bool AutoConnect, string AutoConnectIp, int? AutoConnectPort, string Nick)
+public readonly record struct ClientArgs(
+    bool AutoConnect, 
+    string AutoConnectIp, 
+    int? AutoConnectPort, 
+    string Nick, 
+    bool GodotLogPush)
 {
     public static readonly string AutoConnectFlag = "--auto-connect";
     public static readonly string AutoConnectIpFlag = "--auto-connect-ip";
     public static readonly string AutoConnectPortFlag = "--auto-connect-port";
     public static readonly string NickFlag = "--nick";
+    public static readonly string GodotLogPushParam = "--godot-log-push";
     
     public static ClientArgs GetFromCmd(KludgeBox.Core.CmdArgsService  argsService)
     {
@@ -13,7 +19,8 @@ public readonly record struct ClientArgs(bool AutoConnect, string AutoConnectIp,
             argsService.ContainsInCmdArgs(AutoConnectFlag),
             argsService.GetStringFromCmdArgs(AutoConnectIpFlag),
             argsService.GetIntFromCmdArgs(AutoConnectPortFlag),
-            argsService.GetStringFromCmdArgs(NickFlag)
+            argsService.GetStringFromCmdArgs(NickFlag),
+            argsService.ContainsInCmdArgs(GodotLogPushParam)
         );
     }
 }

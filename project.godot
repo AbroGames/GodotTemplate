@@ -18,3 +18,7 @@ config/icon="uid://dy5ljuga61dg4"
 [dotnet]
 
 project/assembly_name="GodotTemplate"
+
+[editor]
+
+run/main_run_args="--godot-log-push"

@@ -1,5 +1,5 @@
-﻿using GodotTemplate.Scripts;
-using KludgeBox.DI.Requests.LoggerInjection;
+﻿using KludgeBox.DI.Requests.LoggerInjection;
+using KludgeBox.Logging;
 using Serilog;
 
 namespace GodotTemplate.Scenes.Root.Starters;
@@ -13,6 +13,7 @@ public abstract class BaseRootStarter
     {
         Di.Process(this);
         
+        LogFactory.GodotPushEnable = Services.CmdArgs.GodotLogPush;
         Services.ExceptionHandler.AddExceptionHandlerForUnhandledException();
         Services.CmdArgs.LogCmdArgs();
         

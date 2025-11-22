@@ -7,6 +7,9 @@ public class CmdArgsService : KludgeBox.Core.CmdArgsService
     public bool IsDedicatedServer { get; private set; }
     public ClientArgs Client { get; private set; }
     public DedicatedServerArgs DedicatedServer { get; private set; }
+    
+    //TODO Общее свойство и для Client и для DedicatedServer
+    public bool GodotLogPush { get; private set; }
 
     public CmdArgsService() 
     {
@@ -15,10 +18,12 @@ public class CmdArgsService : KludgeBox.Core.CmdArgsService
         if (IsDedicatedServer)
         {
             DedicatedServer = DedicatedServerArgs.GetFromCmd(this);
+            GodotLogPush = DedicatedServer.GodotLogPush;
         }
         else
         {
             Client = ClientArgs.GetFromCmd(this);
+            GodotLogPush = Client.GodotLogPush;
         }
     }
 }
