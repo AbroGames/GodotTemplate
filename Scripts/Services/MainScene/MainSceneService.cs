@@ -1,7 +1,7 @@
-﻿using KludgeBox.Godot.Nodes;
-using GodotTemplate.Scenes.Game;
+﻿using GodotTemplate.Scenes.Game;
 using GodotTemplate.Scenes.Game.Starters;
 using Godot;
+using GodotTemplate.Scenes.KludgeBox;
 using MainMenu = GodotTemplate.Scenes.Screen.MainMenu.MainMenu;
 
 namespace GodotTemplate.Scripts.Services.MainScene;

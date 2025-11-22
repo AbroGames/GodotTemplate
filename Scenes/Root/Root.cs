@@ -1,6 +1,6 @@
-using KludgeBox.Godot.Nodes;
 using GodotTemplate.Scenes.Root.Starters;
 using Godot;
+using GodotTemplate.Scenes.KludgeBox;
 using KludgeBox.DI.Requests.NotNullCheck;
 
 namespace GodotTemplate.Scenes.Root;

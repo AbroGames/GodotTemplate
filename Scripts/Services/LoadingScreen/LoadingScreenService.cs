@@ -1,6 +1,6 @@
-﻿using KludgeBox.Godot.Nodes;
-using GodotTemplate.Scripts.Content.LoadingScreen;
+﻿using GodotTemplate.Scripts.Content.LoadingScreen;
 using Godot;
+using GodotTemplate.Scenes.KludgeBox;
 using LoadingScreenNode = GodotTemplate.Scenes.Screen.LoadingScreen.LoadingScreen;
 
 namespace GodotTemplate.Scripts.Services.LoadingScreen;
