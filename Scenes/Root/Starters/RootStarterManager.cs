@@ -1,6 +1,6 @@
 ﻿using System.Linq;
-using GodotTemplate.Scripts.Services.CmdArgs;
 using Godot;
+using GodotTemplate.Scripts.Service.CmdArgs;
 
 namespace GodotTemplate.Scenes.Root.Starters;
 

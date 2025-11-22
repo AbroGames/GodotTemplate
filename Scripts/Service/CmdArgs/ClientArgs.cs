@@ -1,4 +1,4 @@
-namespace GodotTemplate.Scripts.Services.CmdArgs;
+namespace GodotTemplate.Scripts.Service.CmdArgs;
 
 public readonly record struct ClientArgs(bool AutoConnect, string AutoConnectIp, int? AutoConnectPort, string Nick)
 {

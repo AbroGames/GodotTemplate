@@ -1,7 +1,7 @@
-﻿using GodotTemplate.Scenes.Screen.MainMenu.Pages;
-using Godot;
-using GodotTemplate.Scenes.KludgeBox;
+﻿using Godot;
+using GodotTemplate.Scenes.Screen.MainMenu.Pages;
 using KludgeBox.DI.Requests.NotNullCheck;
+using NodeContainer = GodotTemplate.Scenes.KludgeBox.NodeContainer;
 
 namespace GodotTemplate.Scenes.Screen.MainMenu;
 

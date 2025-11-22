@@ -1,6 +1,6 @@
-﻿using GodotTemplate.Scenes.Game;
+﻿using Godot;
+using GodotTemplate.Scenes.Game;
 using GodotTemplate.Scripts.Content.LoadingScreen;
-using Godot;
 using KludgeBox.DI.Requests.LoggerInjection;
 using KludgeBox.DI.Requests.NotNullCheck;
 using Serilog;
@@ -47,20 +47,20 @@ public partial class Hud : Control
         Test3.Pressed += () => { _world.Test3(); };
         LogChildren.Pressed += () => { _world.StateCheckerService.LogState(); _world.StateCheckerService.StateCheckRequest(); };
 
-        ExitButton.Pressed += () => { Service.MainScene.StartMainMenu(); };
+        ExitButton.Pressed += () => { Services.MainScene.StartMainMenu(); };
         SaveButton.Pressed += () => { _world.TestSave(SaveTextEdit.Text); };
     }
 
     private void ConnectToEvents()
     {
-        _synchronizer.SyncStartedOnClientEvent += () => Service.LoadingScreen.SetLoadingScreen(LoadingScreenTypes.Type.Loading);
-        _synchronizer.SyncEndedOnClientEvent += () => Service.LoadingScreen.Clear();
+        _synchronizer.SyncStartedOnClientEvent += () => Services.LoadingScreen.SetLoadingScreen(LoadingScreenTypes.Type.Loading);
+        _synchronizer.SyncEndedOnClientEvent += () => Services.LoadingScreen.Clear();
         _synchronizer.SyncRejectOnClientEvent += (errorMessage) =>
         {
             _log.Warning($"Synchronization with the server was rejected: {errorMessage}");
-            Service.MainScene.StartMainMenu();
+            Services.MainScene.StartMainMenu();
             //TODO Show error message in menu
-            Service.LoadingScreen.Clear();
+            Services.LoadingScreen.Clear();
         };
     }
 

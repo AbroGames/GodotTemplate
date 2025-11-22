@@ -1,8 +1,8 @@
-﻿using KludgeBox.Godot.Nodes.Process;
+﻿using Godot;
 using GodotTemplate.Scenes.Game.Net;
 using GodotTemplate.Scripts.Content.LoadingScreen;
-using GodotTemplate.Scripts.Services.Settings;
-using Godot;
+using GodotTemplate.Scripts.Service.Settings;
+using KludgeBox.Godot.Nodes.Process;
 
 namespace GodotTemplate.Scenes.Game.Starters;
 
@@ -11,18 +11,18 @@ public class HostMultiplayerGameStarter(int? port = null, string saveFileName = 
     public override void Init(Game game)
     {
         base.Init(game);
-        Service.LoadingScreen.SetLoadingScreen(LoadingScreenTypes.Type.Loading);
+        Services.LoadingScreen.SetLoadingScreen(LoadingScreenTypes.Type.Loading);
 
         if (parentPid.HasValue)
         {
             ProcessDeadChecker clientDeadChecker = new ProcessDeadChecker(
                 parentPid.Value, 
-                () => Service.MainScene.Shutdown(),
+                () => Services.MainScene.Shutdown(),
                 pid => $"Parent process {pid} is dead. Shutdown server.");
             game.AddChild(clientDeadChecker);
         }
         
-        PlayerSettings playerSettings = Service.PlayerSettings.GetPlayerSettings();
+        PlayerSettings playerSettings = Services.PlayerSettings.GetPlayerSettings();
         World.World world = game.AddWorld();
         Synchronizer synchronizer = game.AddSynchronizer(playerSettings);
         game.DoClient(() => game.AddHud());
@@ -49,8 +49,8 @@ public class HostMultiplayerGameStarter(int? port = null, string saveFileName = 
     
     private void HostFailedEventOnClient()
     {
-        Service.MainScene.StartMainMenu();
+        Services.MainScene.StartMainMenu();
         //TODO Show error in menu (it is client). Log already has error.
-        Service.LoadingScreen.Clear();
+        Services.LoadingScreen.Clear();
     }
 }

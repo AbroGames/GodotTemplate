@@ -1,5 +1,4 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using Godot;
 using MessagePack;
 
 namespace GodotTemplate.Scenes.World.Data.MapPoint;

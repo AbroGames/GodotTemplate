@@ -1,11 +1,10 @@
-﻿using KludgeBox.Godot.Nodes;
+﻿using Godot;
 using GodotTemplate.Scenes.Game.Net;
 using GodotTemplate.Scenes.Game.Starters;
 using GodotTemplate.Scenes.Screen.Hud;
-using GodotTemplate.Scenes.World;
-using GodotTemplate.Scripts.Services.Settings;
-using Godot;
+using GodotTemplate.Scripts.Service.Settings;
 using KludgeBox.DI.Requests.NotNullCheck;
+using NodeContainer = GodotTemplate.Scenes.KludgeBox.NodeContainer;
 
 namespace GodotTemplate.Scenes.Game;
 

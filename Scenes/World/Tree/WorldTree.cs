@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
-using KludgeBox.Godot.Nodes.MpSync;
 using Godot;
 using Godot.Collections;
 using KludgeBox.DI.Requests.NotNullCheck;
+using KludgeBox.Godot.Nodes.MpSync;
 using BattleSurface = GodotTemplate.Scenes.World.Tree.Surface.Battle.BattleSurface;
 using MapSurface = GodotTemplate.Scenes.World.Tree.Surface.Map.MapSurface;
 

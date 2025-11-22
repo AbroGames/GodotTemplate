@@ -1,4 +1,4 @@
-﻿namespace GodotTemplate.Scripts.Services.CmdArgs;
+﻿namespace GodotTemplate.Scripts.Service.CmdArgs;
 
 //TODO Точно нужен сервис? Вроде как мы используем эти параметры только в Root Starters и всё (а дальше пробрасываем как свойства в Game). В идеале так и оставить.
 //TODO Вообще-то ещё в LibInit.SetNodeNetworkExtensionsIsClientChecker(_ => !Service.CmdArgs.IsDedicatedServer). Но по сути тут не обязательно ссылаться именно на Service.CmdArgs

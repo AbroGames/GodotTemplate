@@ -6,7 +6,7 @@ namespace GodotTemplate.Scenes.Root.Starters;
 public class DedicatedServerRootStarter : BaseRootStarter
 {
     
-    [Logger] private ILogger _log; //TODO Тест, т.к. здесь нет DI
+    [Logger] private ILogger _log;
     
     public override void Init(Root root)
     {
@@ -21,11 +21,11 @@ public class DedicatedServerRootStarter : BaseRootStarter
         base.Start(root);
         _log.Information("Starting DedicatedServer...");
 
-        Service.MainScene.HostMultiplayerGameAsDedicatedServer(
-            Service.CmdArgs.DedicatedServer.Port,
-            Service.CmdArgs.DedicatedServer.SaveFileName,
-            Service.CmdArgs.DedicatedServer.Admin,
-            Service.CmdArgs.DedicatedServer.ParentPid,
-            Service.CmdArgs.DedicatedServer.IsRender);
+        Services.MainScene.HostMultiplayerGameAsDedicatedServer(
+            Services.CmdArgs.DedicatedServer.Port,
+            Services.CmdArgs.DedicatedServer.SaveFileName,
+            Services.CmdArgs.DedicatedServer.Admin,
+            Services.CmdArgs.DedicatedServer.ParentPid,
+            Services.CmdArgs.DedicatedServer.IsRender);
     }
 }

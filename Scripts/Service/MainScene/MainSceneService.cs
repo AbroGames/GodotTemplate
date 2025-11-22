@@ -1,19 +1,18 @@
-﻿using GodotTemplate.Scenes.Game;
+﻿using Godot;
+using GodotTemplate.Scenes.Game;
 using GodotTemplate.Scenes.Game.Starters;
-using Godot;
-using GodotTemplate.Scenes.KludgeBox;
 using MainMenu = GodotTemplate.Scenes.Screen.MainMenu.MainMenu;
 
-namespace GodotTemplate.Scripts.Services.MainScene;
+namespace GodotTemplate.Scripts.Service.MainScene;
 
 public class MainSceneService
 {
     
-    private NodeContainer _mainSceneContainer;
+    private Scenes.KludgeBox.NodeContainer _mainSceneContainer;
     private PackedScene _gamePackedScene;
     private PackedScene _mainMenuPackedScene;
 
-    public void Init(NodeContainer mainSceneContainer, PackedScene gamePackedScene, PackedScene mainMenuPackedScene)
+    public void Init(Scenes.KludgeBox.NodeContainer mainSceneContainer, PackedScene gamePackedScene, PackedScene mainMenuPackedScene)
     {
         _mainSceneContainer = mainSceneContainer;
         _gamePackedScene = gamePackedScene;
@@ -56,7 +55,7 @@ public class MainSceneService
         game.SetName("Game");
         _mainSceneContainer.ChangeStoredNode(game);
 
-        string adminNickname = Service.PlayerSettings.GetPlayerSettings().Nick;
+        string adminNickname = Services.PlayerSettings.GetPlayerSettings().Nick;
         
         if (createDedicatedServerProcess ?? false)
         {
@@ -84,7 +83,7 @@ public class MainSceneService
         
         game.Init(new HostMultiplayerGameStarter(port, saveFileName, adminNickname, parentPid));
         
-        Service.LoadingScreen.Clear();
+        Services.LoadingScreen.Clear();
         if (!gameRender.HasValue || !gameRender.Value)
         {
             //TODO Show GUI with stats

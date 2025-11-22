@@ -1,5 +1,5 @@
-﻿global using GodotTemplate.Scripts.Services;
-global using static GodotTemplate.Scripts.Services.Service.Global;
+﻿global using GodotTemplate.Scripts;
+global using static GodotTemplate.Scripts.Services.Global;
 global using static GodotTemplate.Scripts.Consts.Global;
 
 global using static KludgeBox.Godot.Extensions.CameraExtensions;

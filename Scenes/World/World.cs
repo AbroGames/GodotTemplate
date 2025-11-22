@@ -1,13 +1,13 @@
 ﻿using System;
-using KludgeBox.Godot.Nodes.MpSync;
+using Godot;
 using GodotTemplate.Scenes.World.Data;
 using GodotTemplate.Scenes.World.Data.MapPoint;
 using GodotTemplate.Scenes.World.Services;
 using GodotTemplate.Scenes.World.Tree;
 using GodotTemplate.Scenes.World.Tree.Entity.Building;
-using Godot;
 using KludgeBox.DI.Requests.LoggerInjection;
 using KludgeBox.DI.Requests.NotNullCheck;
+using KludgeBox.Godot.Nodes.MpSync;
 using Serilog;
 using WorldStartStopService = GodotTemplate.Scenes.World.Services.StartStop.WorldStartStopService;
 

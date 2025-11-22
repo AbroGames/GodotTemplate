@@ -1,5 +1,5 @@
-using GodotTemplate.Scripts.Services.Settings;
 using Godot;
+using GodotTemplate.Scripts.Service.Settings;
 using KludgeBox.DI.Requests.NotNullCheck;
 
 namespace GodotTemplate.Scenes.Screen.MainMenu.Pages.Settings;
@@ -15,7 +15,7 @@ public partial class MainMenuSettingsPage : MainMenuPage
     {
         Di.Process(this);
 
-        PlayerSettings playerSettings = Service.PlayerSettings.GetPlayerSettings();
+        PlayerSettings playerSettings = Services.PlayerSettings.GetPlayerSettings();
         NickTextEdit.Text = playerSettings.Nick;
         ColorTextEdit.Text = playerSettings.Color.ToHtml(false);
 
@@ -27,7 +27,7 @@ public partial class MainMenuSettingsPage : MainMenuPage
         string nick = NickTextEdit.Text;
         Color color = Color.FromHtml(ColorTextEdit.Text);
         
-        Service.PlayerSettings.SetPlayerSettings(new PlayerSettings(nick, color));
+        Services.PlayerSettings.SetPlayerSettings(new PlayerSettings(nick, color));
         ChangeMenuPage(PackedScenes.Main);
     }
 }

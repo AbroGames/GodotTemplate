@@ -1,7 +1,7 @@
-using GodotTemplate.Scripts.Services.CmdArgs;
 using Godot;
+using GodotTemplate.Scripts.Service.CmdArgs;
 
-namespace GodotTemplate.Scripts.Services.Process;
+namespace GodotTemplate.Scripts.Service.Process;
 
 public class ProcessService
 {

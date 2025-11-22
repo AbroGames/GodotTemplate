@@ -15,7 +15,7 @@ public partial class MainMenuMainPage : MainMenuPage
     {
         Di.Process(this);
         
-        StartSingleplayerButton.Pressed += () => Service.MainScene.StartSingleplayerGame();
+        StartSingleplayerButton.Pressed += () => Services.MainScene.StartSingleplayerGame();
         CreateServerButton.Pressed += () => ChangeMenuPage(PackedScenes.CreateServer);
         ConnectToServerButton.Pressed += () => ChangeMenuPage(PackedScenes.ConnectToServer);
         SettingsButton.Pressed += () => ChangeMenuPage(PackedScenes.Settings);

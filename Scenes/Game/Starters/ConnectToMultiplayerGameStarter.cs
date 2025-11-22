@@ -1,7 +1,7 @@
-﻿using GodotTemplate.Scenes.Game.Net;
+﻿using Godot;
+using GodotTemplate.Scenes.Game.Net;
 using GodotTemplate.Scripts.Content.LoadingScreen;
-using GodotTemplate.Scripts.Services.Settings;
-using Godot;
+using GodotTemplate.Scripts.Service.Settings;
 
 namespace GodotTemplate.Scenes.Game.Starters;
 
@@ -11,9 +11,9 @@ public class ConnectToMultiplayerGameStarter(string host = null, int? port = nul
     public override void Init(Game game)
     {
         base.Init(game);
-        Service.LoadingScreen.SetLoadingScreen(LoadingScreenTypes.Type.Connecting);
+        Services.LoadingScreen.SetLoadingScreen(LoadingScreenTypes.Type.Connecting);
         
-        PlayerSettings playerSettings = Service.PlayerSettings.GetPlayerSettings();
+        PlayerSettings playerSettings = Services.PlayerSettings.GetPlayerSettings();
         game.AddWorld();
         Synchronizer synchronizer = game.AddSynchronizer(playerSettings);
         game.AddHud();
@@ -33,16 +33,16 @@ public class ConnectToMultiplayerGameStarter(string host = null, int? port = nul
     // Failed attempt to connect to the server (did not receive a response from the server within the timeout).
     private void ConnectionFailedEvent()
     {
-        Service.MainScene.StartMainMenu();
+        Services.MainScene.StartMainMenu();
         //TODO Show message in menu (it is client). Log already has message.
-        Service.LoadingScreen.Clear();
+        Services.LoadingScreen.Clear();
     }
     
     // Server disconnected (the connection was successful, but the server disconnected us). This may also happen several hours after the connection.
     private void ServerDisconnectedEvent()
     {
-        Service.MainScene.StartMainMenu();
+        Services.MainScene.StartMainMenu();
         //TODO Show message in menu (it is client). Log already has message.
-        Service.LoadingScreen.Clear();
+        Services.LoadingScreen.Clear();
     }
 }

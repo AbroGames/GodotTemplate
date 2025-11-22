@@ -1,7 +1,7 @@
 ﻿using System;
-using GodotTemplate.Scenes.World.Data.Player;
-using GodotTemplate.Scripts.Services.Settings;
 using Godot;
+using GodotTemplate.Scenes.World.Data.Player;
+using GodotTemplate.Scripts.Service.Settings;
 using KludgeBox.DI.Requests.LoggerInjection;
 using Serilog;
 

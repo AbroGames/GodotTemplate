@@ -1,17 +1,16 @@
-﻿using GodotTemplate.Scripts.Content.LoadingScreen;
-using Godot;
-using GodotTemplate.Scenes.KludgeBox;
+﻿using Godot;
+using GodotTemplate.Scripts.Content.LoadingScreen;
 using LoadingScreenNode = GodotTemplate.Scenes.Screen.LoadingScreen.LoadingScreen;
 
-namespace GodotTemplate.Scripts.Services.LoadingScreen;
+namespace GodotTemplate.Scripts.Service.LoadingScreen;
 
 public class LoadingScreenService
 {
     
-    private NodeContainer _loadingScreenContainer;
+    private Scenes.KludgeBox.NodeContainer _loadingScreenContainer;
     private PackedScene _loadingScreenPackedScene;
 
-    public void Init(NodeContainer loadingScreenContainer, PackedScene loadingScreenPackedScene)
+    public void Init(Scenes.KludgeBox.NodeContainer loadingScreenContainer, PackedScene loadingScreenPackedScene)
     {
         _loadingScreenContainer = loadingScreenContainer;
         _loadingScreenPackedScene = loadingScreenPackedScene;

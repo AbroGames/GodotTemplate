@@ -7,19 +7,19 @@ namespace GodotTemplate.Scenes.Root.Starters;
 public class ClientRootStarter : BaseRootStarter
 {
 
-	[Logger] private ILogger _log; //TODO Тест, т.к. здесь нет DI
+	[Logger] private ILogger _log;
 	
     public override void Init(Root root)
     {
 	    base.Init(root);
         _log.Information("Initializing Client...");
         
-        Service.LoadingScreen.SetLoadingScreen(LoadingScreenTypes.Type.Loading);
+        Services.LoadingScreen.SetLoadingScreen(LoadingScreenTypes.Type.Loading);
         
-        Service.PlayerSettings.Init();
-        if (Service.CmdArgs.Client.Nick != null)
+        Services.PlayerSettings.Init();
+        if (Services.CmdArgs.Client.Nick != null)
         {
-	        Service.PlayerSettings.SetNickTemporarily(Service.CmdArgs.Client.Nick);
+	        Services.PlayerSettings.SetNickTemporarily(Services.CmdArgs.Client.Nick);
         }
     }
 
@@ -28,14 +28,14 @@ public class ClientRootStarter : BaseRootStarter
 	    base.Start(root);
         _log.Information("Starting Client...");
         
-        if (Service.CmdArgs.Client.AutoConnect)
+        if (Services.CmdArgs.Client.AutoConnect)
         {
-	        Service.MainScene.ConnectToMultiplayerGame(Service.CmdArgs.Client.AutoConnectIp, Service.CmdArgs.Client.AutoConnectPort);
+	        Services.MainScene.ConnectToMultiplayerGame(Services.CmdArgs.Client.AutoConnectIp, Services.CmdArgs.Client.AutoConnectPort);
         }
         else
         {
-	        Service.MainScene.StartMainMenu();
-	        Service.LoadingScreen.Clear();
+	        Services.MainScene.StartMainMenu();
+	        Services.LoadingScreen.Clear();
         }
     }
 }

@@ -1,5 +1,5 @@
-﻿using KludgeBox.Godot.Nodes.MpSync;
-using Godot;
+﻿using Godot;
+using KludgeBox.Godot.Nodes.MpSync;
 
 namespace GodotTemplate.Scenes.World.Services;
 

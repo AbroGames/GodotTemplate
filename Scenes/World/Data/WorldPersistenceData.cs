@@ -1,7 +1,7 @@
-﻿using GodotTemplate.Scenes.World.Data.General;
+﻿using Godot;
+using GodotTemplate.Scenes.World.Data.General;
 using GodotTemplate.Scenes.World.Data.MapPoint;
 using GodotTemplate.Scenes.World.Data.Player;
-using Godot;
 using KludgeBox.DI.Requests.NotNullCheck;
 
 namespace GodotTemplate.Scenes.World.Data;

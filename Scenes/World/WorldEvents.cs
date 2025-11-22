@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace GodotTemplate.Scenes.World;
+﻿namespace GodotTemplate.Scenes.World;
 
 public class WorldEvents
 {

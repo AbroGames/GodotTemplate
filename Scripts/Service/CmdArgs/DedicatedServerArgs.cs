@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace GodotTemplate.Scripts.Services.CmdArgs;
+namespace GodotTemplate.Scripts.Service.CmdArgs;
 
 public readonly record struct DedicatedServerArgs(bool IsHeadless, int? Port, string SaveFileName, string Admin, int? ParentPid, bool IsRender)
 {

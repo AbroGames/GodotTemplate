@@ -1,7 +1,7 @@
 ﻿using System.Text.Json;
 using Godot;
 
-namespace GodotTemplate.Scripts.Services.Settings;
+namespace GodotTemplate.Scripts.Service.Settings;
 
 public class PlayerSettingsService
 {

@@ -21,6 +21,6 @@ public partial class MainMenuConnectPage : MainMenuPage
     {
         string host = HostTextEdit.Text.Length != 0 ? HostTextEdit.Text : null;
         int? port = PortTextEdit.Text.Length != 0 ? PortTextEdit.Text.ToInt() : null;
-        Service.MainScene.ConnectToMultiplayerGame(host, port);
+        Services.MainScene.ConnectToMultiplayerGame(host, port);
     }
 }

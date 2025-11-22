@@ -8,7 +8,7 @@ public class HostDedicatedServerAndConnectGameStarter(int? port = null, string s
 
     public override void Init(Game game)
     {
-        int dedicatedServerPid = Service.Process.StartNewDedicatedServerApplication(
+        int dedicatedServerPid = Services.Process.StartNewDedicatedServerApplication(
             _port ?? DefaultPort, 
             saveFileName,
             adminNickname, 
