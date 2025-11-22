@@ -2,8 +2,6 @@
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GodotTemplate", "GodotTemplate.csproj", "{F6A59079-475F-453C-821F-4B369C0FC164}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KludgeBox", "KludgeBox\KludgeBox.csproj", "{800377F0-09AA-4466-A212-2E7D0FF433C7}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 	Debug|Any CPU = Debug|Any CPU
@@ -17,11 +15,5 @@ Global
 		{F6A59079-475F-453C-821F-4B369C0FC164}.ExportDebug|Any CPU.Build.0 = ExportDebug|Any CPU
 		{F6A59079-475F-453C-821F-4B369C0FC164}.ExportRelease|Any CPU.ActiveCfg = ExportRelease|Any CPU
 		{F6A59079-475F-453C-821F-4B369C0FC164}.ExportRelease|Any CPU.Build.0 = ExportRelease|Any CPU
-		{800377F0-09AA-4466-A212-2E7D0FF433C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{800377F0-09AA-4466-A212-2E7D0FF433C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{800377F0-09AA-4466-A212-2E7D0FF433C7}.ExportDebug|Any CPU.ActiveCfg = Debug|Any CPU
-		{800377F0-09AA-4466-A212-2E7D0FF433C7}.ExportDebug|Any CPU.Build.0 = Debug|Any CPU
-		{800377F0-09AA-4466-A212-2E7D0FF433C7}.ExportRelease|Any CPU.ActiveCfg = Debug|Any CPU
-		{800377F0-09AA-4466-A212-2E7D0FF433C7}.ExportRelease|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 EndGlobal
