@@ -24,7 +24,7 @@ public partial class Hud : Control
     
     [Logger] private ILogger _log;
     
-    public Hud Init(World.World world, Synchronizer synchronizer)
+    public Hud InitPreReady(World.World world, Synchronizer synchronizer)
     {
         Di.Process(this);
         
@@ -45,7 +45,7 @@ public partial class Hud : Control
         Test1.Pressed += () => { _world.Test1(); };
         Test2.Pressed += () => { _world.Test2(); };
         Test3.Pressed += () => { _world.Test3(); };
-        LogChildren.Pressed += () => { _world.StateCheckerService.LogState(); _world.StateCheckerService.StateCheckRequest(); };
+        LogChildren.Pressed += () => { Services.NodeTree.LogFullTree(_world); };
 
         ExitButton.Pressed += () => { Services.MainScene.StartMainMenu(); };
         SaveButton.Pressed += () => { _world.TestSave(SaveTextEdit.Text); };

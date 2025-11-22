@@ -18,7 +18,7 @@ public abstract class BaseRootStarter
         Services.CmdArgs.LogCmdArgs();
         
         _log.Information("Initializing base...");
-        root.PackedScenes.Init();
+        Services.Net.Init(root, Services.CmdArgs.IsDedicatedServer);
         Services.LoadingScreen.Init(root.LoadingScreenContainer, root.PackedScenes.LoadingScreen);
         Services.MainScene.Init(root.MainSceneContainer, root.PackedScenes.Game, root.PackedScenes.MainMenu);
     }

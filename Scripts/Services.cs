@@ -17,6 +17,7 @@ public static class Services
     public static readonly RandomService Rand = new RandomService();
     public static readonly MathService Math = new MathService();
     public static readonly StringCompressionService StringCompression = new StringCompressionService();
+    public static readonly NodeTreeService NodeTree = new NodeTreeService();
     
     // Services from game, but extended KludgeBox services
     public static readonly CmdArgsService CmdArgs = new CmdArgsService();

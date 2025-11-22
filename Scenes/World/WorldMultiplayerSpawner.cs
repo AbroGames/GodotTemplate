@@ -17,7 +17,7 @@ public partial class WorldMultiplayerSpawner : MultiplayerSpawner
     
     [Logger] private ILogger _log;
     
-    public WorldMultiplayerSpawner Init(Node observableNode, bool selfSync = true)
+    public WorldMultiplayerSpawner InitPreReady(Node observableNode, bool selfSync = true)
     {
         Di.Process(this);
         

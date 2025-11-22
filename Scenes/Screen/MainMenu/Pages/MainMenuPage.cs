@@ -8,7 +8,7 @@ public partial class MainMenuPage : Control
     protected Func<PackedScene, Node> ChangeMenuPage;
     protected MainMenuPackedScenes PackedScenes;
     
-    public void Init(Func<PackedScene, Node> changeMenuPage, MainMenuPackedScenes packedScenes)
+    public void InitPreReady(Func<PackedScene, Node> changeMenuPage, MainMenuPackedScenes packedScenes)
     {
         ChangeMenuPage = changeMenuPage;
         PackedScenes = packedScenes;

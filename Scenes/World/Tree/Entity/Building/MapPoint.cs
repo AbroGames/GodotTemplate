@@ -18,7 +18,7 @@ public partial class MapPoint : Node2D
         Data.PositionY = Position.Y;
     }
 
-    public MapPoint Init(MapPointData data)
+    public MapPoint InitPreReady(MapPointData data)
     {
         Data = data;
         Position = Vec2(data.PositionX, data.PositionY);
@@ -32,7 +32,7 @@ public partial class MapPoint : Node2D
         storage.AddMapPoint(mapPointData);
         
         MapPoint mapPoint = scene.Instantiate<MapPoint>();
-        mapPoint.Init(mapPointData);
+        mapPoint.InitPreReady(mapPointData);
         return mapPoint;
         
         //TODO return scene.Instantiate<MapPoint>().Init(mapPointData);
@@ -60,7 +60,7 @@ public partial class MapPoint : Node2D
             foreach (MapPointData mapPointData in world.Data.MapPoint.MapPointById.Values)
             {
                 MapPoint mapPoint = _mapPointById[mapPointData.Id];
-                mapPoint.Init(mapPointData);
+                mapPoint.InitPreReady(mapPointData);
             }
         }
     }

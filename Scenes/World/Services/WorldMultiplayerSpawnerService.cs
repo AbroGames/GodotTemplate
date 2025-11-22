@@ -32,7 +32,7 @@ public partial class WorldMultiplayerSpawnerService : Node
     public WorldMultiplayerSpawner AddSpawnerToNode(Node observableNode, Node parentNode)
     {
         WorldMultiplayerSpawner worldMultiplayerSpawner = WorldMultiplayerSpawnerPackedScene.Instantiate<WorldMultiplayerSpawner>() 
-            .Init(observableNode);
+            .InitPreReady(observableNode);
         parentNode.AddChildWithName(worldMultiplayerSpawner, observableNode.GetName() + "-MultiplayerSpawner");
         observableNode.TreeExiting += worldMultiplayerSpawner.QueueFree;
         return worldMultiplayerSpawner;

@@ -15,7 +15,7 @@ public partial class WorldStartStopService : Node
     /// </summary>
     private bool _isServer;
 
-    public WorldStartStopService Init(World world)
+    public WorldStartStopService InitPostReady(World world)
     {
         _world = world;
         return this;
@@ -36,9 +36,7 @@ public partial class WorldStartStopService : Node
     private void ServerInit(string adminNickname = null)
     {
         _isServer = true;
-        
         _world.TemporaryDataService.InitOnServer(adminNickname);
-        _world.StateCheckerService.InitOnServer();
     }
     
     public override void _Notification(int id)

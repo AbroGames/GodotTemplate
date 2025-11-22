@@ -16,6 +16,8 @@ public partial class Root : Node2D
     
     public override void _Ready()
     {
+        Di.Process(this);
+        
         Callable.From(() => {
             Init();
             Start();
@@ -26,7 +28,6 @@ public partial class Root : Node2D
     {
         _rootStarterManager = new RootStarterManager(this);
         _rootStarterManager.Init();
-        Di.Process(this); // We call NotNullChecker here, because it has not been created earlier
     }
 
     private void Start()

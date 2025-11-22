@@ -23,7 +23,7 @@ public partial class Synchronizer : Node
     
     [Logger] private ILogger _log;
     
-    public Synchronizer Init(World.World world, PlayerSettings playerSettings)
+    public Synchronizer InitPreReady(World.World world, PlayerSettings playerSettings)
     {
         Di.Process(this);
         

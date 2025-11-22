@@ -21,7 +21,7 @@ public partial class MainMenu : Node2D
     public Node ChangeMenuPage(PackedScene newMenuPageScene)
     {
         MainMenuPage newMenuPage = newMenuPageScene.Instantiate<MainMenuPage>();
-        newMenuPage.Init(ChangeMenuPage, PackedScenes);
+        newMenuPage.InitPreReady(ChangeMenuPage, PackedScenes);
         return MenuContainer.ChangeStoredNode(newMenuPage);
     }
 }

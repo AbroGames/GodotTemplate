@@ -19,7 +19,6 @@ public partial class World : Node2D
     [Export] [NotNull] public WorldTree Tree { get; private set; }
     [Export] [NotNull] public WorldPersistenceData Data { get; private set; }
     [Export] [NotNull] public WorldTemporaryDataService TemporaryDataService { get; private set; }
-    [Export] [NotNull] public WorldStateCheckerService StateCheckerService  { get; private set; }
     [Export] [NotNull] public WorldStartStopService StartStopService  { get; private set; }
     [Export] [NotNull] public WorldMultiplayerSpawnerService MultiplayerSpawnerService { get; private set; }
     
@@ -33,9 +32,8 @@ public partial class World : Node2D
     {
         Di.Process(this);
         
-        StartStopService.Init(this);
-        StateCheckerService.Init(Tree, Data);
-        Tree.Init(this);
+        StartStopService.InitPostReady(this);
+        Tree.InitPostReady(this);
         
         this.AddChildWithName(new AttributeMultiplayerSynchronizer(this), "MultiplayerSynchronizer");
     }
@@ -61,7 +59,7 @@ public partial class World : Node2D
         mapPointData.PositionY = Random.Shared.Next(0, 600);
         
         Data.MapPoint.AddMapPoint(mapPointData);
-        MapPoint mp2 = PackedScenes.MapPoint.Instantiate<MapPoint>().Init(mapPointData);
+        MapPoint mp2 = PackedScenes.MapPoint.Instantiate<MapPoint>().InitPreReady(mapPointData);
         Tree.MapSurface.AddChildWithUniqueName(mp2, "MapPoint");
         
         //TODO Третий способ создать MapPoint: отдельный объект WorldFactories, где лежат фабрики под все персистенсе объекты 

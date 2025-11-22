@@ -19,7 +19,7 @@ public partial class WorldTree : Node2D
     public List<BattleSurface> BattleSurfaces => _battleSurfacesNames.Select(name => GetNodeOrNull<BattleSurface>(name)).ToList();
     [Export] [Sync] private Array<string> _battleSurfacesNames = new();
 
-    public void Init(World world)
+    public void InitPostReady(World world)
     {
         _world = world;
     }

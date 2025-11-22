@@ -38,7 +38,7 @@ public partial class Game : Node2D
     public Hud AddHud()
     {
         Hud hud = PackedScenes.Hud.Instantiate<Hud>()
-            .Init(WorldContainer.GetCurrentStoredNode<World.World>(), _synchronizer);
+            .InitPreReady(WorldContainer.GetCurrentStoredNode<World.World>(), _synchronizer);
         hud.SetName("Hud");
         HudContainer.ChangeStoredNode(hud);
         return hud;
@@ -48,7 +48,7 @@ public partial class Game : Node2D
     {
         _synchronizer?.QueueFree();
         _synchronizer = new Synchronizer()
-            .Init(WorldContainer.GetCurrentStoredNode<World.World>(), playerSettings);
+            .InitPreReady(WorldContainer.GetCurrentStoredNode<World.World>(), playerSettings);
         this.AddChildWithName(_synchronizer, "Synchronizer");
         return _synchronizer;
     }

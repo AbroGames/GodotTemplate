@@ -27,8 +27,13 @@ public class ClientRootStarter : BaseRootStarter
     {
 	    base.Start(root);
         _log.Information("Starting Client...");
-        
-        if (Services.CmdArgs.Client.AutoConnect)
+
+
+        if (Services.CmdArgs.Client.AutoStart)
+        {
+	        Services.MainScene.StartSingleplayerGame();
+        } 
+        else if (Services.CmdArgs.Client.AutoConnect)
         {
 	        Services.MainScene.ConnectToMultiplayerGame(Services.CmdArgs.Client.AutoConnectIp, Services.CmdArgs.Client.AutoConnectPort);
         }

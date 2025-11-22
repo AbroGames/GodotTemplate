@@ -10,8 +10,8 @@ public partial class RootPackedScenes : Node
     [Export] [NotNull] public PackedScene MainMenu { get; private set; }
     [Export] [NotNull] public PackedScene LoadingScreen { get; private set; }
 
-    public void Init()
+    public override void _Ready()
     {
-        Di.Process(this); // We call NotNullChecker here, because it has not been created in _Ready
+        Di.Process(this);
     }
 }
