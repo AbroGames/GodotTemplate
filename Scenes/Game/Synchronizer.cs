@@ -2,6 +2,8 @@
 using GodotTemplate.Scenes.World.Data.Player;
 using GodotTemplate.Scripts.Services.Settings;
 using Godot;
+using KludgeBox.DI.Requests.LoggerInjection;
+using Serilog;
 
 namespace GodotTemplate.Scenes.Game;
 
@@ -19,12 +21,16 @@ public partial class Synchronizer : Node
     private World.World _world;
     private PlayerSettings _playerSettings;
     
+    [Logger] private ILogger _log;
+    
     public Synchronizer Init(World.World world, PlayerSettings playerSettings)
     {
-        if (world == null) Log.Error("World must be not null");
+        Di.Process(this);
+        
+        if (world == null) _log.Error("World must be not null");
         _world = world;
         
-        if (playerSettings == null) Log.Error("PlayerSettings must be not null");
+        if (playerSettings == null) _log.Error("PlayerSettings must be not null");
         _playerSettings = playerSettings;
 
         return this;

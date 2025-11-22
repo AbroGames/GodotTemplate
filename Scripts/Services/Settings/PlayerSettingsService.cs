@@ -3,7 +3,6 @@ using Godot;
 
 namespace GodotTemplate.Scripts.Services.Settings;
 
-//TODO [Service]
 public class PlayerSettingsService
 {
 

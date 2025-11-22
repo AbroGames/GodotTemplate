@@ -1,14 +1,18 @@
 ﻿using GodotTemplate.Scripts.Content.LoadingScreen;
+using KludgeBox.DI.Requests.LoggerInjection;
+using Serilog;
 
 namespace GodotTemplate.Scenes.Root.Starters;
 
 public class ClientRootStarter : BaseRootStarter
 {
 
+	[Logger] private ILogger _log; //TODO Тест, т.к. здесь нет DI
+	
     public override void Init(Root root)
     {
 	    base.Init(root);
-        Log.Info("Initializing Client...");
+        _log.Information("Initializing Client...");
         
         Service.LoadingScreen.SetLoadingScreen(LoadingScreenTypes.Type.Loading);
         
@@ -22,7 +26,7 @@ public class ClientRootStarter : BaseRootStarter
     public override void Start(Root root)
     {
 	    base.Start(root);
-        Log.Info("Starting Client...");
+        _log.Information("Starting Client...");
         
         if (Service.CmdArgs.Client.AutoConnect)
         {

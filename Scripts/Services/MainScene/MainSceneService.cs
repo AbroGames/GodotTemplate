@@ -6,7 +6,6 @@ using MainMenu = GodotTemplate.Scenes.Screen.MainMenu.MainMenu;
 
 namespace GodotTemplate.Scripts.Services.MainScene;
 
-//TODO [Service]
 public class MainSceneService
 {
     

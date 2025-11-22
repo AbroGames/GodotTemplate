@@ -4,6 +4,8 @@ using GodotTemplate.Scenes.World.Data;
 using GodotTemplate.Scenes.World.Tree;
 using Godot;
 using KludgeBox.Core.Cooldown;
+using KludgeBox.DI.Requests.LoggerInjection;
+using Serilog;
 
 namespace GodotTemplate.Scenes.World.Services;
 
@@ -13,9 +15,13 @@ public partial class WorldStateCheckerService : Node
     private WorldTree _worldTree;
     private WorldPersistenceData _worldData;
     private AutoCooldown _checkCooldown;
+    
+    [Logger] private ILogger _log;
 
     public void Init(WorldTree worldTree, WorldPersistenceData worldData)
     {
+        Di.Process(this);
+        
         _worldTree = worldTree;
         _worldData = worldData;
     }
@@ -69,7 +75,7 @@ public partial class WorldStateCheckerService : Node
             sb.AppendLine("Client world data: " + clientWorldDataHash);
         }
         
-        Log.Warning(sb.ToString());
+        _log.Warning(sb.ToString());
     }
     
     /// <summary>
@@ -80,9 +86,9 @@ public partial class WorldStateCheckerService : Node
     [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true)]
     private void LogStateRpc()
     {
-        Log.Debug("World tree: " + GetWorldTree());
-        Log.Debug("World tree hash: " + GetWorldTreeHash());
-        Log.Debug("World data hash: " + GetWorldDataHash());
+        _log.Debug("World tree: " + GetWorldTree());
+        _log.Debug("World tree hash: " + GetWorldTreeHash());
+        _log.Debug("World data hash: " + GetWorldDataHash());
     }
     
     private string GetWorldTree()

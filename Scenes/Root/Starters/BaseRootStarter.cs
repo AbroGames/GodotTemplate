@@ -1,16 +1,24 @@
-﻿namespace GodotTemplate.Scenes.Root.Starters;
+﻿using KludgeBox.DI.Requests.LoggerInjection;
+using Serilog;
+
+namespace GodotTemplate.Scenes.Root.Starters;
 
 public abstract class BaseRootStarter
 {
+    
+    [Logger] private ILogger _log;
 
     public virtual void Init(Root root)
     {
-        // We can't log anything before Lib initialized
-        new LibInitializer()
-            .SetNodeNetworkExtensionsIsClientChecker(_ => !Service.CmdArgs.IsDedicatedServer) // IsDedicatedServer is null now, but will be set before the lambda is called
-            .Init();
+        Di.Process(this);
         
-        Log.Info("Initializing base...");
+        // We can't log anything before Lib initialized
+        /* TODO
+         new LibInitializer()
+            .SetNodeNetworkExtensionsIsClientChecker(_ => !Service.CmdArgs.IsDedicatedServer) // IsDedicatedServer is null now, but will be set before the lambda is called
+            .Init();*/
+        
+        _log.Information("Initializing base...");
         
         root.PackedScenes.Init();
         Service.LoadingScreen.Init(root.LoadingScreenContainer, root.PackedScenes.LoadingScreen);
@@ -19,6 +27,6 @@ public abstract class BaseRootStarter
 
     public virtual void Start(Root root)
     {
-        Log.Info("Starting base...");
+        _log.Information("Starting base...");
     }
 }

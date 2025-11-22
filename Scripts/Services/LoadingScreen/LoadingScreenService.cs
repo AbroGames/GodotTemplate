@@ -5,7 +5,6 @@ using LoadingScreenNode = GodotTemplate.Scenes.Screen.LoadingScreen.LoadingScree
 
 namespace GodotTemplate.Scripts.Services.LoadingScreen;
 
-//TODO [Service]
 public class LoadingScreenService
 {
     

@@ -1,24 +1,35 @@
 ﻿using System;
 using Godot;
+using KludgeBox.DI.Requests.LoggerInjection;
+using Serilog;
 
 namespace GodotTemplate.Scenes.World.Data;
 
-public class WorldDataSaveLoad(WorldPersistenceData worldData)
+public class WorldDataSaveLoad
 {
 
     private const string SaveDirPath = "user://saves/";
     private const string SaveExtension = ".bin";
     private const string AutoSaveName = "auto";
     
+    private WorldPersistenceData _worldData;
+    [Logger] private ILogger _log;
+
+    public WorldDataSaveLoad(WorldPersistenceData worldData) 
+    {
+        Di.Process(this);
+        _worldData = worldData;
+    }
+
     public bool Save(string saveFileName)
     {
-        worldData.General.GeneralData.SaveFileName = saveFileName;
-        return SaveToDisk(worldData.Serializer.SerializeWorldData(), saveFileName);
+        _worldData.General.GeneralData.SaveFileName = saveFileName;
+        return SaveToDisk(_worldData.Serializer.SerializeWorldData(), saveFileName);
     }
     
     public bool AutoSave()
     {
-        return SaveToDisk(worldData.Serializer.SerializeWorldData(), AutoSaveName);
+        return SaveToDisk(_worldData.Serializer.SerializeWorldData(), AutoSaveName);
     }
 
     public bool Load(string saveFileName)
@@ -28,12 +39,12 @@ public class WorldDataSaveLoad(WorldPersistenceData worldData)
         
         try
         {
-            worldData.Serializer.DeserializeWorldData(data);
+            _worldData.Serializer.DeserializeWorldData(data);
         }
         catch (Exception e)
         {
             //TODO Вместо возвращаемого bool мб выбрасывать ошибку выше, чтобы обрабатывать потом в Host MpGame и в Host Single Game?
-            Log.Error($"Failed to deserialize world data from save file '{SaveDirPath + saveFileName + SaveExtension}': {e.Message}");
+            _log.Error($"Failed to deserialize world data from save file '{SaveDirPath + saveFileName + SaveExtension}': {e.Message}");
             return false;
         }
 
@@ -46,7 +57,7 @@ public class WorldDataSaveLoad(WorldPersistenceData worldData)
         using var file = FileAccess.Open(SaveDirPath + saveFileName + SaveExtension, FileAccess.ModeFlags.Write);
         if (file == null)
         {
-            Log.Error($"Failed to save file '{SaveDirPath + saveFileName + SaveExtension}': {FileAccess.GetOpenError()}");
+            _log.Error($"Failed to save file '{SaveDirPath + saveFileName + SaveExtension}': {FileAccess.GetOpenError()}");
             return false;
         }
         
@@ -60,7 +71,7 @@ public class WorldDataSaveLoad(WorldPersistenceData worldData)
         using var file = FileAccess.Open(SaveDirPath + saveFileName + SaveExtension, FileAccess.ModeFlags.Read);
         if (file == null)
         {
-            Log.Error($"Failed to load file '{SaveDirPath + saveFileName + SaveExtension}': {FileAccess.GetOpenError()}");
+            _log.Error($"Failed to load file '{SaveDirPath + saveFileName + SaveExtension}': {FileAccess.GetOpenError()}");
             return null;
         }
         

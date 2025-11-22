@@ -6,7 +6,9 @@ using GodotTemplate.Scenes.World.Services;
 using GodotTemplate.Scenes.World.Tree;
 using GodotTemplate.Scenes.World.Tree.Entity.Building;
 using Godot;
+using KludgeBox.DI.Requests.LoggerInjection;
 using KludgeBox.DI.Requests.NotNullCheck;
+using Serilog;
 using WorldStartStopService = GodotTemplate.Scenes.World.Services.StartStop.WorldStartStopService;
 
 namespace GodotTemplate.Scenes.World;
@@ -25,6 +27,8 @@ public partial class World : Node2D
     
     public readonly WorldEvents Events = new();
     
+    [Logger] private ILogger _log;
+    
     public override void _Ready()
     {
         Di.Process(this);
@@ -41,7 +45,7 @@ public partial class World : Node2D
     [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true)]
     private void Test1Rpc()
     {
-        Log.Warning("Test 1 RPC called");
+        _log.Warning("Test 1 RPC called");
 
         //TODO Первые способ создать MapPoint
         MapPoint mp1 = MapPoint.Create(PackedScenes.MapPoint, Data.MapPoint, data =>
@@ -67,14 +71,14 @@ public partial class World : Node2D
     [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true)]
     private void Test2Rpc()
     {
-        Log.Warning("Test 2 RPC called");
+        _log.Warning("Test 2 RPC called");
     }
     
     public void Test3() => RpcId(ServerId, MethodName.Test3Rpc);
     [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true)]
     private void Test3Rpc()
     {
-        Log.Warning("Test 3 RPC called");
+        _log.Warning("Test 3 RPC called");
     }
     
     //TODO Переделать на нормальный метод запроса сохранения с клиента на сервер, с проверкой прав
@@ -82,7 +86,7 @@ public partial class World : Node2D
     [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true)]
     private void TestSaveRpc(string saveFileName)
     {
-        Log.Warning("TestSave RPC called");
+        _log.Warning("TestSave RPC called");
         Data.SaveLoad.Save(saveFileName);
     }
 }

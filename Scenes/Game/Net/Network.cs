@@ -1,4 +1,6 @@
 ﻿using Godot;
+using KludgeBox.DI.Requests.LoggerInjection;
+using Serilog;
 
 namespace GodotTemplate.Scenes.Game.Net;
 
@@ -9,9 +11,13 @@ public partial class Network : Node
     
     public MultiplayerApi Api { get; private set; }
     public NetworkStateMachine StateMachine { get; } = new();
+    
+    [Logger] private ILogger _log;
 
     public override void _Ready()
     {
+        Di.Process(this);
+        
         Api = GetMultiplayer();
         Api.ConnectedToServer += ConnectedToServerEvent;
         Api.PeerConnected += PeerConnectedEvent;
@@ -32,11 +38,11 @@ public partial class Network : Node
     {
         if (!StateMachine.CanInitialize)
         {
-            Log.Error($"Can't initialize network in current state: {StateMachine.CurrentState}");
+            _log.Error($"Can't initialize network in current state: {StateMachine.CurrentState}");
             return Error.AlreadyInUse;
         }
         
-        Log.Info($"Connecting to the server at {host}:{port}");
+        _log.Information($"Connecting to the server at {host}:{port}");
 
         StateMachine.SetState(NetworkStateMachine.State.Connecting);
         var peer = new ENetMultiplayerPeer();
@@ -45,7 +51,7 @@ public partial class Network : Node
 		
         if (error != Error.Ok)
         {
-            Log.Error($"Failed to connect to the server: {error}");
+            _log.Error($"Failed to connect to the server: {error}");
         }
         return error; 
     }
@@ -64,11 +70,11 @@ public partial class Network : Node
     {
         if (!StateMachine.CanInitialize)
         {
-            Log.Error($"Can't initialize network in current state: {StateMachine.CurrentState}");
+            _log.Error($"Can't initialize network in current state: {StateMachine.CurrentState}");
             return Error.AlreadyInUse;
         }
         
-        Log.Info($"Starting server on port {port}");
+        _log.Information($"Starting server on port {port}");
         
         StateMachine.SetState(NetworkStateMachine.State.Hosting);
         var peer = new ENetMultiplayerPeer();
@@ -79,11 +85,11 @@ public partial class Network : Node
         if (error == Error.Ok)
         {
             StateMachine.SetState(NetworkStateMachine.State.Hosted);
-            Log.Info("Started server successfully");
+            _log.Information("Started server successfully");
         }
         else
         {
-            Log.Error($"Failed to start server: {error}");
+            _log.Error($"Failed to start server: {error}");
         }
         
         return error;
@@ -93,7 +99,7 @@ public partial class Network : Node
     {
         if (!StateMachine.IsServer)
         {
-            Log.Error($"Can't open server in current state: {StateMachine.CurrentState}");
+            _log.Error($"Can't open server in current state: {StateMachine.CurrentState}");
             return;
         }
         
@@ -109,7 +115,7 @@ public partial class Network : Node
     {
         if (Api.HasMultiplayerPeer() && Api.GetMultiplayerPeer() is not OfflineMultiplayerPeer)
         {
-            Log.Info("Shutting down network...");
+            _log.Information("Shutting down network...");
 
             Api.MultiplayerPeer.RefuseNewConnections = true;
             foreach (var peer in Api.GetPeers())
@@ -120,20 +126,20 @@ public partial class Network : Node
             Api.MultiplayerPeer = new OfflineMultiplayerPeer();
             StateMachine.SetState(NetworkStateMachine.State.NotInitialized);
             
-            Log.Info("Network shutdown successful");
+            _log.Information("Network shutdown successful");
         }
     }
 
     private void ConnectedToServerEvent()
     {
         StateMachine.SetState(NetworkStateMachine.State.Connected);
-        Log.Info($"Connected to the server successfully. My peer id: {Api.GetUniqueId()}");
+        _log.Information($"Connected to the server successfully. My peer id: {Api.GetUniqueId()}");
     }
 
     private void ConnectionFailedEvent()
     {
         StateMachine.SetState(NetworkStateMachine.State.Disconnected);
-        Log.Error("Connection to the server failed");
+        _log.Error("Connection to the server failed");
         
         Shutdown();
     }
@@ -141,18 +147,18 @@ public partial class Network : Node
     private void ServerDisconnectedEvent()
     {
         StateMachine.SetState(NetworkStateMachine.State.Disconnected);
-        Log.Info("Server disconnected");
+        _log.Information("Server disconnected");
         
         Shutdown();
     }
     
     private void PeerConnectedEvent(long id)
     {
-        Log.Debug($"Network peer connected: {id}");
+        _log.Debug($"Network peer connected: {id}");
     }
     
     private void PeerDisconnectedEvent(long id)
     {
-        Log.Debug($"Network peer disconnected: {id}");
+        _log.Debug($"Network peer disconnected: {id}");
     }
 }

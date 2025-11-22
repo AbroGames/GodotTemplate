@@ -1,5 +1,7 @@
 using Godot;
+using KludgeBox.DI.Requests.LoggerInjection;
 using KludgeBox.DI.Requests.NotNullCheck;
+using Serilog;
 
 namespace GodotTemplate.Scenes.World;
 
@@ -13,8 +15,12 @@ public partial class WorldMultiplayerSpawner : MultiplayerSpawner
     [Export] private bool _selfSync = true;
     private Node _observableNode;
     
+    [Logger] private ILogger _log;
+    
     public WorldMultiplayerSpawner Init(Node observableNode, bool selfSync = true)
     {
+        Di.Process(this);
+        
         _observableNode = observableNode;
         _selfSync = selfSync;
         return this;
@@ -39,7 +45,7 @@ public partial class WorldMultiplayerSpawner : MultiplayerSpawner
         }
         else if (string.IsNullOrEmpty(GetSpawnPath())) 
         {
-            Log.Error("SelfMultiplayerSpawner must have not null _observableNode or SpawnPath. Spawner path: " + GetPath());
+            _log.Error("SelfMultiplayerSpawner must have not null _observableNode or SpawnPath. Spawner path: " + GetPath());
         }
     }
 }

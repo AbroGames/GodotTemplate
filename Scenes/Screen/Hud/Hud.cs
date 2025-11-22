@@ -1,7 +1,9 @@
 ﻿using GodotTemplate.Scenes.Game;
 using GodotTemplate.Scripts.Content.LoadingScreen;
 using Godot;
+using KludgeBox.DI.Requests.LoggerInjection;
 using KludgeBox.DI.Requests.NotNullCheck;
+using Serilog;
 
 namespace GodotTemplate.Scenes.Screen.Hud;
 
@@ -20,12 +22,16 @@ public partial class Hud : Control
     private World.World _world;
     private Synchronizer _synchronizer;
     
+    [Logger] private ILogger _log;
+    
     public Hud Init(World.World world, Synchronizer synchronizer)
     {
-        if (world == null) Log.Error("World must be not null");
+        Di.Process(this);
+        
+        if (world == null) _log.Error("World must be not null");
         _world = world;
         
-        if (synchronizer == null) Log.Error("Synchronizer must be not null");
+        if (synchronizer == null) _log.Error("Synchronizer must be not null");
         _synchronizer = synchronizer;
 
         ConnectToEvents();
@@ -51,7 +57,7 @@ public partial class Hud : Control
         _synchronizer.SyncEndedOnClientEvent += () => Service.LoadingScreen.Clear();
         _synchronizer.SyncRejectOnClientEvent += (errorMessage) =>
         {
-            Log.Warning($"Synchronization with the server was rejected: {errorMessage}");
+            _log.Warning($"Synchronization with the server was rejected: {errorMessage}");
             Service.MainScene.StartMainMenu();
             //TODO Show error message in menu
             Service.LoadingScreen.Clear();

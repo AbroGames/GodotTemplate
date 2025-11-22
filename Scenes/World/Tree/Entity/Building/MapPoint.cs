@@ -24,7 +24,7 @@ public partial class MapPoint : Node2D
     public MapPoint Init(MapPointData data)
     {
         Data = data;
-        Position = Vec(data.PositionX, data.PositionY);
+        Position = Vec2(data.PositionX, data.PositionY);
         return this;
     }
 
