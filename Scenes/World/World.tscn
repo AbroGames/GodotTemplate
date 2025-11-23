@@ -1,23 +1,24 @@
-[gd_scene load_steps=9 format=3 uid="uid://bpjqlqsxaute2"]
+[gd_scene load_steps=10 format=3 uid="uid://bpjqlqsxaute2"]
 
 [ext_resource type="Script" uid="uid://dtpndmeabtt07" path="res://Scenes/World/World.cs" id="1_0nbjp"]
-[ext_resource type="PackedScene" uid="uid://baeir4xp6kjyd" path="res://Scenes/World/WorldMultiplayerSpawner.tscn" id="2_ouhkt"]
-[ext_resource type="PackedScene" uid="uid://ba3apeajydxl6" path="res://Scenes/World/WorldPackedScenes.tscn" id="2_xf6vi"]
+[ext_resource type="PackedScene" uid="uid://baeir4xp6kjyd" path="res://Scenes/World/MpSpawn/WorldMultiplayerSpawner.tscn" id="2_ouhkt"]
+[ext_resource type="PackedScene" uid="uid://ba3apeajydxl6" path="res://Scenes/World/PackedScenes/WorldPackedScenes.tscn" id="2_xf6vi"]
 [ext_resource type="PackedScene" uid="uid://bic2y3aefedxr" path="res://Scenes/World/Data/WorldPersistenceData.tscn" id="3_5jr8x"]
 [ext_resource type="PackedScene" uid="uid://c8mpkavrkvkxh" path="res://Scenes/World/Tree/WorldTree.tscn" id="3_hveh7"]
 [ext_resource type="Script" uid="uid://b1lvv7kolowbi" path="res://Scenes/World/Services/WorldTemporaryDataService.cs" id="4_p7pgw"]
 [ext_resource type="Script" uid="uid://dup0k3cek5wg" path="res://Scenes/World/Services/WorldMultiplayerSpawnerService.cs" id="6_87yka"]
 [ext_resource type="Script" uid="uid://fbb6ibpssx62" path="res://Scenes/World/Services/StartStop/WorldStartStopService.cs" id="6_p7pgw"]
+[ext_resource type="PackedScene" uid="uid://buxateh143bl3" path="res://Scenes/World/PackedScenes/ClientPackedScenes.tscn" id="9_p7pgw"]
 
-[node name="World" type="Node2D" node_paths=PackedStringArray("Tree", "Data", "TemporaryDataService", "StateCheckerService", "StartStopService", "MultiplayerSpawnerService", "PackedScenes")]
+[node name="World" type="Node2D" node_paths=PackedStringArray("Tree", "Data", "TemporaryDataService", "StartStopService", "MultiplayerSpawnerService", "WorldPackedScenes", "ClientPackedScenes")]
 script = ExtResource("1_0nbjp")
 Tree = NodePath("Tree")
 Data = NodePath("PersistenceData")
 TemporaryDataService = NodePath("TemporaryDataService")
-StateCheckerService = NodePath("")
 StartStopService = NodePath("StartStopService")
 MultiplayerSpawnerService = NodePath("MultiplayerSpawnerService")
-PackedScenes = NodePath("PackedScenes")
+WorldPackedScenes = NodePath("WorldPackedScenes")
+ClientPackedScenes = NodePath("ClientPackedScenes")
 
 [node name="Tree" parent="." instance=ExtResource("3_hveh7")]
 
@@ -33,7 +34,9 @@ script = ExtResource("6_p7pgw")
 script = ExtResource("6_87yka")
 WorldMultiplayerSpawnerPackedScene = ExtResource("2_ouhkt")
 
-[node name="PackedScenes" parent="." instance=ExtResource("2_xf6vi")]
+[node name="WorldPackedScenes" parent="." instance=ExtResource("2_xf6vi")]
+
+[node name="ClientPackedScenes" parent="." instance=ExtResource("9_p7pgw")]
 
 [node name="Tree-MultiplayerSpawner" parent="." instance=ExtResource("2_ouhkt")]
 spawn_path = NodePath("../Tree")

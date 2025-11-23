@@ -49,7 +49,7 @@ public partial class MapPoint : Node2D
         {
             foreach (MapPointData mapPointData in world.Data.MapPoint.MapPointById.Values)
             {
-                MapPoint mapPoint = world.PackedScenes.MapPoint.Instantiate<MapPoint>();
+                MapPoint mapPoint = world.WorldPackedScenes.MapPoint.Instantiate<MapPoint>();
                 world.Tree.MapSurface.AddChildWithUniqueName(mapPoint, "MapPoint");
                 _mapPointById.Add(mapPointData.Id, mapPoint);
             }

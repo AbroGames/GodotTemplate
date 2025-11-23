@@ -19,7 +19,7 @@ public partial class WorldTemporaryDataService : Node
     
     public override void _Ready()
     {
-        this.AddChildWithName(new AttributeMultiplayerSynchronizer(this), "MultiplayerSynchronizer");
+        Di.Process(this);
     }
     
     public void InitOnServer(string adminNickname = null)

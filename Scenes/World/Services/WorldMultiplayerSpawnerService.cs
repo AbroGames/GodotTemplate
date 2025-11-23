@@ -1,4 +1,5 @@
 ﻿using Godot;
+using GodotTemplate.Scenes.World.MpSpawn;
 using KludgeBox.DI.Requests.NotNullCheck;
 
 namespace GodotTemplate.Scenes.World.Services;
@@ -31,8 +32,8 @@ public partial class WorldMultiplayerSpawnerService : Node
     /// <returns>Created spawner</returns>
     public WorldMultiplayerSpawner AddSpawnerToNode(Node observableNode, Node parentNode)
     {
-        WorldMultiplayerSpawner worldMultiplayerSpawner = WorldMultiplayerSpawnerPackedScene.Instantiate<WorldMultiplayerSpawner>() 
-            .InitPreReady(observableNode);
+        WorldMultiplayerSpawner worldMultiplayerSpawner = WorldMultiplayerSpawnerPackedScene.Instantiate<WorldMultiplayerSpawner>(); 
+        worldMultiplayerSpawner.InitPreReady(observableNode);
         parentNode.AddChildWithName(worldMultiplayerSpawner, observableNode.GetName() + "-MultiplayerSpawner");
         observableNode.TreeExiting += worldMultiplayerSpawner.QueueFree;
         return worldMultiplayerSpawner;

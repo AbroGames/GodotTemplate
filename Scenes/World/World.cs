@@ -2,12 +2,12 @@
 using Godot;
 using GodotTemplate.Scenes.World.Data;
 using GodotTemplate.Scenes.World.Data.MapPoint;
+using GodotTemplate.Scenes.World.PackedScenes;
 using GodotTemplate.Scenes.World.Services;
 using GodotTemplate.Scenes.World.Tree;
 using GodotTemplate.Scenes.World.Tree.Entity.Building;
 using KludgeBox.DI.Requests.LoggerInjection;
 using KludgeBox.DI.Requests.NotNullCheck;
-using KludgeBox.Godot.Nodes.MpSync;
 using Serilog;
 using WorldStartStopService = GodotTemplate.Scenes.World.Services.StartStop.WorldStartStopService;
 
@@ -22,7 +22,8 @@ public partial class World : Node2D
     [Export] [NotNull] public WorldStartStopService StartStopService  { get; private set; }
     [Export] [NotNull] public WorldMultiplayerSpawnerService MultiplayerSpawnerService { get; private set; }
     
-    [Export] [NotNull] public WorldPackedScenes PackedScenes { get; private set; }
+    [Export] [NotNull] public WorldPackedScenes WorldPackedScenes { get; private set; }
+    [Export] [NotNull] public ClientPackedScenes ClientPackedScenes { get; private set; }
     
     public readonly WorldEvents Events = new();
     
@@ -34,8 +35,6 @@ public partial class World : Node2D
         
         StartStopService.InitPostReady(this);
         Tree.InitPostReady(this);
-        
-        this.AddChildWithName(new AttributeMultiplayerSynchronizer(this), "MultiplayerSynchronizer");
     }
     
     //TODO Test methods. Remove after tests.
@@ -46,7 +45,7 @@ public partial class World : Node2D
         _log.Warning("Test 1 RPC called");
 
         //TODO Первые способ создать MapPoint
-        MapPoint mp1 = MapPoint.Create(PackedScenes.MapPoint, Data.MapPoint, data =>
+        MapPoint mp1 = MapPoint.Create(WorldPackedScenes.MapPoint, Data.MapPoint, data =>
         {
             data.PositionX = Random.Shared.Next(0, 600);
             data.PositionY = Random.Shared.Next(0, 600);
@@ -59,7 +58,7 @@ public partial class World : Node2D
         mapPointData.PositionY = Random.Shared.Next(0, 600);
         
         Data.MapPoint.AddMapPoint(mapPointData);
-        MapPoint mp2 = PackedScenes.MapPoint.Instantiate<MapPoint>().InitPreReady(mapPointData);
+        MapPoint mp2 = WorldPackedScenes.MapPoint.Instantiate<MapPoint>().InitPreReady(mapPointData);
         Tree.MapSurface.AddChildWithUniqueName(mp2, "MapPoint");
         
         //TODO Третий способ создать MapPoint: отдельный объект WorldFactories, где лежат фабрики под все персистенсе объекты 

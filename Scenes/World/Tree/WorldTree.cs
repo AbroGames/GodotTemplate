@@ -27,12 +27,11 @@ public partial class WorldTree : Node2D
     public override void _Ready()
     {
         Di.Process(this);
-        this.AddChildWithName(new AttributeMultiplayerSynchronizer(this), "MultiplayerSynchronizer");
     }
     
     public BattleSurface AddBattleSurface()
     {
-        BattleSurface battleSurface = _world.PackedScenes.BattleSurface.Instantiate<BattleSurface>();
+        BattleSurface battleSurface = _world.WorldPackedScenes.BattleSurface.Instantiate<BattleSurface>();
         this.AddChildWithUniqueName(battleSurface, "BattleSurface");
         _battleSurfacesNames.Add(battleSurface.Name);
         _world.MultiplayerSpawnerService.AddSpawnerToNode(battleSurface);
