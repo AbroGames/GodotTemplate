@@ -4,39 +4,40 @@ using Godot;
 using GodotTemplate.Scenes.World.Data.MapPoint;
 using GodotTemplate.Scenes.World.Services.PersistenceFactory;
 using GodotTemplate.Scenes.World.Services.StartStop;
+using KludgeBox.DI.Requests.ParentInjection;
+using KludgeBox.Godot.Nodes.MpSync;
+using static Godot.SceneReplicationConfig.ReplicationMode;
 
 namespace GodotTemplate.Scenes.World.Tree.Entity.Building;
 
 public partial class MapPoint : Node2D
 {
     
-    public MapPointData Data { get; private set; } //TODO Как связать их на клиенте? Через Export + Sync по id?
+    public MapPointData Data { get; private set; } 
+
+    [Export] [Sync(Never)] private long _id;
+    [Parent(true)] private World _world; 
+    
+    public override void _EnterTree()
+    {
+        Di.Process(this);
+        
+        // Init on client side
+        if (Data == null) InitPreReady(_world.Data.MapPoint.MapPointById[_id]);
+    }
+
+    private void InitPreReady(MapPointData data)
+    {
+        Data = data;
+        Position = Vec2(data.PositionX, data.PositionY);
+        _id = data.Id;
+    }
 
     public void UpdatePosition(Vector2 position)
     {
         Position = position;
         Data.PositionX = Position.X;
         Data.PositionY = Position.Y;
-    }
-
-    public MapPoint InitPreReady(MapPointData data)
-    {
-        Data = data;
-        Position = Vec2(data.PositionX, data.PositionY);
-        return this;
-    }
-
-    public static MapPoint Create(PackedScene scene, MapPointDataStorage storage, Action<MapPointData> init = null)
-    {
-        MapPointData mapPointData = new MapPointData();
-        init?.Invoke(mapPointData);
-        storage.AddMapPoint(mapPointData);
-        
-        MapPoint mapPoint = scene.Instantiate<MapPoint>();
-        mapPoint.InitPreReady(mapPointData);
-        return mapPoint;
-        
-        //TODO return scene.Instantiate<MapPoint>().Init(mapPointData);
     }
 
     public class Factory : IPersistenceNodeFactory<MapPoint, MapPointData>
@@ -62,7 +63,8 @@ public partial class MapPoint : Node2D
             _storage.AddMapPoint(mapPointData);
         
             MapPoint mapPoint = _scene.Instantiate<MapPoint>();
-            return mapPoint.InitPreReady(mapPointData);
+            mapPoint.InitPreReady(mapPointData);
+            return mapPoint;
         }
     }
 

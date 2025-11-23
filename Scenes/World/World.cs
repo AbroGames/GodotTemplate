@@ -9,7 +9,6 @@ using GodotTemplate.Scenes.World.Tree;
 using GodotTemplate.Scenes.World.Tree.Entity.Building;
 using KludgeBox.DI.Requests.ChildInjection;
 using KludgeBox.DI.Requests.LoggerInjection;
-using KludgeBox.DI.Requests.NotNullCheck;
 using Serilog;
 using WorldStartStopService = GodotTemplate.Scenes.World.Services.StartStop.WorldStartStopService;
 
@@ -43,31 +42,12 @@ public partial class World : Node2D
     private void Test1Rpc()
     {
         _log.Warning("Test 1 RPC called");
-
-        //TODO Первые способ создать MapPoint
-        MapPoint mp1 = MapPoint.Create(WorldPackedScenes.MapPoint, Data.MapPoint, data =>
+        
+        Tree.MapSurface.AddChildWithUniqueName(Factory.Create<MapPoint, MapPointData>(data =>
         {
             data.PositionX = Random.Shared.Next(0, 600);
             data.PositionY = Random.Shared.Next(0, 600);
-        });
-        Tree.MapSurface.AddChildWithUniqueName(mp1, "MapPoint");
-        
-        //TODO Второй способ создать MapPoint
-        MapPointData mapPointData = new MapPointData();
-        mapPointData.PositionX = Random.Shared.Next(0, 600);
-        mapPointData.PositionY = Random.Shared.Next(0, 600);
-        
-        Data.MapPoint.AddMapPoint(mapPointData);
-        MapPoint mp2 = WorldPackedScenes.MapPoint.Instantiate<MapPoint>().InitPreReady(mapPointData);
-        Tree.MapSurface.AddChildWithUniqueName(mp2, "MapPoint");
-        
-        //TODO Третий способ создать MapPoint: отдельный объект WorldFactories, где лежат фабрики под все персистенсе объекты 
-        MapPoint mp3 = Factory.Create<MapPoint, MapPointData>(data =>
-        {
-            data.PositionX = Random.Shared.Next(0, 600);
-            data.PositionY = Random.Shared.Next(0, 600);
-        });
-        Tree.MapSurface.AddChildWithUniqueName(mp3, "MapPoint");
+        }), "MapPoint");
     }
     
     public void Test2() => RpcId(ServerId, MethodName.Test2Rpc);
