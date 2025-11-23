@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Godot;
 using GodotTemplate.Scenes.World.Data.MapPoint;
+using GodotTemplate.Scenes.World.Services.PersistenceFactory;
 using GodotTemplate.Scenes.World.Services.StartStop;
 
 namespace GodotTemplate.Scenes.World.Tree.Entity.Building;
@@ -36,6 +37,33 @@ public partial class MapPoint : Node2D
         return mapPoint;
         
         //TODO return scene.Instantiate<MapPoint>().Init(mapPointData);
+    }
+
+    public class Factory : IPersistenceNodeFactory<MapPoint, MapPointData>
+    {
+        private PackedScene _scene;
+        private MapPointDataStorage _storage;
+        
+        public Type CreatedType()
+        {
+            return typeof(MapPoint);
+        }
+
+        public void InitFactory(World world)
+        {
+            _scene = world.WorldPackedScenes.MapPoint;
+            _storage = world.Data.MapPoint;
+        }
+
+        public MapPoint Create(Action<MapPointData> init)
+        {
+            MapPointData mapPointData = new MapPointData();
+            init?.Invoke(mapPointData);
+            _storage.AddMapPoint(mapPointData);
+        
+            MapPoint mapPoint = _scene.Instantiate<MapPoint>();
+            return mapPoint.InitPreReady(mapPointData);
+        }
     }
 
     public class Loader : IWorldTreeLoader

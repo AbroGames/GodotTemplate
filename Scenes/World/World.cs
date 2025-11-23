@@ -4,6 +4,7 @@ using GodotTemplate.Scenes.World.Data;
 using GodotTemplate.Scenes.World.Data.MapPoint;
 using GodotTemplate.Scenes.World.PackedScenes;
 using GodotTemplate.Scenes.World.Services;
+using GodotTemplate.Scenes.World.Services.PersistenceFactory;
 using GodotTemplate.Scenes.World.Tree;
 using GodotTemplate.Scenes.World.Tree.Entity.Building;
 using KludgeBox.DI.Requests.ChildInjection;
@@ -19,6 +20,7 @@ public partial class World : Node2D
     
     [Child] public WorldTree Tree { get; private set; }
     [Child] public WorldPersistenceData Data { get; private set; }
+    [Child] public PersistenceNodesFactoryService Factory { get; private set; }
     [Child] public WorldTemporaryDataService TemporaryDataService { get; private set; }
     [Child] public WorldStartStopService StartStopService  { get; private set; }
     [Child] public WorldMultiplayerSpawnerService MultiplayerSpawnerService { get; private set; }
@@ -29,8 +31,8 @@ public partial class World : Node2D
     public readonly WorldEvents Events = new();
     
     [Logger] private ILogger _log;
-    
-    public override void _Ready()
+
+    public override void _EnterTree() 
     {
         Di.Process(this);
     }
@@ -60,6 +62,12 @@ public partial class World : Node2D
         Tree.MapSurface.AddChildWithUniqueName(mp2, "MapPoint");
         
         //TODO Третий способ создать MapPoint: отдельный объект WorldFactories, где лежат фабрики под все персистенсе объекты 
+        MapPoint mp3 = Factory.Create<MapPoint, MapPointData>(data =>
+        {
+            data.PositionX = Random.Shared.Next(0, 600);
+            data.PositionY = Random.Shared.Next(0, 600);
+        });
+        Tree.MapSurface.AddChildWithUniqueName(mp3, "MapPoint");
     }
     
     public void Test2() => RpcId(ServerId, MethodName.Test2Rpc);
