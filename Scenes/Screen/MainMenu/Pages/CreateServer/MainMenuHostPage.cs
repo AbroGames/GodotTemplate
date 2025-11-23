@@ -1,4 +1,5 @@
 using Godot;
+using KludgeBox.DI.Requests.ChildInjection;
 using KludgeBox.DI.Requests.NotNullCheck;
 
 namespace GodotTemplate.Scenes.Screen.MainMenu.Pages.CreateServer;
@@ -6,10 +7,10 @@ namespace GodotTemplate.Scenes.Screen.MainMenu.Pages.CreateServer;
 public partial class MainMenuHostPage : MainMenuPage
 {
     
-    [Export] [NotNull] public TextEdit PortTextEdit { get; private set; }
-    [Export] [NotNull] public TextEdit SaveNameTextEdit { get; private set; }
-    [Export] [NotNull] public CheckBox IsDedicatedCheckBox { get; private set; }
-    [Export] [NotNull] public Button CreateServerButton { get; private set; }
+    [Child] public TextEdit PortTextEdit { get; private set; }
+    [Child] public TextEdit SaveNameTextEdit { get; private set; }
+    [Child] public CheckBox IsDedicatedCheckBox { get; private set; }
+    [Child] public Button CreateServerButton { get; private set; }
     
     public override void _Ready()
     {

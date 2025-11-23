@@ -1,13 +1,15 @@
 using Godot;
+using KludgeBox.DI.Requests.ChildInjection;
 using KludgeBox.DI.Requests.NotNullCheck;
 
 namespace GodotTemplate.Scenes.Screen.LoadingScreen;
 
 public partial class LoadingAnimHandle : Node2D
 {
-	[Export] [NotNull] public Sprite2D ThickPart {get; private set;}
-	[Export] [NotNull] public Sprite2D ThinPart {get; private set;}
+	[Child] public Sprite2D ThickPart {get; private set;}
+	[Child] public Sprite2D ThinPart {get; private set;}
 
+	// We don't use [Child], because here SubResource, not Node
 	[Export] [NotNull] public Curve ThickRotationSpeedCurve {get; private set;}
 	[Export] [NotNull] public Curve ThinRotationSpeedCurve {get; private set;}
 

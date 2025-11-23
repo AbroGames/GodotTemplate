@@ -2,6 +2,7 @@
 using GodotTemplate.Scenes.Game.Starters;
 using GodotTemplate.Scenes.Screen.Hud;
 using GodotTemplate.Scripts.Service.Settings;
+using KludgeBox.DI.Requests.ChildInjection;
 using KludgeBox.DI.Requests.NotNullCheck;
 using NodeContainer = GodotTemplate.Scenes.KludgeBox.NodeContainer;
 
@@ -10,9 +11,9 @@ namespace GodotTemplate.Scenes.Game;
 public partial class Game : Node2D
 {
 
-    [Export] [NotNull] public NodeContainer WorldContainer { get; set; }
-    [Export] [NotNull] public NodeContainer HudContainer { get; set; }
-    [Export] [NotNull] public GamePackedScenes PackedScenes { get; set; }
+    [Child] public NodeContainer WorldContainer { get; set; }
+    [Child] public NodeContainer HudContainer { get; set; }
+    [Child] public GamePackedScenes PackedScenes { get; set; }
 
     private Network.Network _network;
     private Synchronizer _synchronizer;

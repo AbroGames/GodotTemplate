@@ -2,8 +2,12 @@ using System.Collections.Generic;
 using System.Linq;
 using Godot;
 using Godot.Collections;
+using KludgeBox.DI.Requests.ChildInjection;
+using KludgeBox.DI.Requests.LoggerInjection;
 using KludgeBox.DI.Requests.NotNullCheck;
+using KludgeBox.DI.Requests.ParentInjection;
 using KludgeBox.Godot.Nodes.MpSync;
+using Serilog;
 using BattleSurface = GodotTemplate.Scenes.World.Tree.Surface.Battle.BattleSurface;
 using MapSurface = GodotTemplate.Scenes.World.Tree.Surface.Map.MapSurface;
 
@@ -12,17 +16,12 @@ namespace GodotTemplate.Scenes.World.Tree;
 public partial class WorldTree : Node2D
 {
 
-    private World _world;
-    
-    [Export] [NotNull] public MapSurface MapSurface  { get; private set; }
+    [Child] public MapSurface MapSurface  { get; private set; }
     
     public List<BattleSurface> BattleSurfaces => _battleSurfacesNames.Select(name => GetNodeOrNull<BattleSurface>(name)).ToList();
     [Export] [Sync] private Array<string> _battleSurfacesNames = new();
-
-    public void InitPostReady(World world)
-    {
-        _world = world;
-    }
+    
+    [Parent] private World _world;
 
     public override void _Ready()
     {

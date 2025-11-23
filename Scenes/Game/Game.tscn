@@ -6,11 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://bpjqlqsxaute2" path="res://Scenes/World/World.tscn" id="3_ln2h6"]
 [ext_resource type="PackedScene" uid="uid://dnb3y8rbdon8t" path="res://Scenes/Screen/Hud/Hud.tscn" id="4_y3kpf"]
 
-[node name="Game" type="Node2D" node_paths=PackedStringArray("WorldContainer", "HudContainer", "PackedScenes")]
+[node name="Game" type="Node2D"]
 script = ExtResource("1_gwu2e")
-WorldContainer = NodePath("WorldContainer")
-HudContainer = NodePath("HudContainer")
-PackedScenes = NodePath("PackedScenes")
 
 [node name="WorldContainer" type="Node2D" parent="."]
 script = ExtResource("2_y3kpf")

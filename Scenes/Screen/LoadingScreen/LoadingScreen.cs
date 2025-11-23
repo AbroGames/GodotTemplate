@@ -1,17 +1,23 @@
 using System;
 using Godot;
+using KludgeBox.DI.Requests.ChildInjection;
 using KludgeBox.DI.Requests.NotNullCheck;
 
 namespace GodotTemplate.Scenes.Screen.LoadingScreen;
 
 public partial class LoadingScreen : CanvasLayer
 {
-    [Export] [NotNull] public LoadingAnimHandle LoadingAnimHandle { get; private set; }
-    [Export] [NotNull] public Label LoadingLabel { get; private set; }
+    [Child] public LoadingAnimHandle LoadingHandle { get; private set; }
+    [Child] public Label LoadingLabel { get; private set; }
+
+    public LoadingScreen InitPreReady()
+    {
+        Di.Process(this);
+        return this;
+    }
 
     public override void _Ready()
     {
-        Di.Process(this);
         SetLayer(Int32.MaxValue);
     }
 

@@ -12,17 +12,10 @@
 
 [node name="World" type="Node2D" node_paths=PackedStringArray("Tree", "Data", "TemporaryDataService", "StartStopService", "MultiplayerSpawnerService", "WorldPackedScenes", "ClientPackedScenes")]
 script = ExtResource("1_0nbjp")
-Tree = NodePath("Tree")
-Data = NodePath("PersistenceData")
-TemporaryDataService = NodePath("TemporaryDataService")
-StartStopService = NodePath("StartStopService")
-MultiplayerSpawnerService = NodePath("MultiplayerSpawnerService")
-WorldPackedScenes = NodePath("WorldPackedScenes")
-ClientPackedScenes = NodePath("ClientPackedScenes")
 
 [node name="Tree" parent="." instance=ExtResource("3_hveh7")]
 
-[node name="PersistenceData" parent="." instance=ExtResource("3_5jr8x")]
+[node name="Data" parent="." instance=ExtResource("3_5jr8x")]
 
 [node name="TemporaryDataService" type="Node" parent="."]
 script = ExtResource("4_p7pgw")

@@ -6,6 +6,7 @@ using GodotTemplate.Scenes.World.PackedScenes;
 using GodotTemplate.Scenes.World.Services;
 using GodotTemplate.Scenes.World.Tree;
 using GodotTemplate.Scenes.World.Tree.Entity.Building;
+using KludgeBox.DI.Requests.ChildInjection;
 using KludgeBox.DI.Requests.LoggerInjection;
 using KludgeBox.DI.Requests.NotNullCheck;
 using Serilog;
@@ -16,14 +17,14 @@ namespace GodotTemplate.Scenes.World;
 public partial class World : Node2D
 {
     
-    [Export] [NotNull] public WorldTree Tree { get; private set; }
-    [Export] [NotNull] public WorldPersistenceData Data { get; private set; }
-    [Export] [NotNull] public WorldTemporaryDataService TemporaryDataService { get; private set; }
-    [Export] [NotNull] public WorldStartStopService StartStopService  { get; private set; }
-    [Export] [NotNull] public WorldMultiplayerSpawnerService MultiplayerSpawnerService { get; private set; }
+    [Child] public WorldTree Tree { get; private set; }
+    [Child] public WorldPersistenceData Data { get; private set; }
+    [Child] public WorldTemporaryDataService TemporaryDataService { get; private set; }
+    [Child] public WorldStartStopService StartStopService  { get; private set; }
+    [Child] public WorldMultiplayerSpawnerService MultiplayerSpawnerService { get; private set; }
     
-    [Export] [NotNull] public WorldPackedScenes WorldPackedScenes { get; private set; }
-    [Export] [NotNull] public ClientPackedScenes ClientPackedScenes { get; private set; }
+    [Child] public WorldPackedScenes WorldPackedScenes { get; private set; }
+    [Child] public ClientPackedScenes ClientPackedScenes { get; private set; }
     
     public readonly WorldEvents Events = new();
     
@@ -32,9 +33,6 @@ public partial class World : Node2D
     public override void _Ready()
     {
         Di.Process(this);
-        
-        StartStopService.InitPostReady(this);
-        Tree.InitPostReady(this);
     }
     
     //TODO Test methods. Remove after tests.

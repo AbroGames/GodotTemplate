@@ -1,5 +1,6 @@
 ﻿using Godot;
 using GodotTemplate.Scenes.Screen.MainMenu.Pages;
+using KludgeBox.DI.Requests.ChildInjection;
 using KludgeBox.DI.Requests.NotNullCheck;
 using NodeContainer = GodotTemplate.Scenes.KludgeBox.NodeContainer;
 
@@ -7,9 +8,9 @@ namespace GodotTemplate.Scenes.Screen.MainMenu;
 
 public partial class MainMenu : Node2D
 {
-    [Export] [NotNull] public NodeContainer BackgroundContainer { get; private set; }
-    [Export] [NotNull] public NodeContainer MenuContainer { get; private set; }
-    [Export] [NotNull] public MainMenuPackedScenes PackedScenes { get; private set; }
+    [Child] public NodeContainer BackgroundContainer { get; private set; }
+    [Child] public NodeContainer MenuContainer { get; private set; }
+    [Child] public MainMenuPackedScenes PackedScenes { get; private set; }
     
     public override void _Ready()
     {

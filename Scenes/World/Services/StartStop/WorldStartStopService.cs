@@ -1,4 +1,5 @@
 ﻿using Godot;
+using KludgeBox.DI.Requests.ParentInjection;
 
 namespace GodotTemplate.Scenes.World.Services.StartStop;
 
@@ -6,8 +7,8 @@ namespace GodotTemplate.Scenes.World.Services.StartStop;
 public partial class WorldStartStopService : Node
 {
     
-    private World _world;
     private readonly WorldTreeLoadService _worldTreeLoadService = new();
+    [Parent] private World _world;
 
     /// <summary>
     /// In shutdown process (<see cref="Node.NotificationExitTree"/>) we can't use <c>Node.GetMultiplayer().IsServer()</c> for checking, because after TreeExit <c>Node.GetMultiplayer()</c> returns null.<br/>
@@ -15,12 +16,11 @@ public partial class WorldStartStopService : Node
     /// </summary>
     private bool _isServer;
 
-    public WorldStartStopService InitPostReady(World world)
+    public override void _Ready()
     {
-        _world = world;
-        return this;
+        Di.Process(this);
     }
-    
+
     public void StartNewGame(string adminNickname = null)
     {
         ServerInit(adminNickname);

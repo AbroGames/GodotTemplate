@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://d3dhctucbogs0" path="res://Scenes/Screen/MainMenu/Pages/Settings/MainMenuSettingsPage.cs" id="1_q7ooi"]
 
-[node name="MainMenuSettingsPage" type="Control" node_paths=PackedStringArray("NickTextEdit", "ColorTextEdit", "SaveReturnButton")]
+[node name="MainMenuSettingsPage" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -10,9 +10,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_q7ooi")
-NickTextEdit = NodePath("VBoxContainer/HBoxContainer/NickEdit")
-ColorTextEdit = NodePath("VBoxContainer/HBoxContainer/ColorEdit")
-SaveReturnButton = NodePath("VBoxContainer/SaveReturnButton")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 custom_minimum_size = Vector2(400, 150)
@@ -38,7 +35,7 @@ size_flags_vertical = 3
 layout_mode = 2
 text = "Nick:"
 
-[node name="NickEdit" type="TextEdit" parent="VBoxContainer/HBoxContainer"]
+[node name="NickTextEdit" type="TextEdit" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -47,7 +44,7 @@ size_flags_vertical = 3
 layout_mode = 2
 text = "Color:"
 
-[node name="ColorEdit" type="TextEdit" parent="VBoxContainer/HBoxContainer"]
+[node name="ColorTextEdit" type="TextEdit" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3

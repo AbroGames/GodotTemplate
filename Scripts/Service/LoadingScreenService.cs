@@ -18,7 +18,7 @@ public class LoadingScreenService
     
     public LoadingScreenNode SetLoadingScreen(string text)
     {
-        LoadingScreenNode loadingScreen = _loadingScreenPackedScene.Instantiate<LoadingScreenNode>();
+        LoadingScreenNode loadingScreen = _loadingScreenPackedScene.Instantiate<LoadingScreenNode>().InitPreReady();
         if (text != null)
         {
             loadingScreen.SetText(text);

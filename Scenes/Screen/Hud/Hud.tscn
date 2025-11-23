@@ -10,16 +10,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_63bhl")
-Test1 = NodePath("Test1")
-Test2 = NodePath("Test2")
-Test3 = NodePath("Test3")
-LogChildren = NodePath("Log")
-Info = NodePath("Label")
-SaveButton = NodePath("SaveButton")
-ExitButton = NodePath("ExitButton")
-SaveTextEdit = NodePath("SaveTextEdit")
 
-[node name="Test1" type="Button" parent="."]
+[node name="Test1Button" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -34,7 +26,7 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "ТЕСТ 1"
 
-[node name="Test2" type="Button" parent="."]
+[node name="Test2Button" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -49,7 +41,7 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "ТЕСТ 2"
 
-[node name="Test3" type="Button" parent="."]
+[node name="Test3Button" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -64,7 +56,7 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "ТЕСТ 3"
 
-[node name="Log" type="Button" parent="."]
+[node name="LogButton" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -79,12 +71,13 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "ЛОГ"
 
-[node name="Label" type="Label" parent="."]
+[node name="InfoLabel" type="Label" parent="."]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
 
 [node name="ExitButton" type="Button" parent="."]
+layout_mode = 0
 offset_left = 10.0
 offset_top = 563.0
 offset_right = 79.0
@@ -97,7 +90,7 @@ offset_left = 125.0
 offset_top = 604.0
 offset_right = 231.0
 offset_bottom = 635.0
-text = "СОХРАНИТЬ"
+text = "Сохранить"
 
 [node name="SaveTextEdit" type="TextEdit" parent="."]
 layout_mode = 0

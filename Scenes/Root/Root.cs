@@ -1,5 +1,6 @@
 using Godot;
 using GodotTemplate.Scenes.Root.Starters;
+using KludgeBox.DI.Requests.ChildInjection;
 using KludgeBox.DI.Requests.NotNullCheck;
 using NodeContainer = GodotTemplate.Scenes.KludgeBox.NodeContainer;
 
@@ -8,9 +9,9 @@ namespace GodotTemplate.Scenes.Root;
 public partial class Root : Node2D
 {
     
-    [Export] [NotNull] public NodeContainer MainSceneContainer { get; set; }
-    [Export] [NotNull] public NodeContainer LoadingScreenContainer { get; set; }
-    [Export] [NotNull] public RootPackedScenes PackedScenes { get; set; }
+    [Child] public NodeContainer MainSceneContainer { get; set; }
+    [Child] public NodeContainer LoadingScreenContainer { get; set; }
+    [Child] public RootPackedScenes PackedScenes { get; set; }
 
     private RootStarterManager _rootStarterManager;
     

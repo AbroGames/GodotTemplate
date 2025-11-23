@@ -5,17 +5,14 @@
 [ext_resource type="Script" uid="uid://c2l5yl5sincvf" path="res://Scenes/World/Data/Player/PlayerDataStorage.cs" id="2_w7bjh"]
 [ext_resource type="Script" uid="uid://okoy6n1ids2k" path="res://Scenes/World/Data/MapPoint/MapPointDataStorage.cs" id="4_i2sn3"]
 
-[node name="WorldPersistenceData" type="Node" node_paths=PackedStringArray("General", "Players", "MapPoint")]
+[node name="WorldPersistenceData" type="Node"]
 script = ExtResource("1_2ykke")
-General = NodePath("GeneralDataStorage")
-Players = NodePath("PlayerDataStorage")
-MapPoint = NodePath("MapPointDataStorage")
 
-[node name="GeneralDataStorage" type="Node" parent="."]
+[node name="General" type="Node" parent="."]
 script = ExtResource("2_4cxp3")
 
-[node name="PlayerDataStorage" type="Node" parent="."]
+[node name="Players" type="Node" parent="."]
 script = ExtResource("2_w7bjh")
 
-[node name="MapPointDataStorage" type="Node" parent="."]
+[node name="MapPoint" type="Node" parent="."]
 script = ExtResource("4_i2sn3")

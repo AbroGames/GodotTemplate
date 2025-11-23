@@ -1,5 +1,6 @@
 using Godot;
 using GodotTemplate.Scripts.Service.Settings;
+using KludgeBox.DI.Requests.ChildInjection;
 using KludgeBox.DI.Requests.NotNullCheck;
 
 namespace GodotTemplate.Scenes.Screen.MainMenu.Pages.Settings;
@@ -7,9 +8,9 @@ namespace GodotTemplate.Scenes.Screen.MainMenu.Pages.Settings;
 public partial class MainMenuSettingsPage : MainMenuPage
 {
     
-    [Export] [NotNull] public TextEdit NickTextEdit { get; private set; }
-    [Export] [NotNull] public TextEdit ColorTextEdit { get; private set; }
-    [Export] [NotNull] public Button SaveReturnButton { get; private set; }
+    [Child] public TextEdit NickTextEdit { get; private set; }
+    [Child] public TextEdit ColorTextEdit { get; private set; }
+    [Child] public Button SaveReturnButton { get; private set; }
     
     public override void _Ready()
     {
