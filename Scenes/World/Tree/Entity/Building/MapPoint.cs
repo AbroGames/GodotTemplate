@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using Godot;
+using KludgeBox.DI.Requests.ParentInjection;
+using KludgeBox.Godot.Nodes.MpSync;
 using GodotTemplate.Scenes.World.Data.MapPoint;
 using GodotTemplate.Scenes.World.Services.PersistenceFactory;
 using GodotTemplate.Scenes.World.Services.StartStop;
-using KludgeBox.DI.Requests.ParentInjection;
-using KludgeBox.Godot.Nodes.MpSync;
 using static Godot.SceneReplicationConfig.ReplicationMode;
 
 namespace GodotTemplate.Scenes.World.Tree.Entity.Building;

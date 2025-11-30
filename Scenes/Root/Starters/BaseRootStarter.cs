@@ -1,4 +1,6 @@
-﻿using KludgeBox.DI.Requests.LoggerInjection;
+﻿using System.Linq;
+using System.Reflection;
+using KludgeBox.DI.Requests.LoggerInjection;
 using KludgeBox.Logging;
 using Serilog;
 
@@ -18,6 +20,7 @@ public abstract class BaseRootStarter
         Services.CmdArgs.LogCmdArgs();
         
         _log.Information("Initializing base...");
+        Services.TypesStorage.AddTypes(Assembly.GetExecutingAssembly().GetTypes().ToList());
         Services.Net.Init(root, Services.CmdArgs.IsDedicatedServer);
         Services.LoadingScreen.Init(root.LoadingScreenContainer, root.PackedScenes.LoadingScreen);
         Services.MainScene.Init(root.MainSceneContainer, root.PackedScenes.Game, root.PackedScenes.MainMenu);

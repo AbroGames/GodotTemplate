@@ -1,7 +1,6 @@
 using Godot;
-using GodotTemplate.Scenes.Root.Starters;
 using KludgeBox.DI.Requests.ChildInjection;
-using KludgeBox.DI.Requests.NotNullCheck;
+using GodotTemplate.Scenes.Root.Starters;
 using NodeContainer = GodotTemplate.Scenes.KludgeBox.NodeContainer;
 
 namespace GodotTemplate.Scenes.Root;

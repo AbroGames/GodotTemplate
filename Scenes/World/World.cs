@@ -1,5 +1,7 @@
 ﻿using System;
 using Godot;
+using KludgeBox.DI.Requests.ChildInjection;
+using KludgeBox.DI.Requests.LoggerInjection;
 using GodotTemplate.Scenes.World.Data;
 using GodotTemplate.Scenes.World.Data.MapPoint;
 using GodotTemplate.Scenes.World.PackedScenes;
@@ -7,8 +9,6 @@ using GodotTemplate.Scenes.World.Services;
 using GodotTemplate.Scenes.World.Services.PersistenceFactory;
 using GodotTemplate.Scenes.World.Tree;
 using GodotTemplate.Scenes.World.Tree.Entity.Building;
-using KludgeBox.DI.Requests.ChildInjection;
-using KludgeBox.DI.Requests.LoggerInjection;
 using Serilog;
 using WorldStartStopService = GodotTemplate.Scenes.World.Services.StartStop.WorldStartStopService;
 

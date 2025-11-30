@@ -1,6 +1,6 @@
 ﻿using Godot;
-using GodotTemplate.Scenes.World.MpSpawn;
 using KludgeBox.DI.Requests.NotNullCheck;
+using GodotTemplate.Scenes.World.MpSpawn;
 
 namespace GodotTemplate.Scenes.World.Services;
 

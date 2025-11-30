@@ -1,9 +1,8 @@
 ﻿using Godot;
+using KludgeBox.DI.Requests.ChildInjection;
 using GodotTemplate.Scenes.Game.Starters;
 using GodotTemplate.Scenes.Screen.Hud;
 using GodotTemplate.Scripts.Service.Settings;
-using KludgeBox.DI.Requests.ChildInjection;
-using KludgeBox.DI.Requests.NotNullCheck;
 using NodeContainer = GodotTemplate.Scenes.KludgeBox.NodeContainer;
 
 namespace GodotTemplate.Scenes.Game;

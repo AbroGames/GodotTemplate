@@ -1,9 +1,8 @@
 ﻿using Godot;
-using GodotTemplate.Scenes.Game;
-using GodotTemplate.Scripts.Content.LoadingScreen;
 using KludgeBox.DI.Requests.ChildInjection;
 using KludgeBox.DI.Requests.LoggerInjection;
-using KludgeBox.DI.Requests.NotNullCheck;
+using GodotTemplate.Scenes.Game;
+using GodotTemplate.Scripts.Content.LoadingScreen;
 using Serilog;
 
 namespace GodotTemplate.Scenes.Screen.Hud;

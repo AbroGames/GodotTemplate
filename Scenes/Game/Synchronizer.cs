@@ -1,8 +1,8 @@
 ﻿using System;
 using Godot;
+using KludgeBox.DI.Requests.LoggerInjection;
 using GodotTemplate.Scenes.World.Data.Player;
 using GodotTemplate.Scripts.Service.Settings;
-using KludgeBox.DI.Requests.LoggerInjection;
 using Serilog;
 
 namespace GodotTemplate.Scenes.Game;
