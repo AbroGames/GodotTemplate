@@ -53,6 +53,7 @@ public partial class Hud : Control
 
     private void ConnectToEvents()
     {
+        //TODO После удаления сцены Hud будет выгружен из памяти, или останется из-за привязки к _synchronizer?
         _synchronizer.SyncStartedOnClientEvent += () => Services.LoadingScreen.SetLoadingScreen(LoadingScreenTypes.Type.Loading);
         _synchronizer.SyncEndedOnClientEvent += () => Services.LoadingScreen.Clear();
         _synchronizer.SyncRejectOnClientEvent += (errorMessage) =>

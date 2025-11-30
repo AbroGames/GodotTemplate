@@ -73,7 +73,7 @@ public partial class Synchronizer : Node
         EndSyncOnClient(connectedClientId, _world.Data.Serializer.SerializeWorldData());
     }
 
-    private void EndSyncOnClient(int id, byte[] serializableData) => RpcId(id, MethodName.EndSyncOnClientRpc, serializableData);
+    private void EndSyncOnClient(long peerId, byte[] serializableData) => RpcId(peerId, MethodName.EndSyncOnClientRpc, serializableData);
     [Rpc(CallLocal = true)]
     private void EndSyncOnClientRpc(byte[] serializableData)
     {
@@ -81,7 +81,7 @@ public partial class Synchronizer : Node
         SyncEndedOnClientEvent.Invoke();
     }
     
-    private void RejectSyncOnClient(int id, string errorMessage) => RpcId(id, MethodName.RejectSyncOnClientRpc, errorMessage);
+    private void RejectSyncOnClient(long peerId, string errorMessage) => RpcId(peerId, MethodName.RejectSyncOnClientRpc, errorMessage);
     [Rpc(CallLocal = true)] 
     private void RejectSyncOnClientRpc(string errorMessage)
     {
