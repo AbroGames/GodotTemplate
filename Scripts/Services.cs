@@ -4,6 +4,7 @@ using KludgeBox.DI;
 using KludgeBox.Godot.Services;
 using GodotTemplate.Scripts.Service;
 using GodotTemplate.Scripts.Service.Settings;
+using KludgeBox.Reflection.Access;
 using CmdArgsService = GodotTemplate.Scripts.Service.CmdArgs.CmdArgsService;
 using NetworkService = GodotTemplate.Scripts.Service.NetworkService;
 
@@ -19,6 +20,7 @@ public static class Services
     public static readonly StringCompressionService StringCompression = new StringCompressionService();
     public static readonly NodeTreeService NodeTree = new NodeTreeService();
     public static readonly TypesStorageService TypesStorage = new TypesStorageService();
+    public static MembersScanner MembersScanner => Di.MembersScanner;
     
     // Services from game, but extended KludgeBox services
     public static readonly CmdArgsService CmdArgs = new CmdArgsService();
