@@ -10,9 +10,9 @@ namespace GodotTemplate.Scenes.Game;
 public partial class Game : Node2D
 {
 
-    [Child] public NodeContainer WorldContainer { get; set; }
-    [Child] public NodeContainer HudContainer { get; set; }
-    [Child] public GamePackedScenes PackedScenes { get; set; }
+    [Child] private NodeContainer WorldContainer { get; set; }
+    [Child] private NodeContainer HudContainer { get; set; }
+    [Child] private GamePackedScenes PackedScenes { get; set; }
 
     private Network.Network _network;
     private Synchronizer _synchronizer;

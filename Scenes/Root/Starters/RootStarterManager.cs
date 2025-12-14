@@ -7,23 +7,23 @@ namespace GodotTemplate.Scenes.Root.Starters;
 public class RootStarterManager
 {
 
-    private readonly Root _root;
+    private readonly RootData _rootData;
     private readonly BaseRootStarter _rootStarter;
 
-    public RootStarterManager(Root root)
+    public RootStarterManager(RootData rootData)
     {
-        _root = root;
+        _rootData = rootData;
         _rootStarter = ChooseStarter();
     }
     
     public void Init()
     {
-        _rootStarter.Init(_root);
+        _rootStarter.Init(_rootData);
     }
     
     public void Start()
     {
-        _rootStarter.Start(_root);
+        _rootStarter.Start(_rootData);
     }
 
     private BaseRootStarter ChooseStarter()

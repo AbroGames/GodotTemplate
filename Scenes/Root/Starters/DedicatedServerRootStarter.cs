@@ -8,17 +8,17 @@ public class DedicatedServerRootStarter : BaseRootStarter
     
     [Logger] private ILogger _log;
     
-    public override void Init(Root root)
+    public override void Init(RootData rootData)
     {
-        base.Init(root);
+        base.Init(rootData);
         _log.Information("Initializing DedicatedServer...");
         
-        root.GetTree().Root.Title = $"[SERVER] {root.GetTree().Root.Title}";
+        rootData.SceneTree.Root.Title = $"[SERVER] {rootData.SceneTree.Root.Title}";
     }
 
-    public override void Start(Root root)
+    public override void Start(RootData rootData)
     {
-        base.Start(root);
+        base.Start(rootData);
         _log.Information("Starting DedicatedServer...");
 
         Services.MainScene.HostMultiplayerGameAsDedicatedServer(

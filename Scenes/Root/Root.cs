@@ -8,9 +8,9 @@ namespace GodotTemplate.Scenes.Root;
 public partial class Root : Node2D
 {
     
-    [Child] public NodeContainer MainSceneContainer { get; set; }
-    [Child] public NodeContainer LoadingScreenContainer { get; set; }
-    [Child] public RootPackedScenes PackedScenes { get; set; }
+    [Child] private NodeContainer MainSceneContainer { get; set; }
+    [Child] private NodeContainer LoadingScreenContainer { get; set; }
+    [Child] private RootPackedScenes PackedScenes { get; set; }
 
     private RootStarterManager _rootStarterManager;
     
@@ -26,7 +26,8 @@ public partial class Root : Node2D
 
     private void Init()
     {
-        _rootStarterManager = new RootStarterManager(this);
+        RootData rootData = new RootData(MainSceneContainer, LoadingScreenContainer, PackedScenes, GetTree());
+        _rootStarterManager = new RootStarterManager(rootData);
         _rootStarterManager.Init();
     }
 

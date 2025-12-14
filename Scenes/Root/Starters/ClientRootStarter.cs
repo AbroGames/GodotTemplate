@@ -9,9 +9,9 @@ public class ClientRootStarter : BaseRootStarter
 
 	[Logger] private ILogger _log;
 	
-    public override void Init(Root root)
+    public override void Init(RootData rootData)
     {
-	    base.Init(root);
+	    base.Init(rootData);
         _log.Information("Initializing Client...");
         
         Services.LoadingScreen.SetLoadingScreen(LoadingScreenTypes.Type.Loading);
@@ -23,9 +23,9 @@ public class ClientRootStarter : BaseRootStarter
         }
     }
 
-    public override void Start(Root root)
+    public override void Start(RootData rootData)
     {
-	    base.Start(root);
+	    base.Start(rootData);
         _log.Information("Starting Client...");
 
 

@@ -11,7 +11,7 @@ public abstract class BaseRootStarter
     
     [Logger] private ILogger _log;
 
-    public virtual void Init(Root root)
+    public virtual void Init(RootData rootData)
     {
         Di.Process(this);
         
@@ -21,12 +21,12 @@ public abstract class BaseRootStarter
         
         _log.Information("Initializing base...");
         Services.TypesStorage.AddTypes(Assembly.GetExecutingAssembly().GetTypes().ToList());
-        Services.Net.Init(root, Services.CmdArgs.IsDedicatedServer);
-        Services.LoadingScreen.Init(root.LoadingScreenContainer, root.PackedScenes.LoadingScreen);
-        Services.MainScene.Init(root.MainSceneContainer, root.PackedScenes.Game, root.PackedScenes.MainMenu);
+        Services.Net.Init(rootData.SceneTree, Services.CmdArgs.IsDedicatedServer);
+        Services.LoadingScreen.Init(rootData.LoadingScreenContainer, rootData.PackedScenes.LoadingScreen);
+        Services.MainScene.Init(rootData.MainSceneContainer, rootData.PackedScenes.Game, rootData.PackedScenes.MainMenu);
     }
 
-    public virtual void Start(Root root)
+    public virtual void Start(RootData rootData)
     {
         _log.Information("Starting base...");
     }
