@@ -1,7 +1,9 @@
 ﻿using Godot;
+using GodotTemplate.Scenes.World.Data;
 using KludgeBox.DI.Requests.ParentInjection;
+using KludgeBox.DI.Requests.SceneServiceInjection;
 
-namespace GodotTemplate.Scenes.World.Services.StartStop;
+namespace GodotTemplate.Scenes.World.StartStop;
 
 
 public partial class WorldStartStopService : Node
@@ -9,6 +11,8 @@ public partial class WorldStartStopService : Node
     
     private readonly WorldTreeLoadService _worldTreeLoadService = new();
     [Parent] private World _world;
+    [SceneService] private WorldPersistenceData _worldPersistenceData;
+    [SceneService] private WorldTemporaryDataService _worldTemporaryData;
 
     /// <summary>
     /// In shutdown process (<see cref="Node.NotificationExitTree"/>) we can't use <c>Node.GetMultiplayer().IsServer()</c> for checking, because after TreeExit <c>Node.GetMultiplayer()</c> returns null.<br/>
@@ -29,14 +33,14 @@ public partial class WorldStartStopService : Node
     public void LoadGame(string saveFileName, string adminNickname = null)
     {
         ServerInit(adminNickname);
-        _world.Data.SaveLoad.Load(saveFileName);
+        _worldPersistenceData.SaveLoad.Load(saveFileName);
         _worldTreeLoadService.RunAllLoaders(_world);
     }
 
     private void ServerInit(string adminNickname = null)
     {
         _isServer = true;
-        _world.TemporaryDataService.InitOnServer(adminNickname);
+        _worldTemporaryData.InitOnServer(adminNickname);
     }
     
     public override void _Notification(int id)
@@ -46,6 +50,6 @@ public partial class WorldStartStopService : Node
     
     private void Shutdown()
     {
-        _world.Data.SaveLoad.AutoSave();
+        _worldPersistenceData.SaveLoad.AutoSave();
     }
 }

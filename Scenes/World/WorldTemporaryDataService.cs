@@ -1,7 +1,7 @@
 ﻿using Godot;
 using KludgeBox.Godot.Nodes.MpSync;
 
-namespace GodotTemplate.Scenes.World.Services;
+namespace GodotTemplate.Scenes.World;
 
 public partial class WorldTemporaryDataService : Node
 {

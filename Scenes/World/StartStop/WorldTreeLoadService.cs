@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace GodotTemplate.Scenes.World.Services.StartStop;
+namespace GodotTemplate.Scenes.World.StartStop;
 
 public class WorldTreeLoadService
 {

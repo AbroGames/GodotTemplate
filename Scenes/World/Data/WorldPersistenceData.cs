@@ -1,8 +1,8 @@
 ﻿using Godot;
-using KludgeBox.DI.Requests.ChildInjection;
 using GodotTemplate.Scenes.World.Data.General;
 using GodotTemplate.Scenes.World.Data.MapPoint;
 using GodotTemplate.Scenes.World.Data.Player;
+using KludgeBox.DI.Requests.ChildInjection;
 
 namespace GodotTemplate.Scenes.World.Data;
 
