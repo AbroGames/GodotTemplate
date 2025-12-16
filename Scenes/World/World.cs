@@ -1,41 +1,73 @@
 ﻿using System;
+using System.Collections.Generic;
 using Godot;
-using KludgeBox.DI.Requests.ChildInjection;
-using KludgeBox.DI.Requests.LoggerInjection;
+using GodotTemplate.Scenes.World.ClientScenes;
 using GodotTemplate.Scenes.World.Data;
 using GodotTemplate.Scenes.World.Data.MapPoint;
-using GodotTemplate.Scenes.World.PackedScenes;
-using GodotTemplate.Scenes.World.Services;
-using GodotTemplate.Scenes.World.Services.PersistenceFactory;
+using GodotTemplate.Scenes.World.SyncedScenes;
 using GodotTemplate.Scenes.World.Tree;
 using GodotTemplate.Scenes.World.Tree.Entity.Building;
+using KludgeBox.DI.Requests.ChildInjection;
+using KludgeBox.DI.Requests.LoggerInjection;
 using Serilog;
-using WorldStartStopService = GodotTemplate.Scenes.World.Services.StartStop.WorldStartStopService;
+using PersistenceNodesFactoryService = GodotTemplate.Scenes.World.PersistenceFactory.PersistenceNodesFactoryService;
+using WorldStartStopService = GodotTemplate.Scenes.World.StartStop.WorldStartStopService;
 
 namespace GodotTemplate.Scenes.World;
 
-public partial class World : Node2D
+/// <summary>
+/// Является хранилищем сервисов. Каждый сервис может ссылаться на другие сервисы.
+/// Каждый сервис является точкой взаимодействия с системой, и при вызове методов должен гарантировать,
+/// что он внесёт изменения и в другие сервисы, чтобы сохранить целостность состояния системы.
+/// </summary>
+public partial class World : Node2D, IServiceProvider
 {
     
     [Child] public WorldTree Tree { get; private set; }
     [Child] public WorldPersistenceData Data { get; private set; }
     [Child] public PersistenceNodesFactoryService Factory { get; private set; }
-    [Child] public WorldTemporaryDataService TemporaryDataService { get; private set; }
-    [Child] public WorldStartStopService StartStopService  { get; private set; }
-    [Child] public WorldMultiplayerSpawnerService MultiplayerSpawnerService { get; private set; }
-    
-    [Child] public WorldPackedScenes WorldPackedScenes { get; private set; }
+    [Child] public WorldTemporaryDataService TemporaryData { get; private set; }
+    [Child] public WorldStartStopService StartStop { get; private set; }
+    [Child] public WorldMultiplayerSpawnerService MultiplayerSpawner { get; private set; }
+    [Child] public SyncedPackedScenes SyncedPackedScenes { get; private set; }
     [Child] public ClientPackedScenes ClientPackedScenes { get; private set; }
     
     public readonly WorldEvents Events = new();
     
+    private readonly Dictionary<Type, object> _services = new();
     [Logger] private ILogger _log;
 
     public override void _EnterTree() 
     {
         Di.Process(this);
+        
+        AddService(Tree);
+        AddService(Data);
+        AddService(Factory);
+        AddService(TemporaryData);
+        AddService(StartStop);
+        AddService(MultiplayerSpawner);
+        AddService(SyncedPackedScenes);
+        AddService(ClientPackedScenes);
+    }
+
+    public object GetService(Type serviceType)
+    {
+        return _services.GetValueOrDefault(serviceType, null);
     }
     
+    private void AddService(object service)
+    {
+        if (!_services.ContainsKey(service.GetType()))
+        {
+            _log.Warning("Service {type} already exists", service.GetType());
+        }
+        else
+        {
+            _services.Add(service.GetType(), service);
+        }
+    }
+
     //TODO Test methods. Remove after tests.
     public void Test1() => RpcId(ServerId, MethodName.Test1Rpc);
     [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true)]
