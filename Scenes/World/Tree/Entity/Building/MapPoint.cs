@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using Godot;
-using KludgeBox.DI.Requests.ParentInjection;
-using KludgeBox.Godot.Nodes.MpSync;
+using GodotTemplate.Scenes.World.Data;
 using GodotTemplate.Scenes.World.Data.MapPoint;
-using GodotTemplate.Scenes.World.Services.PersistenceFactory;
-using GodotTemplate.Scenes.World.Services.StartStop;
+using GodotTemplate.Scenes.World.PersistenceFactory;
+using GodotTemplate.Scenes.World.StartStop;
+using KludgeBox.DI.Requests.SceneServiceInjection;
+using KludgeBox.Godot.Nodes.MpSync;
 using static Godot.SceneReplicationConfig.ReplicationMode;
 
 namespace GodotTemplate.Scenes.World.Tree.Entity.Building;
@@ -16,14 +17,14 @@ public partial class MapPoint : Node2D
     public MapPointData Data { get; private set; } 
 
     [Export] [Sync(Never)] private long _id;
-    [Parent(true)] private World _world; 
+    [SceneService] private WorldPersistenceData _worldPersistenceData; 
     
     public override void _EnterTree()
     {
         Di.Process(this);
         
         // Init on client side
-        if (Data == null) InitPreReady(_world.Data.MapPoint.MapPointById[_id]);
+        if (Data == null) InitPreReady(_worldPersistenceData.MapPoint.MapPointById[_id]);
     }
 
     private void InitPreReady(MapPointData data)
@@ -52,7 +53,7 @@ public partial class MapPoint : Node2D
 
         public void InitFactory(World world)
         {
-            _scene = world.WorldPackedScenes.MapPoint;
+            _scene = world.SyncedPackedScenes.MapPoint;
             _storage = world.Data.MapPoint;
         }
 
@@ -79,7 +80,7 @@ public partial class MapPoint : Node2D
         {
             foreach (MapPointData mapPointData in world.Data.MapPoint.MapPointById.Values)
             {
-                MapPoint mapPoint = world.WorldPackedScenes.MapPoint.Instantiate<MapPoint>();
+                MapPoint mapPoint = world.SyncedPackedScenes.MapPoint.Instantiate<MapPoint>();
                 world.Tree.MapSurface.AddChildWithUniqueName(mapPoint, "MapPoint");
                 _mapPointById.Add(mapPointData.Id, mapPoint);
             }

@@ -49,7 +49,7 @@ public partial class Synchronizer : Node
     {
         int connectedClientId = GetMultiplayer().GetRemoteSenderId();
 
-        if (_world.TemporaryDataService.PlayerNickByPeerId.Values.Contains(nick))
+        if (_world.TemporaryData.PlayerNickByPeerId.Values.Contains(nick))
         {
             RejectSyncOnClient(connectedClientId, "Nickname is already used");
         }
@@ -57,7 +57,7 @@ public partial class Synchronizer : Node
         {
             RejectSyncOnClient(connectedClientId, "Lenght of nickname must be between 3 and 25 characters");
         }
-        _world.TemporaryDataService.PlayerNickByPeerId.Add(connectedClientId, nick);
+        _world.TemporaryData.PlayerNickByPeerId.Add(connectedClientId, nick);
 
         if (!_world.Data.Players.PlayerByNick.ContainsKey(nick))
         {
@@ -65,10 +65,12 @@ public partial class Synchronizer : Node
             {
                 Nick = nick,
                 Color = color,
-                IsAdmin = nick.Equals(_world.TemporaryDataService.MainAdminNick)
+                IsAdmin = nick.Equals(_world.TemporaryData.MainAdminNick)
             };
             _world.Data.Players.AddPlayer(playerData);
         }
+        
+        //TODO Бросаем серверный ивент или вызываем какой-то пустой метод при подключении нового игрока
         
         EndSyncOnClient(connectedClientId, _world.Data.Serializer.SerializeWorldData());
     }
