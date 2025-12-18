@@ -60,7 +60,7 @@ public partial class World : Node2D, IServiceProvider
     {
         if (!_services.ContainsKey(service.GetType()))
         {
-            _log.Warning("Service {type} already exists", service.GetType());
+            _log.Warning("Service by type {type} already exists", service.GetType().Name);
         }
         else
         {

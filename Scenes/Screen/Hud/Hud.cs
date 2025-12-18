@@ -58,7 +58,7 @@ public partial class Hud : Control
         _synchronizer.SyncEndedOnClientEvent += () => Services.LoadingScreen.Clear();
         _synchronizer.SyncRejectOnClientEvent += (errorMessage) =>
         {
-            _log.Warning($"Synchronization with the server was rejected: {errorMessage}");
+            _log.Warning("Synchronization with the server was rejected: {error}", errorMessage);
             Services.MainScene.StartMainMenu();
             //TODO Show error message in menu
             Services.LoadingScreen.Clear();

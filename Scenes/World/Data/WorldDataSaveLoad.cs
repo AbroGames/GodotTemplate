@@ -44,7 +44,8 @@ public class WorldDataSaveLoad
         catch (Exception e)
         {
             //TODO Вместо возвращаемого bool мб выбрасывать ошибку выше, чтобы обрабатывать потом в Host MpGame и в Host Single Game?
-            _log.Error($"Failed to deserialize world data from save file '{SaveDirPath + saveFileName + SaveExtension}': {e.Message}");
+            string fullPath = SaveDirPath + saveFileName + SaveExtension;
+            _log.Error("Failed to deserialize world data from save file '{fullPath}': {error}", fullPath, e.Message);
             return false;
         }
 
@@ -54,10 +55,11 @@ public class WorldDataSaveLoad
     private bool SaveToDisk(byte[] data, string saveFileName)
     {
         DirAccess.MakeDirRecursiveAbsolute(SaveDirPath);
-        using var file = FileAccess.Open(SaveDirPath + saveFileName + SaveExtension, FileAccess.ModeFlags.Write);
+        string fullPath = SaveDirPath + saveFileName + SaveExtension;
+        using var file = FileAccess.Open(fullPath, FileAccess.ModeFlags.Write);
         if (file == null)
         {
-            _log.Error($"Failed to save file '{SaveDirPath + saveFileName + SaveExtension}': {FileAccess.GetOpenError()}");
+            _log.Error("Failed to save file '{fullPath}': {error}", fullPath, FileAccess.GetOpenError());
             return false;
         }
         
@@ -68,10 +70,11 @@ public class WorldDataSaveLoad
     
     private byte[] LoadFromDisk(string saveFileName)
     {
-        using var file = FileAccess.Open(SaveDirPath + saveFileName + SaveExtension, FileAccess.ModeFlags.Read);
+        string fullPath = SaveDirPath + saveFileName + SaveExtension;
+        using var file = FileAccess.Open(fullPath, FileAccess.ModeFlags.Read);
         if (file == null)
         {
-            _log.Error($"Failed to load file '{SaveDirPath + saveFileName + SaveExtension}': {FileAccess.GetOpenError()}");
+            _log.Error("Failed to load file '{fullPath}': {error}", fullPath, FileAccess.GetOpenError());
             return null;
         }
         
