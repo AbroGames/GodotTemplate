@@ -44,7 +44,7 @@ public class WorldDataSaveLoad
         catch (Exception e)
         {
             //TODO Вместо возвращаемого bool мб выбрасывать ошибку выше, чтобы обрабатывать потом в Host MpGame и в Host Single Game?
-            string fullPath = SaveDirPath + saveFileName + SaveExtension;
+            string fullPath = GetFullPath(saveFileName);
             _log.Error("Failed to deserialize world data from save file '{fullPath}': {error}", fullPath, e.Message);
             return false;
         }
@@ -55,7 +55,7 @@ public class WorldDataSaveLoad
     private bool SaveToDisk(byte[] data, string saveFileName)
     {
         DirAccess.MakeDirRecursiveAbsolute(SaveDirPath);
-        string fullPath = SaveDirPath + saveFileName + SaveExtension;
+        string fullPath = GetFullPath(saveFileName);
         using var file = FileAccess.Open(fullPath, FileAccess.ModeFlags.Write);
         if (file == null)
         {
@@ -70,7 +70,7 @@ public class WorldDataSaveLoad
     
     private byte[] LoadFromDisk(string saveFileName)
     {
-        string fullPath = SaveDirPath + saveFileName + SaveExtension;
+        string fullPath = GetFullPath(saveFileName);
         using var file = FileAccess.Open(fullPath, FileAccess.ModeFlags.Read);
         if (file == null)
         {
@@ -83,4 +83,6 @@ public class WorldDataSaveLoad
         
         return data;
     }
+    
+    private string GetFullPath(string saveFileName) => SaveDirPath + saveFileName + SaveExtension;
 }
