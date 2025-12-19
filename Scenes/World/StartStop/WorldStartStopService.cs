@@ -45,10 +45,10 @@ public partial class WorldStartStopService : Node
     
     public override void _Notification(int id)
     {
-        if (id == NotificationExitTree && _isServer) Shutdown();
+        if (id == NotificationExitTree && _isServer) ServerShutdown();
     }
     
-    private void Shutdown()
+    private void ServerShutdown()
     {
         _worldPersistenceData.SaveLoad.AutoSave();
     }

@@ -8,7 +8,8 @@ public partial class WorldTemporaryDataService : Node
     /// <summary>
     /// Hoster nick, or nick from cmd param in dedicated server.<br/>
     /// <c>Player.IsAdmin</c> in <c>WorldPersistenceData</c> for this player automatically will change to true.<br/>
-    /// If next application start will be with <c>MainAdminNick = null</c>, then <c>Player.IsAdmin</c> in <c>WorldPersistenceData</c> stay true anyway.<br/>
+    /// If next application start will be with <c>MainAdminNick = null</c>, then <c>Player.IsAdmin</c>
+    /// in <c>WorldPersistenceData</c> change to false on this player connecting process.<br/>
     /// </summary>
     [Export] [Sync] public string MainAdminNick; 
     
