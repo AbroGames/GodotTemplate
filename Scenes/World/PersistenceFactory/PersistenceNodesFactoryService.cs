@@ -22,6 +22,7 @@ public partial class PersistenceNodesFactoryService : Node
         Di.Process(this);
         
         // Get all classes implementing IPersistenceNodeFactory
+        //TODO Переделать на использование общего кеша из KludgeBox-ого сервиса
         _factories = Assembly.GetExecutingAssembly()
             .GetTypes()
             .Where(t => typeof(IPersistenceNodeFactory).IsAssignableFrom(t) && t.IsClass && !t.IsAbstract)

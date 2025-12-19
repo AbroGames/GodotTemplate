@@ -15,8 +15,15 @@ namespace GodotTemplate.Scenes.Game;
 public partial class Synchronizer : Node
 {
 
+    private const int NicknameMinLength = 3;
+    private const int NicknameMaxLength = 25;
+    private static readonly string LengthOfNicknameErrorMessage = $"Length of nickname must be between {NicknameMinLength} and {NicknameMaxLength} characters";
+    private const string NicknameAlreadyUsedErrorMessage = "Nickname is already used";
+    
     public Action SyncStartedOnClientEvent;
+    public Action<int> SyncEndedOnServerEvent;
     public Action SyncEndedOnClientEvent;
+    public Action<string> SyncRejectOnServerEvent;
     public Action<string> SyncRejectOnClientEvent;
     
     private World.World _world;
@@ -51,28 +58,29 @@ public partial class Synchronizer : Node
 
         if (_world.TemporaryData.PlayerNickByPeerId.Values.Contains(nick))
         {
-            RejectSyncOnClient(connectedClientId, "Nickname is already used");
+            SyncRejectOnServerEvent.Invoke(NicknameAlreadyUsedErrorMessage);
+            RejectSyncOnClient(connectedClientId, NicknameAlreadyUsedErrorMessage);
         }
-        if (nick.Length < 3 || nick.Length > 25)
+        if (nick.Length < NicknameMinLength || nick.Length > NicknameMaxLength)
         {
-            RejectSyncOnClient(connectedClientId, "Lenght of nickname must be between 3 and 25 characters");
+            SyncRejectOnServerEvent.Invoke(LengthOfNicknameErrorMessage);
+            RejectSyncOnClient(connectedClientId, LengthOfNicknameErrorMessage);
         }
         _world.TemporaryData.PlayerNickByPeerId.Add(connectedClientId, nick);
 
         if (!_world.Data.Players.PlayerByNick.ContainsKey(nick))
         {
-            PlayerData playerData = new()
+            _world.Data.Players.AddPlayer(new PlayerData
             {
-                Nick = nick,
-                Color = color,
-                IsAdmin = nick.Equals(_world.TemporaryData.MainAdminNick)
-            };
-            _world.Data.Players.AddPlayer(playerData);
+                Nick = nick
+            });
         }
-        
-        //TODO Бросаем серверный ивент или вызываем какой-то пустой метод при подключении нового игрока
-        
+        PlayerData playerData = _world.Data.Players.PlayerByNick[nick];
+        playerData.Color = color;
+        playerData.IsAdmin = nick.Equals(_world.TemporaryData.MainAdminNick);
+
         EndSyncOnClient(connectedClientId, _world.Data.Serializer.SerializeWorldData());
+        SyncEndedOnServerEvent.Invoke(connectedClientId);
     }
 
     private void EndSyncOnClient(long peerId, byte[] serializableData) => RpcId(peerId, MethodName.EndSyncOnClientRpc, serializableData);
