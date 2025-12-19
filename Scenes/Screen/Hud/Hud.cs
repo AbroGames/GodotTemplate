@@ -53,10 +53,12 @@ public partial class Hud : Control
 
     private void ConnectToEvents()
     {
-        //TODO После удаления сцены Hud будет выгружен из памяти, или останется из-за привязки к _synchronizer?
+        //TODO После удаления сцены Hud не будет выгружен из памяти из-за привязки к _synchronizer? https://gemini.google.com/app/a7c80361ae5143a6
+        //TODO Это точно должно быть в Hud? Ну вроде как это заглушка поверх Hud, так что да. Хотя переход при SyncRejectOnClientEvent как будто не про Hud. Ещё надо не забыть, что это чисто клиентская логика. 
+        //TODO LoadingScreen точно в Hud, а не World, т.к. World чисто про состояние объектов. Обработка SyncRejectOnClientEvent как будто должна быть в стартере? Возможно LoadingScreen тоже.
         _synchronizer.SyncStartedOnClientEvent += () => Services.LoadingScreen.SetLoadingScreen(LoadingScreenTypes.Type.Loading);
         _synchronizer.SyncEndedOnClientEvent += () => Services.LoadingScreen.Clear();
-        _synchronizer.SyncRejectOnClientEvent += (errorMessage) =>
+        _synchronizer.SyncRejectOnClientEvent += errorMessage =>
         {
             _log.Warning("Synchronization with the server was rejected: {error}", errorMessage);
             Services.MainScene.StartMainMenu();
@@ -71,7 +73,7 @@ public partial class Hud : Control
         InfoLabel.Text += $"\nTPS: {Mathf.Min(1.0/Performance.GetMonitor(Performance.Monitor.TimePhysicsProcess), Engine.PhysicsTicksPerSecond):N0}";
         
         InfoLabel.Text += $"\n\nNodes: {Performance.GetMonitor(Performance.Monitor.ObjectNodeCount)}";
-        InfoLabel.Text += $"\nWorld 1-level nodes: {_world.GetChildCount()}";
+        InfoLabel.Text += $"\nMapSurface 1-level nodes: {_world.Tree.MapSurface.GetChildCount()}";
         InfoLabel.Text += $"\nFrame time process: {Performance.GetMonitor(Performance.Monitor.TimeProcess)*1000:N1}ms";
         InfoLabel.Text += $"\nPhysics time process: {Performance.GetMonitor(Performance.Monitor.TimePhysicsProcess)*1000:N1}ms ({Performance.GetMonitor(Performance.Monitor.TimePhysicsProcess) * Engine.PhysicsTicksPerSecond * 100:N0} %)";
         InfoLabel.Text += $"\nNavigation time process: {Performance.GetMonitor(Performance.Monitor.TimeNavigationProcess)*1000:N1}ms";
