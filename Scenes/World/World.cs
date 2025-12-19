@@ -4,14 +4,14 @@ using Godot;
 using GodotTemplate.Scenes.World.ClientScenes;
 using GodotTemplate.Scenes.World.Data;
 using GodotTemplate.Scenes.World.Data.MapPoint;
+using GodotTemplate.Scenes.World.PersistenceFactory;
+using GodotTemplate.Scenes.World.StartStop;
 using GodotTemplate.Scenes.World.SyncedScenes;
 using GodotTemplate.Scenes.World.Tree;
 using GodotTemplate.Scenes.World.Tree.Entity.Building;
 using KludgeBox.DI.Requests.ChildInjection;
 using KludgeBox.DI.Requests.LoggerInjection;
 using Serilog;
-using PersistenceNodesFactoryService = GodotTemplate.Scenes.World.PersistenceFactory.PersistenceNodesFactoryService;
-using WorldStartStopService = GodotTemplate.Scenes.World.StartStop.WorldStartStopService;
 
 namespace GodotTemplate.Scenes.World;
 
@@ -25,10 +25,12 @@ public partial class World : Node2D, IServiceProvider
     
     [Child] public WorldTree Tree { get; private set; }
     [Child] public WorldPersistenceData Data { get; private set; }
-    [Child] public PersistenceNodesFactoryService Factory { get; private set; }
     [Child] public WorldTemporaryDataService TemporaryData { get; private set; }
+    
+    [Child] public PersistenceNodesFactoryService Factory { get; private set; }
     [Child] public WorldStartStopService StartStop { get; private set; }
     [Child] public WorldMultiplayerSpawnerService MultiplayerSpawner { get; private set; }
+    
     [Child] public SyncedPackedScenes SyncedPackedScenes { get; private set; }
     [Child] public ClientPackedScenes ClientPackedScenes { get; private set; }
     
