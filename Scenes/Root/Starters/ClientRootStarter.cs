@@ -1,5 +1,5 @@
-﻿using KludgeBox.DI.Requests.LoggerInjection;
-using GodotTemplate.Scripts.Content.LoadingScreen;
+﻿using GodotTemplate.Scripts.Content.LoadingScreen;
+using KludgeBox.DI.Requests.LoggerInjection;
 using Serilog;
 
 namespace GodotTemplate.Scenes.Root.Starters;

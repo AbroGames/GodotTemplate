@@ -1,7 +1,7 @@
 ﻿using Godot;
 using GodotTemplate.Scenes.Game;
 using GodotTemplate.Scenes.Game.Starters;
-using MainMenu = GodotTemplate.Scenes.Screen.MainMenu.MainMenu;
+using GodotTemplate.Scenes.Screen.MainMenu;
 
 namespace GodotTemplate.Scripts.Service;
 

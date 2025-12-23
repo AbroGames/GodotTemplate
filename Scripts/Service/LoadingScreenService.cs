@@ -1,6 +1,6 @@
 ﻿using Godot;
+using GodotTemplate.Scenes.Screen.LoadingScreen;
 using GodotTemplate.Scripts.Content.LoadingScreen;
-using LoadingScreenNode = GodotTemplate.Scenes.Screen.LoadingScreen.LoadingScreen;
 
 namespace GodotTemplate.Scripts.Service;
 
@@ -16,9 +16,9 @@ public class LoadingScreenService
         _loadingScreenPackedScene = loadingScreenPackedScene;
     }
     
-    public LoadingScreenNode SetLoadingScreen(string text)
+    public LoadingScreen SetLoadingScreen(string text)
     {
-        LoadingScreenNode loadingScreen = _loadingScreenPackedScene.Instantiate<LoadingScreenNode>().InitPreReady();
+        LoadingScreen loadingScreen = _loadingScreenPackedScene.Instantiate<LoadingScreen>().InitPreReady();
         if (text != null)
         {
             loadingScreen.SetText(text);
@@ -28,7 +28,7 @@ public class LoadingScreenService
         return loadingScreen;
     }
     
-    public LoadingScreenNode SetLoadingScreen(LoadingScreenTypes.Type loadingScreenType)
+    public LoadingScreen SetLoadingScreen(LoadingScreenTypes.Type loadingScreenType)
     {
         return SetLoadingScreen(LoadingScreenTypes.GetLoadingScreenText(loadingScreenType));
     }

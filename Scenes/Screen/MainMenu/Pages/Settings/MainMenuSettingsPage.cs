@@ -1,6 +1,6 @@
 using Godot;
-using KludgeBox.DI.Requests.ChildInjection;
 using GodotTemplate.Scripts.Service.Settings;
+using KludgeBox.DI.Requests.ChildInjection;
 
 namespace GodotTemplate.Scenes.Screen.MainMenu.Pages.Settings;
 
