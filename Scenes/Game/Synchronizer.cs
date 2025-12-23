@@ -1,8 +1,8 @@
 ﻿using System;
 using Godot;
-using KludgeBox.DI.Requests.LoggerInjection;
-using GodotTemplate.Scenes.World.Data.Player;
+using GodotTemplate.Scenes.World.Data.PersistenceData.Player;
 using GodotTemplate.Scripts.Service.Settings;
+using KludgeBox.DI.Requests.LoggerInjection;
 using Serilog;
 
 namespace GodotTemplate.Scenes.Game;
@@ -68,18 +68,18 @@ public partial class Synchronizer : Node
         }
         _world.TemporaryData.PlayerNickByPeerId.Add(connectedClientId, nick);
 
-        if (!_world.Data.Players.PlayerByNick.ContainsKey(nick))
+        if (!_world.PersistenceData.Players.PlayerByNick.ContainsKey(nick))
         {
-            _world.Data.Players.AddPlayer(new PlayerData
+            _world.PersistenceData.Players.AddPlayer(new PlayerData
             {
                 Nick = nick
             });
         }
-        PlayerData playerData = _world.Data.Players.PlayerByNick[nick];
+        PlayerData playerData = _world.PersistenceData.Players.PlayerByNick[nick];
         playerData.Color = color;
         playerData.IsAdmin = nick.Equals(_world.TemporaryData.MainAdminNick);
 
-        EndSyncOnClient(connectedClientId, _world.Data.Serializer.SerializeWorldData());
+        EndSyncOnClient(connectedClientId, _world.DataSerializer.SerializeWorldData());
         SyncEndedOnServerEvent.Invoke(connectedClientId);
     }
 
@@ -87,7 +87,7 @@ public partial class Synchronizer : Node
     [Rpc(CallLocal = true)]
     private void EndSyncOnClientRpc(byte[] serializableData)
     {
-        _world.Data.Serializer.DeserializeWorldData(serializableData);
+        _world.DataSerializer.DeserializeWorldData(serializableData);
         SyncEndedOnClientEvent.Invoke();
     }
     

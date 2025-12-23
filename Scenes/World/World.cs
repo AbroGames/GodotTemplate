@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using Godot;
-using GodotTemplate.Scenes.World.ClientScenes;
-using GodotTemplate.Scenes.World.Data;
-using GodotTemplate.Scenes.World.Data.MapPoint;
-using GodotTemplate.Scenes.World.PersistenceFactory;
-using GodotTemplate.Scenes.World.StartStop;
-using GodotTemplate.Scenes.World.SyncedScenes;
+using GodotTemplate.Scenes.World.Data.PersistenceData;
+using GodotTemplate.Scenes.World.Data.PersistenceData.MapPoint;
+using GodotTemplate.Scenes.World.Data.TemporaryData;
+using GodotTemplate.Scenes.World.Scenes.ClientScenes;
+using GodotTemplate.Scenes.World.Scenes.SyncedScenes;
+using GodotTemplate.Scenes.World.Services;
+using GodotTemplate.Scenes.World.Services.DataSerializer;
+using GodotTemplate.Scenes.World.Services.PersistenceFactory;
+using GodotTemplate.Scenes.World.Services.StartStop;
 using GodotTemplate.Scenes.World.Tree;
 using GodotTemplate.Scenes.World.Tree.Entity.Building;
 using KludgeBox.DI.Requests.ChildInjection;
@@ -24,12 +27,15 @@ public partial class World : Node2D, IServiceProvider
 {
     
     [Child] public WorldTree Tree { get; private set; }
-    [Child] public WorldPersistenceData Data { get; private set; }
-    [Child] public WorldTemporaryDataService TemporaryData { get; private set; }
+    [Child] public WorldPersistenceData PersistenceData { get; private set; }
+    [Child] public WorldTemporaryData TemporaryData { get; private set; }
     
     [Child] public PersistenceNodesFactoryService Factory { get; private set; }
-    [Child] public WorldStartStopService StartStop { get; private set; }
     [Child] public WorldMultiplayerSpawnerService MultiplayerSpawner { get; private set; }
+    [Child] public WorldStartStopService StartStop { get; private set; }
+    [Child] public WorldSynchronizerService Synchronizer { get; private set; }
+    [Child] public WorldDataSaveLoadService DataSaveLoad { get; private set; }
+    [Child] public WorldDataSerializerService DataSerializer { get; private set; }
     
     [Child] public SyncedPackedScenes SyncedPackedScenes { get; private set; }
     [Child] public ClientPackedScenes ClientPackedScenes { get; private set; }
@@ -44,11 +50,14 @@ public partial class World : Node2D, IServiceProvider
         Di.Process(this);
         
         AddService(Tree);
-        AddService(Data);
-        AddService(Factory);
+        AddService(PersistenceData);
         AddService(TemporaryData);
-        AddService(StartStop);
+        AddService(Factory);
         AddService(MultiplayerSpawner);
+        AddService(StartStop);
+        AddService(Synchronizer);
+        AddService(DataSaveLoad);
+        AddService(DataSerializer);
         AddService(SyncedPackedScenes);
         AddService(ClientPackedScenes);
     }
@@ -60,14 +69,13 @@ public partial class World : Node2D, IServiceProvider
     
     private void AddService(object service)
     {
-        if (!_services.ContainsKey(service.GetType()))
+        if (_services.ContainsKey(service.GetType()))
         {
             _log.Warning("Service by type {type} already exists", service.GetType().Name);
+            return;
         }
-        else
-        {
-            _services.Add(service.GetType(), service);
-        }
+        
+        _services.Add(service.GetType(), service);
     }
 
     //TODO Test methods. Remove after tests.
@@ -104,6 +112,6 @@ public partial class World : Node2D, IServiceProvider
     private void TestSaveRpc(string saveFileName)
     {
         _log.Warning("TestSave RPC called");
-        Data.SaveLoad.Save(saveFileName);
+        DataSaveLoad.Save(saveFileName);
     }
 }
