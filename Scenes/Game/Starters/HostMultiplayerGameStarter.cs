@@ -1,7 +1,7 @@
 ﻿using Godot;
-using KludgeBox.Godot.Nodes.Process;
 using GodotTemplate.Scripts.Content.LoadingScreen;
 using GodotTemplate.Scripts.Service.Settings;
+using KludgeBox.Godot.Nodes.Process;
 
 namespace GodotTemplate.Scenes.Game.Starters;
 

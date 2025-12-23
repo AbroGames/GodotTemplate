@@ -1,9 +1,9 @@
-﻿using KludgeBox.Core;
+﻿using GodotTemplate.Scripts.Service;
+using GodotTemplate.Scripts.Service.Settings;
+using KludgeBox.Core;
 using KludgeBox.Core.Random;
 using KludgeBox.DI;
 using KludgeBox.Godot.Services;
-using GodotTemplate.Scripts.Service;
-using GodotTemplate.Scripts.Service.Settings;
 using KludgeBox.Reflection.Access;
 using CmdArgsService = GodotTemplate.Scripts.Service.CmdArgs.CmdArgsService;
 using NetworkService = GodotTemplate.Scripts.Service.NetworkService;
