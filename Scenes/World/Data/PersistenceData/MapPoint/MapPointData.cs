@@ -1,7 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using MessagePack;
 
-namespace GodotTemplate.Scenes.World.Data.MapPoint;
+namespace GodotTemplate.Scenes.World.Data.PersistenceData.MapPoint;
 
 [MessagePackObject(AllowPrivate = true)]
 public partial class MapPointData : ObservableObject

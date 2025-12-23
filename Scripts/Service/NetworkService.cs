@@ -1,5 +1,4 @@
 ﻿using Godot;
-using GodotTemplate.Scenes.Root;
 
 namespace GodotTemplate.Scripts.Service;
 

@@ -7,7 +7,7 @@ using KludgeBox.DI.Requests.LoggerInjection;
 using KludgeBox.DI.Requests.ParentInjection;
 using Serilog;
 
-namespace GodotTemplate.Scenes.World.PersistenceFactory;
+namespace GodotTemplate.Scenes.World.Services.PersistenceFactory;
 
 public partial class PersistenceNodesFactoryService : Node
 {

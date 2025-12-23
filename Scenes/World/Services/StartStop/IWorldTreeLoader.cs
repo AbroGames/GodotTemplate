@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace GodotTemplate.Scenes.World.StartStop;
+namespace GodotTemplate.Scenes.World.Services.StartStop;
 
 public interface IWorldTreeLoader
 {

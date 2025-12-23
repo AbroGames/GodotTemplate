@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using Godot;
-using GodotTemplate.Scenes.World.Data;
-using GodotTemplate.Scenes.World.Data.MapPoint;
-using GodotTemplate.Scenes.World.PersistenceFactory;
-using GodotTemplate.Scenes.World.StartStop;
+using GodotTemplate.Scenes.World.Data.PersistenceData;
+using GodotTemplate.Scenes.World.Data.PersistenceData.MapPoint;
+using GodotTemplate.Scenes.World.Services.PersistenceFactory;
+using GodotTemplate.Scenes.World.Services.StartStop;
 using KludgeBox.DI.Requests.SceneServiceInjection;
 using KludgeBox.Godot.Nodes.MpSync;
 using static Godot.SceneReplicationConfig.ReplicationMode;
@@ -54,7 +54,7 @@ public partial class MapPoint : Node2D
         public void InitFactory(World world)
         {
             _scene = world.SyncedPackedScenes.MapPoint;
-            _storage = world.Data.MapPoint;
+            _storage = world.PersistenceData.MapPoint;
         }
 
         public MapPoint Create(Action<MapPointData> init)
@@ -78,7 +78,7 @@ public partial class MapPoint : Node2D
 
         public void Create(World world)
         {
-            foreach (MapPointData mapPointData in world.Data.MapPoint.MapPointById.Values)
+            foreach (MapPointData mapPointData in world.PersistenceData.MapPoint.MapPointById.Values)
             {
                 MapPoint mapPoint = world.SyncedPackedScenes.MapPoint.Instantiate<MapPoint>();
                 world.Tree.MapSurface.AddChildWithUniqueName(mapPoint, "MapPoint");
@@ -88,7 +88,7 @@ public partial class MapPoint : Node2D
 
         public void Init(World world)
         {
-            foreach (MapPointData mapPointData in world.Data.MapPoint.MapPointById.Values)
+            foreach (MapPointData mapPointData in world.PersistenceData.MapPoint.MapPointById.Values)
             {
                 MapPoint mapPoint = _mapPointById[mapPointData.Id];
                 mapPoint.InitPreReady(mapPointData);
