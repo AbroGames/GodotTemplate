@@ -2,7 +2,7 @@
 using KludgeBox.DI.Requests.NotNullCheck;
 using KludgeBox.Godot.Nodes;
 
-namespace GodotTemplate.Scenes.World.SyncedScenes;
+namespace GodotTemplate.Scenes.World.Scenes.SyncedScenes;
 
 public partial class SyncedPackedScenes : AbstractStorage
 {
