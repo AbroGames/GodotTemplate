@@ -1,7 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using MessagePack;
 
-namespace GodotTemplate.Scenes.World.Data.General;
+namespace GodotTemplate.Scenes.World.Data.PersistenceData.General;
 
 [MessagePackObject(AllowPrivate = true)]
 public partial class GeneralData : ObservableObject

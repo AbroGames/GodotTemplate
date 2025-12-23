@@ -1,4 +1,4 @@
-﻿namespace GodotTemplate.Scenes.World.Data;
+﻿namespace GodotTemplate.Scenes.World.Services.DataSerializer;
 
 public interface ISerializableStorage
 {

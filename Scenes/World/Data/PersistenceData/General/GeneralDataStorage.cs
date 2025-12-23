@@ -1,8 +1,9 @@
 ﻿using Godot;
+using GodotTemplate.Scenes.World.Services.DataSerializer;
 using MessagePack;
 using static MessagePack.MessagePackSerializer;
 
-namespace GodotTemplate.Scenes.World.Data.General;
+namespace GodotTemplate.Scenes.World.Data.PersistenceData.General;
 
 public partial class GeneralDataStorage : Node, ISerializableStorage
 {
