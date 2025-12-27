@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using Godot;
-using GodotTemplate.Scenes.World.SyncedScenes;
+using GodotTemplate.Scenes.World.Scenes.SyncedScenes;
 using KludgeBox.Godot.Nodes;
 
-namespace GodotTemplate.Scenes.World.MpSpawn;
+namespace GodotTemplate.Scenes.World.Services.MpSpawn;
 
 public partial class WorldMultiplayerSpawner : AbstractMultiplayerSpawner
 {

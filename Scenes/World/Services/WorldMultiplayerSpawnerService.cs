@@ -1,8 +1,8 @@
 ﻿using Godot;
-using GodotTemplate.Scenes.World.MpSpawn;
+using GodotTemplate.Scenes.World.Services.MpSpawn;
 using KludgeBox.DI.Requests.NotNullCheck;
 
-namespace GodotTemplate.Scenes.World;
+namespace GodotTemplate.Scenes.World.Services;
 
 public partial class WorldMultiplayerSpawnerService : Node
 {
