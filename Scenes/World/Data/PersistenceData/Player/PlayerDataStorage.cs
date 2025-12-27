@@ -1,10 +1,11 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Godot;
+using GodotTemplate.Scenes.World.Services.DataSerializer;
 using MessagePack;
 using static MessagePack.MessagePackSerializer;
 
-namespace GodotTemplate.Scenes.World.Data.Player;
+namespace GodotTemplate.Scenes.World.Data.PersistenceData.Player;
 
 public partial class PlayerDataStorage : Node, ISerializableStorage
 {

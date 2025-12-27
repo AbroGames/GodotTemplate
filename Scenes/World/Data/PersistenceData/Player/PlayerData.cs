@@ -2,7 +2,7 @@
 using Godot;
 using MessagePack;
 
-namespace GodotTemplate.Scenes.World.Data.Player;
+namespace GodotTemplate.Scenes.World.Data.PersistenceData.Player;
 
 [MessagePackObject(AllowPrivate = true)]
 public partial class PlayerData : ObservableObject

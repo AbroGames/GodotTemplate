@@ -1,10 +1,11 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Godot;
+using GodotTemplate.Scenes.World.Services.DataSerializer;
 using MessagePack;
 using static MessagePack.MessagePackSerializer;
 
-namespace GodotTemplate.Scenes.World.Data.MapPoint;
+namespace GodotTemplate.Scenes.World.Data.PersistenceData.MapPoint;
 
 public partial class MapPointDataStorage : Node, ISerializableStorage
 {
