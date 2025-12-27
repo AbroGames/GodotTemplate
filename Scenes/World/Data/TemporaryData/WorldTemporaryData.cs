@@ -1,9 +1,9 @@
 ﻿using Godot;
 using KludgeBox.Godot.Nodes.MpSync;
 
-namespace GodotTemplate.Scenes.World;
+namespace GodotTemplate.Scenes.World.Data.TemporaryData;
 
-public partial class WorldTemporaryDataService : Node
+public partial class WorldTemporaryData : Node
 {
     /// <summary>
     /// Hoster nick, or nick from cmd param in dedicated server.<br/>
@@ -23,6 +23,7 @@ public partial class WorldTemporaryDataService : Node
         Di.Process(this);
     }
     
+    //TODO Вынести этот метод отсюда, т.к. здесь просто хранилище + синк, без логики
     public void InitOnServer(string adminNickname = null)
     {
         MainAdminNick = adminNickname;

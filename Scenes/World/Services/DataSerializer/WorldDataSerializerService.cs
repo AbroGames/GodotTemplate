@@ -1,12 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using Godot;
+using GodotTemplate.Scenes.World.Data.PersistenceData;
+using KludgeBox.DI.Requests.SceneServiceInjection;
 using KludgeBox.Reflection.Access;
 using static MessagePack.MessagePackSerializer;
 
-namespace GodotTemplate.Scenes.World.Data;
+namespace GodotTemplate.Scenes.World.Services.DataSerializer;
 
-public class WorldDataSerializer(WorldPersistenceData worldData)
+public partial class WorldDataSerializerService : Node
 {
+    
+    [SceneService] private WorldPersistenceData _worldPersistenceData;
+
+    public override void _Ready()
+    {
+        Di.Process(this);
+    }
 
     public byte[] SerializeWorldData()
     {
@@ -36,10 +46,10 @@ public class WorldDataSerializer(WorldPersistenceData worldData)
 
     private void ProcessSerializableMembers(Action<IMemberAccessor, ISerializableStorage> action)
     {
-        var memberAccessors = Services.MembersScanner.ScanMembers(worldData.GetType());
+        var memberAccessors = Scripts.Services.MembersScanner.ScanMembers(_worldPersistenceData.GetType());
         foreach (var memberAccessor in memberAccessors)
         {
-            var value = memberAccessor.GetValue(worldData);
+            var value = memberAccessor.GetValue(_worldPersistenceData);
             if (value is ISerializableStorage serializable)
             {
                 action(memberAccessor, serializable);

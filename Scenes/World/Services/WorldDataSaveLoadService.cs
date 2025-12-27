@@ -1,35 +1,38 @@
 ﻿using System;
 using Godot;
+using GodotTemplate.Scenes.World.Data.PersistenceData;
+using GodotTemplate.Scenes.World.Services.DataSerializer;
 using KludgeBox.DI.Requests.LoggerInjection;
+using KludgeBox.DI.Requests.SceneServiceInjection;
 using Serilog;
 
-namespace GodotTemplate.Scenes.World.Data;
+namespace GodotTemplate.Scenes.World.Services;
 
-public class WorldDataSaveLoad
+public partial class WorldDataSaveLoadService : Node
 {
 
     private const string SaveDirPath = "user://saves/";
     private const string SaveExtension = ".bin";
     private const string AutoSaveName = "auto";
     
-    private WorldPersistenceData _worldData;
+    [SceneService] private WorldPersistenceData _worldData;
+    [SceneService] private WorldDataSerializerService _serializerService;
     [Logger] private ILogger _log;
 
-    public WorldDataSaveLoad(WorldPersistenceData worldData) 
+    public override void _Ready()
     {
         Di.Process(this);
-        _worldData = worldData;
     }
 
     public bool Save(string saveFileName)
     {
         _worldData.General.GeneralData.SaveFileName = saveFileName;
-        return SaveToDisk(_worldData.Serializer.SerializeWorldData(), saveFileName);
+        return SaveToDisk(_serializerService.SerializeWorldData(), saveFileName);
     }
     
     public bool AutoSave()
     {
-        return SaveToDisk(_worldData.Serializer.SerializeWorldData(), AutoSaveName);
+        return SaveToDisk(_serializerService.SerializeWorldData(), AutoSaveName);
     }
 
     public bool Load(string saveFileName)
@@ -39,7 +42,7 @@ public class WorldDataSaveLoad
         
         try
         {
-            _worldData.Serializer.DeserializeWorldData(data);
+            _serializerService.DeserializeWorldData(data);
         }
         catch (Exception e)
         {

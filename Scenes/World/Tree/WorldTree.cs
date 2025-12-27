@@ -2,12 +2,12 @@ using System.Collections.Generic;
 using System.Linq;
 using Godot;
 using Godot.Collections;
-using GodotTemplate.Scenes.World.SyncedScenes;
+using GodotTemplate.Scenes.World.Scenes.SyncedScenes;
+using GodotTemplate.Scenes.World.Tree.Surface.Battle;
+using GodotTemplate.Scenes.World.Tree.Surface.Map;
 using KludgeBox.DI.Requests.ChildInjection;
 using KludgeBox.DI.Requests.SceneServiceInjection;
 using KludgeBox.Godot.Nodes.MpSync;
-using BattleSurface = GodotTemplate.Scenes.World.Tree.Surface.Battle.BattleSurface;
-using MapSurface = GodotTemplate.Scenes.World.Tree.Surface.Map.MapSurface;
 
 namespace GodotTemplate.Scenes.World.Tree;
 
@@ -20,7 +20,7 @@ public partial class WorldTree : Node2D
     [Export] [Sync] private Array<string> _battleSurfacesNames = new();
     
     [SceneService] private SyncedPackedScenes _worldPackedScenes;
-    [SceneService] private WorldMultiplayerSpawnerService _worldMultiplayerSpawner;
+    [SceneService] private Services.WorldMultiplayerSpawnerService _worldMultiplayerSpawner;
 
     public override void _Ready()
     {
