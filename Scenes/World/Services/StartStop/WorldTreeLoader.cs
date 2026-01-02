@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace GodotTemplate.Scenes.World.Services.StartStop;
 
-public class WorldTreeLoadService
+public class WorldTreeLoader
 {
     public void RunAllLoaders(World world)
     {
