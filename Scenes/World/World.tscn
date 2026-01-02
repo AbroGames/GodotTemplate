@@ -26,23 +26,23 @@ script = ExtResource("4_x5sp8")
 MainAdminNick = null
 PlayerNickByPeerId = null
 
-[node name="Factory" type="Node" parent="." unique_id=1851041012]
+[node name="FactoryService" type="Node" parent="." unique_id=1851041012]
 script = ExtResource("4_kuxid")
 
-[node name="MultiplayerSpawner" type="Node" parent="." unique_id=1768346598]
+[node name="MultiplayerSpawnerService" type="Node" parent="." unique_id=1768346598]
 script = ExtResource("6_87yka")
 WorldMultiplayerSpawnerPackedScene = ExtResource("2_ouhkt")
 
-[node name="StartStop" type="Node" parent="." unique_id=1732706405]
+[node name="StartStopService" type="Node" parent="." unique_id=1732706405]
 script = ExtResource("6_p7pgw")
 
-[node name="Synchronizer" type="Node" parent="." unique_id=1144656672]
+[node name="SynchronizerService" type="Node" parent="." unique_id=1144656672]
 script = ExtResource("7_ng1ea")
 
-[node name="DataSaveLoad" type="Node" parent="." unique_id=1442151575]
+[node name="DataSaveLoadService" type="Node" parent="." unique_id=1442151575]
 script = ExtResource("10_x5sp8")
 
-[node name="DataSerializer" type="Node" parent="." unique_id=145867701]
+[node name="DataSerializerService" type="Node" parent="." unique_id=145867701]
 script = ExtResource("11_lp0bp")
 
 [node name="SyncedPackedScenes" parent="." unique_id=1365667924 instance=ExtResource("2_xf6vi")]

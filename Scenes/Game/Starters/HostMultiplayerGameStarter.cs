@@ -36,11 +36,11 @@ public class HostMultiplayerGameStarter(int? port = null, string saveFileName = 
 
         if (saveFileName == null)
         {
-            world.StartStop.StartNewGame(adminNickname);
+            world.StartStopService.StartNewGame(adminNickname);
         }
         else
         {
-            world.StartStop.LoadGame(saveFileName, adminNickname);
+            world.StartStopService.LoadGame(saveFileName, adminNickname);
         }
         network.OpenServer();
         Net.DoClient(synchronizer.StartSyncOnClient);

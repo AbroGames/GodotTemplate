@@ -79,7 +79,7 @@ public partial class Synchronizer : Node
         playerData.Color = color;
         playerData.IsAdmin = nick.Equals(_world.TemporaryData.MainAdminNick);
 
-        EndSyncOnClient(connectedClientId, _world.DataSerializer.SerializeWorldData());
+        EndSyncOnClient(connectedClientId, _world.DataSerializerService.SerializeWorldData());
         SyncEndedOnServerEvent.Invoke(connectedClientId);
     }
 
@@ -87,7 +87,7 @@ public partial class Synchronizer : Node
     [Rpc(CallLocal = true)]
     private void EndSyncOnClientRpc(byte[] serializableData)
     {
-        _world.DataSerializer.DeserializeWorldData(serializableData);
+        _world.DataSerializerService.DeserializeWorldData(serializableData);
         SyncEndedOnClientEvent.Invoke();
     }
     

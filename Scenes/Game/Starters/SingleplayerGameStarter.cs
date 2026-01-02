@@ -16,7 +16,7 @@ public class SingleplayerGameStarter : BaseGameStarter
         Synchronizer synchronizer = game.AddSynchronizer(playerSettings);
         game.AddHud();
         
-        world.StartStop.StartNewGame(playerSettings.Nick);
+        world.StartStopService.StartNewGame(playerSettings.Nick);
         synchronizer.StartSyncOnClient();
     }
 }

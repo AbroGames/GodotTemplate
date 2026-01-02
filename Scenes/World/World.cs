@@ -30,12 +30,12 @@ public partial class World : Node2D, IServiceProvider
     [Child] public WorldPersistenceData PersistenceData { get; private set; }
     [Child] public WorldTemporaryData TemporaryData { get; private set; }
     
-    [Child] public PersistenceNodesFactoryService Factory { get; private set; }
-    [Child] public WorldMultiplayerSpawnerService MultiplayerSpawner { get; private set; }
-    [Child] public WorldStartStopService StartStop { get; private set; }
-    [Child] public WorldSynchronizerService Synchronizer { get; private set; }
-    [Child] public WorldDataSaveLoadService DataSaveLoad { get; private set; }
-    [Child] public WorldDataSerializerService DataSerializer { get; private set; }
+    [Child] public PersistenceNodesFactoryService FactoryService { get; private set; }
+    [Child] public WorldMultiplayerSpawnerService MultiplayerSpawnerService { get; private set; }
+    [Child] public WorldStartStopService StartStopService { get; private set; }
+    [Child] public WorldSynchronizerService SynchronizerService { get; private set; }
+    [Child] public WorldDataSaveLoadService DataSaveLoadService { get; private set; }
+    [Child] public WorldDataSerializerService DataSerializerService { get; private set; }
     
     [Child] public SyncedPackedScenes SyncedPackedScenes { get; private set; }
     [Child] public ClientPackedScenes ClientPackedScenes { get; private set; }
@@ -52,12 +52,12 @@ public partial class World : Node2D, IServiceProvider
         AddService(Tree);
         AddService(PersistenceData);
         AddService(TemporaryData);
-        AddService(Factory);
-        AddService(MultiplayerSpawner);
-        AddService(StartStop);
-        AddService(Synchronizer);
-        AddService(DataSaveLoad);
-        AddService(DataSerializer);
+        AddService(FactoryService);
+        AddService(MultiplayerSpawnerService);
+        AddService(StartStopService);
+        AddService(SynchronizerService);
+        AddService(DataSaveLoadService);
+        AddService(DataSerializerService);
         AddService(SyncedPackedScenes);
         AddService(ClientPackedScenes);
     }
@@ -85,7 +85,7 @@ public partial class World : Node2D, IServiceProvider
     {
         _log.Warning("Test 1 RPC called");
         
-        Tree.MapSurface.AddChildWithUniqueName(Factory.Create<MapPoint, MapPointData>(data =>
+        Tree.MapSurface.AddChildWithUniqueName(FactoryService.Create<MapPoint, MapPointData>(data =>
         {
             data.PositionX = Random.Shared.Next(0, 600);
             data.PositionY = Random.Shared.Next(0, 600);
@@ -112,6 +112,6 @@ public partial class World : Node2D, IServiceProvider
     private void TestSaveRpc(string saveFileName)
     {
         _log.Warning("TestSave RPC called");
-        DataSaveLoad.Save(saveFileName);
+        DataSaveLoadService.Save(saveFileName);
     }
 }
