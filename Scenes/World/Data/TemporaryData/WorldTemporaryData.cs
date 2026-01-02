@@ -3,6 +3,10 @@ using KludgeBox.Godot.Nodes.MpSync;
 
 namespace GodotTemplate.Scenes.World.Data.TemporaryData;
 
+/// <summary>
+/// Session-scoped storage cleared when the game ends.
+/// This class only contains data and syncs it over the network.
+/// </summary>
 public partial class WorldTemporaryData : Node
 {
     /// <summary>
@@ -21,12 +25,5 @@ public partial class WorldTemporaryData : Node
     public override void _Ready()
     {
         Di.Process(this);
-    }
-    
-    //TODO Вынести этот метод отсюда, т.к. здесь просто хранилище + синк, без логики
-    public void InitOnServer(string adminNickname = null)
-    {
-        MainAdminNick = adminNickname;
-        GetMultiplayer().PeerDisconnected += id => PlayerNickByPeerId.Remove((int) id);
     }
 }

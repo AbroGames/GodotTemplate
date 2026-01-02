@@ -6,6 +6,10 @@ using KludgeBox.DI.Requests.ChildInjection;
 
 namespace GodotTemplate.Scenes.World.Data.PersistenceData;
 
+/// <summary>
+/// Persistence storage saved on disk when the game ends.
+/// This class only contains data and syncs it over the network.
+/// </summary>
 public partial class WorldPersistenceData : Node
 {
     
