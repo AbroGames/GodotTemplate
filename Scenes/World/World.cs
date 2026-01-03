@@ -52,12 +52,14 @@ public partial class World : Node2D, IServiceProvider
         AddService(Tree);
         AddService(PersistenceData);
         AddService(TemporaryData);
+        
         AddService(FactoryService);
         AddService(MultiplayerSpawnerService);
         AddService(StartStopService);
         AddService(SynchronizerService);
         AddService(DataSaveLoadService);
         AddService(DataSerializerService);
+        
         AddService(SyncedPackedScenes);
         AddService(ClientPackedScenes);
     }
