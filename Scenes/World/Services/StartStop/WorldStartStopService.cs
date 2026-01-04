@@ -16,6 +16,7 @@ public partial class WorldStartStopService : Node
     [SceneService] private WorldDataSaveLoadService _dataSaveLoadService;
     [SceneService] private WorldPersistenceData _worldPersistenceData;
     [SceneService] private Data.TemporaryData.WorldTemporaryData _worldTemporaryData;
+    [Logger] private ILogger _log;
 
     public override void _Ready()
     {
@@ -40,6 +41,8 @@ public partial class WorldStartStopService : Node
 
     private void CommonServerInit(string adminNickname = null)
     {
+        _log.Information("World starting...");
+        
         //Init node for server shutdown process in the future
         AddChild(new WorldServerShutdowner());
         

@@ -1,5 +1,7 @@
 ﻿using Godot;
+using KludgeBox.DI.Requests.LoggerInjection;
 using KludgeBox.DI.Requests.SceneServiceInjection;
+using Serilog;
 
 namespace GodotTemplate.Scenes.World.Services.StartStop;
 
@@ -12,6 +14,7 @@ public partial class WorldServerShutdowner : Node
 {
     
     [SceneService] private WorldDataSaveLoadService _dataSaveLoadService;
+    [Logger] private ILogger _log;
     
     public override void _Ready()
     {
@@ -25,6 +28,7 @@ public partial class WorldServerShutdowner : Node
     
     private void ServerShutdown()
     {
+        _log.Information("World stoping...");
         _dataSaveLoadService.AutoSave();
     }
 }
