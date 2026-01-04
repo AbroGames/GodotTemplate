@@ -11,6 +11,9 @@ namespace GodotTemplate.Scenes.World.Services;
 public partial class WorldDataSaveLoadService : Node
 {
 
+    public class SaveException(string message, Exception innerException = null) : Exception(message, innerException);
+    public class LoadException(string message, Exception innerException = null) : Exception(message, innerException);
+    
     private const string SaveDirPath = "user://saves/";
     private const string SaveExtension = ".bin";
     private const string AutoSaveName = "auto";
@@ -24,38 +27,52 @@ public partial class WorldDataSaveLoadService : Node
         Di.Process(this);
     }
 
-    public bool Save(string saveFileName)
+    public void Save(string saveFileName)
     {
         _worldData.General.GeneralData.SaveFileName = saveFileName;
-        return SaveToDisk(_serializerService.SerializeWorldData(), saveFileName);
+        byte[] data = TrySerializeWorldData();
+        SaveToDisk(data, saveFileName);
     }
     
-    public bool AutoSave()
+    public void AutoSave()
     {
-        return SaveToDisk(_serializerService.SerializeWorldData(), AutoSaveName);
+        byte[] data = TrySerializeWorldData();
+        SaveToDisk(data, AutoSaveName);
     }
 
-    public bool Load(string saveFileName)
+    public void Load(string saveFileName)
     {
         byte[] data = LoadFromDisk(saveFileName);
-        if (data == null) return false;
-        
+        TryDeserializeWorldData(data);
+    }
+    
+    private byte[] TrySerializeWorldData()
+    {
         try
         {
-            _serializerService.DeserializeWorldData(data);
+            return _serializerService.SerializeWorldData();
         }
         catch (Exception e)
         {
-            //TODO Вместо возвращаемого bool мб выбрасывать ошибку выше, чтобы обрабатывать потом в Host MpGame и в Host Single Game?
-            string fullPath = GetFullPath(saveFileName);
-            _log.Error("Failed to deserialize world data from save file '{fullPath}': {error}", fullPath, e.Message);
-            return false;
+            _log.Error("Failed to serialize world data: {error}", e.Message);
+            throw new LoadException($"Failed to serialize world data: {e.Message}", e);
         }
-
-        return true;
     }
 
-    private bool SaveToDisk(byte[] data, string saveFileName)
+    private void TryDeserializeWorldData(byte[] worldDataBytes)
+    {
+        try
+        {
+            _serializerService.DeserializeWorldData(worldDataBytes);
+        }
+        catch (Exception e)
+        {
+            _log.Error("Failed to deserialize world data: {error}", e.Message);
+            throw new LoadException($"Failed to deserialize world data: {e.Message}", e);
+        }
+    }
+
+    private void SaveToDisk(byte[] data, string saveFileName)
     {
         DirAccess.MakeDirRecursiveAbsolute(SaveDirPath);
         string fullPath = GetFullPath(saveFileName);
@@ -63,12 +80,12 @@ public partial class WorldDataSaveLoadService : Node
         if (file == null)
         {
             _log.Error("Failed to save file '{fullPath}': {error}", fullPath, FileAccess.GetOpenError());
-            return false;
+            throw new SaveException($"Failed to save file '{fullPath}': {FileAccess.GetOpenError()}");
         }
         
         file.StoreBuffer(data);
         file.Close();
-        return true;
+        _log.Information("Successfully save file '{fullPath}'", fullPath);
     }
     
     private byte[] LoadFromDisk(string saveFileName)
@@ -78,14 +95,23 @@ public partial class WorldDataSaveLoadService : Node
         if (file == null)
         {
             _log.Error("Failed to load file '{fullPath}': {error}", fullPath, FileAccess.GetOpenError());
-            return null;
+            throw new LoadException($"Failed to load file '{fullPath}': {FileAccess.GetOpenError()}");
         }
-        
+
         byte[] data = file.GetBuffer((long) file.GetLength());
         file.Close();
+        if (data == null)
+        {
+            _log.Error("Failed to load data from file '{fullPath}'", fullPath);
+            throw new LoadException($"Failed to load data from file '{fullPath}'");
+        }
+        _log.Information("Successfully load file '{fullPath}'", fullPath);
         
         return data;
     }
-    
-    private string GetFullPath(string saveFileName) => SaveDirPath + saveFileName + SaveExtension;
+
+    private string GetFullPath(string saveFileName)
+    {
+        return SaveDirPath + saveFileName + SaveExtension;
+    }
 }

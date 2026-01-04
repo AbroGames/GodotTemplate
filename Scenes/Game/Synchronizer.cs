@@ -28,7 +28,6 @@ public partial class Synchronizer : Node
     
     private World.World _world;
     private PlayerSettings _playerSettings;
-    
     [Logger] private ILogger _log;
     
     public Synchronizer InitPreReady(World.World world, PlayerSettings playerSettings)

@@ -21,7 +21,6 @@ public partial class Hud : Control
     
     private World.World _world;
     private Synchronizer _synchronizer;
-    
     [Logger] private ILogger _log;
     
     public Hud InitPreReady(World.World world, Synchronizer synchronizer)
