@@ -2,6 +2,7 @@
 using GodotTemplate.Scenes.Game;
 using GodotTemplate.Scenes.Game.Starters;
 using GodotTemplate.Scenes.Screen.MainMenu;
+using GodotTemplate.Scenes.Screen.MainMenu.Pages.Message;
 
 namespace GodotTemplate.Scripts.Service;
 
@@ -19,10 +20,17 @@ public class MainSceneService
         _mainMenuPackedScene = mainMenuPackedScene;
     }
     
-    public void StartMainMenu()
+    public void StartMainMenu(string message = null)
     {
         MainMenu mainMenu = _mainMenuPackedScene.Instantiate<MainMenu>();
         _mainSceneContainer.ChangeStoredNode(mainMenu);
+        
+        // We must call this section after adding MainMenu to tree, because otherwise we can't access mainMenu.PackedScenes field
+        if (message != null)
+        {
+            mainMenu.ChangeMenuPage(mainMenu.PackedScenes.Message);
+            mainMenu.MenuContainer.GetCurrentStoredNode<MainMenuMessagePage>().MessageLabel.Text = message;
+        }
     }
     
     public void StartSingleplayerGame(string saveFileName = null)

@@ -42,8 +42,7 @@ public abstract class BaseGameStarter
     {
         if (!Net.IsClient()) throw new InvalidOperationException("Can only be executed on the client");
         
-        Services.MainScene.StartMainMenu();
-        //TODO Show message in menu
+        Services.MainScene.StartMainMenu(message);
         Services.LoadingScreen.Clear();
     }
 }
