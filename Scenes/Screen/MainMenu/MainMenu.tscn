@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://de3uhhcoffddv" path="res://Scenes/Screen/MainMenu/Pages/CreateServer/MainMenuHostPage.tscn" id="5_qwycf"]
 [ext_resource type="PackedScene" uid="uid://dfyy367ppdtvj" path="res://Scenes/Screen/MainMenu/Pages/ConnectToServer/MainMenuConnectPage.tscn" id="6_0kduk"]
 [ext_resource type="PackedScene" uid="uid://oioixqldjyt1" path="res://Scenes/Screen/MainMenu/Pages/Settings/MainMenuSettingsPage.tscn" id="7_qwycf"]
+[ext_resource type="PackedScene" uid="uid://cqccvtlsano2a" path="res://Scenes/Screen/MainMenu/Pages/Message/MainMenuMessagePage.tscn" id="9_lo0p5"]
 
 [node name="MainMenu" type="Node2D" unique_id=1235681445]
 script = ExtResource("1_ll75u")
@@ -39,3 +40,4 @@ StartSingleplayer = ExtResource("5_0kduk")
 CreateServer = ExtResource("5_qwycf")
 ConnectToServer = ExtResource("6_0kduk")
 Settings = ExtResource("7_qwycf")
+Message = ExtResource("9_lo0p5")

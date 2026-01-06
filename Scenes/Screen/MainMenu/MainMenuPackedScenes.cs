@@ -11,6 +11,7 @@ public partial class MainMenuPackedScenes : Node
     [Export] [NotNull] public PackedScene CreateServer { get; private set; }
     [Export] [NotNull] public PackedScene ConnectToServer { get; private set; }
     [Export] [NotNull] public PackedScene Settings { get; private set; }
+    [Export] [NotNull] public PackedScene Message { get; private set; }
     
     public override void _Ready()
     {
