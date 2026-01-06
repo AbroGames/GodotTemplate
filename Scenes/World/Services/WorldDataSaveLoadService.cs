@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Godot;
 using GodotTemplate.Scenes.World.Data.PersistenceData;
 using GodotTemplate.Scenes.World.Services.DataSerializer;
@@ -44,6 +46,24 @@ public partial class WorldDataSaveLoadService : Node
     {
         byte[] data = LoadFromDisk(saveFileName);
         TryDeserializeWorldData(data);
+    }
+
+    public List<string> GetAllSaveFiles()
+    {
+        return DirAccess.GetFilesAt(SaveDirPath)
+            .Where(filename => filename.EndsWith(SaveExtension))
+            .Select(filename => (
+                Name: filename,
+                Size: FileAccess.GetModifiedTime(SaveDirPath + filename)))
+            .OrderBy(file => file.Size)
+            .Select(file => System.IO.Path.GetFileNameWithoutExtension(file.Name))
+            .ToList();
+    }
+
+    public bool CheckFileExists(string saveFileName)
+    {
+        string fullPath = GetFullPath(saveFileName);
+        return FileAccess.FileExists(fullPath);
     }
     
     private byte[] TrySerializeWorldData()
