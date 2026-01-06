@@ -14,8 +14,8 @@ public partial class MainMenuMainPage : MainMenuPage
     public override void _Ready()
     {
         Di.Process(this);
-        
-        StartSingleplayerButton.Pressed += () => Services.MainScene.StartSingleplayerGame();
+
+        StartSingleplayerButton.Pressed += () => ChangeMenuPage(PackedScenes.StartSingleplayer);
         CreateServerButton.Pressed += () => ChangeMenuPage(PackedScenes.CreateServer);
         ConnectToServerButton.Pressed += () => ChangeMenuPage(PackedScenes.ConnectToServer);
         SettingsButton.Pressed += () => ChangeMenuPage(PackedScenes.Settings);

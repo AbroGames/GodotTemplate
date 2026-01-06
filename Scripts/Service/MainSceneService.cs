@@ -25,7 +25,7 @@ public class MainSceneService
         _mainSceneContainer.ChangeStoredNode(mainMenu);
     }
     
-    public void StartSingleplayerGame(string saveFileName = null)  //TODO saveFileName
+    public void StartSingleplayerGame(string saveFileName = null)
     {
         Game game = _gamePackedScene.Instantiate<Game>();
         game.SetName("Game");
