@@ -25,13 +25,13 @@ public class MainSceneService
         _mainSceneContainer.ChangeStoredNode(mainMenu);
     }
     
-    public void StartSingleplayerGame()
+    public void StartSingleplayerGame(string saveFileName = null)  //TODO saveFileName
     {
         Game game = _gamePackedScene.Instantiate<Game>();
         game.SetName("Game");
         _mainSceneContainer.ChangeStoredNode(game);
         
-        game.Init(new SingleplayerGameStarter());
+        game.Init(new SingleplayerGameStarter(saveFileName));
     }
     
     public void ConnectToMultiplayerGame(string host = null, int? port = null)

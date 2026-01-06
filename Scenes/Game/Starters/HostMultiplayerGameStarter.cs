@@ -1,4 +1,5 @@
 ﻿using Godot;
+using GodotTemplate.Scenes.World.Services;
 using GodotTemplate.Scripts.Content.LoadingScreen;
 using GodotTemplate.Scripts.Service.Settings;
 using KludgeBox.Godot.Nodes.Process;
@@ -7,6 +8,9 @@ namespace GodotTemplate.Scenes.Game.Starters;
 
 public class HostMultiplayerGameStarter(int? port = null, string saveFileName = null, string adminNickname = null, int? parentPid = null) : BaseGameStarter
 {
+    
+    private const string HostingFailedMessage = ""; //TODO
+    
     public override void Init(Game game)
     {
         base.Init(game);
@@ -30,26 +34,14 @@ public class HostMultiplayerGameStarter(int? port = null, string saveFileName = 
         Error error = network.HostServer(port ?? DefaultPort, true);
         if (error != Error.Ok)
         {
-            Net.DoClient(HostFailedEventOnClient);
+            Net.DoClient(HostingFailedEventOnClient);
             return;
         }
 
-        if (saveFileName == null)
-        {
-            world.StartStopService.StartNewGame(adminNickname);
-        }
-        else
-        {
-            world.StartStopService.LoadGame(saveFileName, adminNickname);
-        }
+        StartWorld(world, saveFileName, adminNickname);
         network.OpenServer();
         Net.DoClient(synchronizer.StartSyncOnClient);
     }
-    
-    private void HostFailedEventOnClient()
-    {
-        Services.MainScene.StartMainMenu();
-        //TODO Show error in menu (it is client). Log already has error.
-        Services.LoadingScreen.Clear();
-    }
+
+    private void HostingFailedEventOnClient() => GoToMenuAndShowError(HostingFailedMessage);
 }

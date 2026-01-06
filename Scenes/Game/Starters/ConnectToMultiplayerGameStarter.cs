@@ -7,6 +7,9 @@ namespace GodotTemplate.Scenes.Game.Starters;
 public class ConnectToMultiplayerGameStarter(string host = null, int? port = null) : BaseGameStarter
 {
     
+    private const string ConnectionFailedMessage = ""; //TODO
+    private const string DisconnectedFromServerMessage = "";
+    
     public override void Init(Game game)
     {
         base.Init(game);
@@ -30,18 +33,8 @@ public class ConnectToMultiplayerGameStarter(string host = null, int? port = nul
     }
 
     // Failed attempt to connect to the server (did not receive a response from the server within the timeout).
-    private void ConnectionFailedEvent()
-    {
-        Services.MainScene.StartMainMenu();
-        //TODO Show message in menu (it is client). Log already has message.
-        Services.LoadingScreen.Clear();
-    }
+    private void ConnectionFailedEvent() => GoToMenuAndShowError(ConnectionFailedMessage);
     
     // Server disconnected (the connection was successful, but the server disconnected us). This may also happen several hours after the connection.
-    private void ServerDisconnectedEvent()
-    {
-        Services.MainScene.StartMainMenu();
-        //TODO Show message in menu (it is client). Log already has message.
-        Services.LoadingScreen.Clear();
-    }
+    private void ServerDisconnectedEvent() => GoToMenuAndShowError(DisconnectedFromServerMessage);
 }

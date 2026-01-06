@@ -1,9 +1,10 @@
-﻿using GodotTemplate.Scripts.Content.LoadingScreen;
+﻿using GodotTemplate.Scenes.World.Services;
+using GodotTemplate.Scripts.Content.LoadingScreen;
 using GodotTemplate.Scripts.Service.Settings;
 
 namespace GodotTemplate.Scenes.Game.Starters;
 
-public class SingleplayerGameStarter : BaseGameStarter
+public class SingleplayerGameStarter(string saveFileName = null) : BaseGameStarter
 {
     
     public override void Init(Game game)
@@ -16,7 +17,7 @@ public class SingleplayerGameStarter : BaseGameStarter
         Synchronizer synchronizer = game.AddSynchronizer(playerSettings);
         game.AddHud();
         
-        world.StartStopService.StartNewGame(playerSettings.Nick);
+        StartWorld(world, saveFileName, playerSettings.Nick);
         synchronizer.StartSyncOnClient();
     }
 }
