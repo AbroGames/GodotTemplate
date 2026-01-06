@@ -2,6 +2,7 @@
 using GodotTemplate.Scenes.World.Services;
 using GodotTemplate.Scripts.Content.LoadingScreen;
 using GodotTemplate.Scripts.Service.Settings;
+using Humanizer;
 using KludgeBox.Godot.Nodes.Process;
 
 namespace GodotTemplate.Scenes.Game.Starters;
@@ -9,7 +10,7 @@ namespace GodotTemplate.Scenes.Game.Starters;
 public class HostMultiplayerGameStarter(int? port = null, string saveFileName = null, string adminNickname = null, int? parentPid = null) : BaseGameStarter
 {
     
-    private const string HostingFailedMessage = ""; //TODO
+    private const string HostingFailedMessage = "Failed to start server: {0}";
     
     public override void Init(Game game)
     {
@@ -34,7 +35,7 @@ public class HostMultiplayerGameStarter(int? port = null, string saveFileName = 
         Error error = network.HostServer(port ?? DefaultPort, true);
         if (error != Error.Ok)
         {
-            Net.DoClient(HostingFailedEventOnClient);
+            Net.DoClient(() => HostingFailedEventOnClient(error));
             return;
         }
 
@@ -43,5 +44,5 @@ public class HostMultiplayerGameStarter(int? port = null, string saveFileName = 
         Net.DoClient(synchronizer.StartSyncOnClient);
     }
 
-    private void HostingFailedEventOnClient() => GoToMenuAndShowError(HostingFailedMessage);
+    private void HostingFailedEventOnClient(Error error) => GoToMenuAndShowError(HostingFailedMessage.FormatWith(error));
 }

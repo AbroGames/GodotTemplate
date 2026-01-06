@@ -7,8 +7,8 @@ namespace GodotTemplate.Scenes.Game.Starters;
 public class ConnectToMultiplayerGameStarter(string host = null, int? port = null) : BaseGameStarter
 {
     
-    private const string ConnectionFailedMessage = ""; //TODO
-    private const string DisconnectedFromServerMessage = "";
+    private const string ConnectionFailedMessage = "Connection to the server failed";
+    private const string DisconnectedFromServerMessage = "Server disconnected";
     
     public override void Init(Game game)
     {
