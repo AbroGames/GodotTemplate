@@ -38,7 +38,7 @@ public partial class Game : Node2D
     public Hud AddHud()
     {
         Hud hud = PackedScenes.Hud.Instantiate<Hud>()
-            .InitPreReady(WorldContainer.GetCurrentStoredNode<World.World>(), _synchronizer);
+            .InitPreReady(WorldContainer.GetCurrentStoredNode<World.World>());
         hud.SetName("Hud");
         HudContainer.ChangeStoredNode(hud);
         return hud;

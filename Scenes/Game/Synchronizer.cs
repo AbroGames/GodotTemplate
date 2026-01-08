@@ -57,12 +57,12 @@ public partial class Synchronizer : Node
 
         if (_world.TemporaryData.PlayerNickByPeerId.Values.Contains(nick))
         {
-            SyncRejectOnServerEvent.Invoke(NicknameAlreadyUsedErrorMessage);
+            //TODO SyncRejectOnServerEvent.Invoke(NicknameAlreadyUsedErrorMessage);
             RejectSyncOnClient(connectedClientId, NicknameAlreadyUsedErrorMessage);
         }
         if (nick.Length < NicknameMinLength || nick.Length > NicknameMaxLength)
         {
-            SyncRejectOnServerEvent.Invoke(LengthOfNicknameErrorMessage);
+            //TODO SyncRejectOnServerEvent.Invoke(LengthOfNicknameErrorMessage);
             RejectSyncOnClient(connectedClientId, LengthOfNicknameErrorMessage);
         }
         _world.TemporaryData.PlayerNickByPeerId.Add(connectedClientId, nick);
@@ -79,7 +79,7 @@ public partial class Synchronizer : Node
         playerData.IsAdmin = nick.Equals(_world.TemporaryData.MainAdminNick);
 
         EndSyncOnClient(connectedClientId, _world.DataSerializerService.SerializeWorldData());
-        SyncEndedOnServerEvent.Invoke(connectedClientId);
+        //TODO SyncEndedOnServerEvent.Invoke(connectedClientId);
     }
 
     private void EndSyncOnClient(long peerId, byte[] serializableData) => RpcId(peerId, MethodName.EndSyncOnClientRpc, serializableData);
@@ -94,6 +94,7 @@ public partial class Synchronizer : Node
     [Rpc(CallLocal = true)] 
     private void RejectSyncOnClientRpc(string errorMessage)
     {
+        _log.Error("Synchronization with the server was rejected: {error}", errorMessage);
         SyncRejectOnClientEvent.Invoke(errorMessage);
     }
 }

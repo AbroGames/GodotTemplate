@@ -28,6 +28,7 @@ public class HostMultiplayerGameStarter(int? port = null, string saveFileName = 
         PlayerSettings playerSettings = Services.PlayerSettings.GetPlayerSettings();
         World.World world = game.AddWorld();
         Synchronizer synchronizer = game.AddSynchronizer(playerSettings);
+        Net.DoClient(() => ConnectToClientSynchronizerEvents(synchronizer));
         Net.DoClient(() => game.AddHud());
         Network.Network network = game.AddNetwork();
         

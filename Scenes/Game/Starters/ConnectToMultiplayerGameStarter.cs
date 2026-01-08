@@ -18,6 +18,7 @@ public class ConnectToMultiplayerGameStarter(string host = null, int? port = nul
         PlayerSettings playerSettings = Services.PlayerSettings.GetPlayerSettings();
         game.AddWorld();
         Synchronizer synchronizer = game.AddSynchronizer(playerSettings);
+        ConnectToClientSynchronizerEvents(synchronizer);
         game.AddHud();
         Network.Network network = game.AddNetwork();
         

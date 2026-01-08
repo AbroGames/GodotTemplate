@@ -14,6 +14,7 @@ public class SingleplayerGameStarter(string saveFileName = null) : BaseGameStart
         PlayerSettings playerSettings = Services.PlayerSettings.GetPlayerSettings();
         World.World world = game.AddWorld();
         Synchronizer synchronizer = game.AddSynchronizer(playerSettings);
+        ConnectToClientSynchronizerEvents(synchronizer);
         game.AddHud();
         
         StartWorld(world, saveFileName, playerSettings.Nick);

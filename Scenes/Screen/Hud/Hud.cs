@@ -20,20 +20,14 @@ public partial class Hud : Control
     [Child] public TextEdit SaveTextEdit { get; set; }
     
     private World.World _world;
-    private Synchronizer _synchronizer;
     [Logger] private ILogger _log;
     
-    public Hud InitPreReady(World.World world, Synchronizer synchronizer)
+    public Hud InitPreReady(World.World world)
     {
         Di.Process(this);
         
         if (world == null) _log.Error("World must be not null");
         _world = world;
-        
-        if (synchronizer == null) _log.Error("Synchronizer must be not null");
-        _synchronizer = synchronizer;
-
-        ConnectToEvents();
         
         return this;
     }
@@ -48,22 +42,6 @@ public partial class Hud : Control
 
         ExitButton.Pressed += () => { Services.MainScene.StartMainMenu(); };
         SaveButton.Pressed += () => { _world.TestSave(SaveTextEdit.Text); };
-    }
-
-    private void ConnectToEvents()
-    {
-        //TODO После удаления сцены Hud не будет выгружен из памяти из-за привязки к _synchronizer? https://gemini.google.com/app/a7c80361ae5143a6
-        //TODO Это точно должно быть в Hud? Ну вроде как это заглушка поверх Hud, так что да. Хотя переход при SyncRejectOnClientEvent как будто не про Hud. Ещё надо не забыть, что это чисто клиентская логика. 
-        //TODO LoadingScreen точно в Hud, а не World, т.к. World чисто про состояние объектов. Обработка SyncRejectOnClientEvent как будто должна быть в стартере? Возможно LoadingScreen тоже.
-        _synchronizer.SyncStartedOnClientEvent += () => Services.LoadingScreen.SetLoadingScreen(LoadingScreenTypes.Type.Loading);
-        _synchronizer.SyncEndedOnClientEvent += () => Services.LoadingScreen.Clear();
-        _synchronizer.SyncRejectOnClientEvent += errorMessage =>
-        {
-            _log.Warning("Synchronization with the server was rejected: {error}", errorMessage);
-            Services.MainScene.StartMainMenu();
-            //TODO Show error message in menu
-            Services.LoadingScreen.Clear();
-        };
     }
 
     public override void _Process(double delta)
