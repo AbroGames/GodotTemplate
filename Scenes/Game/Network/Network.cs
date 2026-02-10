@@ -118,9 +118,12 @@ public partial class Network : Node
             _log.Information("Shutting down network...");
 
             Api.MultiplayerPeer.RefuseNewConnections = true;
-            foreach (var peer in Api.GetPeers())
+            if (StateMachine.IsServer)
             {
-                Api.MultiplayerPeer.DisconnectPeer(peer);
+                foreach (var peer in Api.GetPeers())
+                {
+                    Api.MultiplayerPeer.DisconnectPeer(peer);
+                }
             }
             Api.MultiplayerPeer.Close();
             Api.MultiplayerPeer = new OfflineMultiplayerPeer();
@@ -154,11 +157,11 @@ public partial class Network : Node
     
     private void PeerConnectedEvent(long id)
     {
-        _log.Debug("Network peer connected: {id}", id);
+        _log.Information("Network peer connected: {id}", id);
     }
     
     private void PeerDisconnectedEvent(long id)
     {
-        _log.Debug("Network peer disconnected: {id}", id);
+        _log.Information("Network peer disconnected: {id}", id);
     }
 }
