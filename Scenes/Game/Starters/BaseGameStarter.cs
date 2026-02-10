@@ -1,9 +1,9 @@
 ﻿using System;
+using Godot;
 using GodotTemplate.Scenes.World.Services;
 using GodotTemplate.Scripts.Content.LoadingScreen;
+using GodotTemplate.Scripts.Service.Settings;
 using Humanizer;
-using KludgeBox.DI.Requests.LoggerInjection;
-using Serilog;
 
 namespace GodotTemplate.Scenes.Game.Starters;
 
@@ -14,26 +14,19 @@ public abstract class BaseGameStarter
     protected const int DefaultPort = 25566;
     
     private const string SyncRejectedMessage = "Synchronization with the server was rejected: {0}";
-    
-    [Logger] ILogger _log;
-
-    protected BaseGameStarter()
-    {
-        Di.Process(this);
-    }
 
     public virtual void Init(Game game)
     {
         
     }
 
-    protected void ConnectToClientSynchronizerEvents(Synchronizer synchronizer)
+    protected void ConnectToClientSynchronizerEvents(WorldSynchronizerService synchronizerService)
     {
         if (!Net.IsClient()) throw new InvalidOperationException("Can only be executed on the client");
-        
-        synchronizer.SyncRejectOnClientEvent += errorMessage => GoToMenuAndShowError(SyncRejectedMessage.FormatWith(errorMessage));
-        synchronizer.SyncStartedOnClientEvent += () => Services.LoadingScreen.SetLoadingScreen(LoadingScreenTypes.Type.Loading);
-        synchronizer.SyncEndedOnClientEvent += () => Services.LoadingScreen.Clear();
+
+        synchronizerService.SyncRejectOnClientEvent += errorMessage => GoToMenuAndShowError(SyncRejectedMessage.FormatWith(errorMessage));
+        synchronizerService.SyncStartedOnClientEvent += () => Services.LoadingScreen.SetLoadingScreen(LoadingScreenTypes.Type.Loading);
+        synchronizerService.SyncEndedOnClientEvent += () => Services.LoadingScreen.Clear();
     }
 
     protected void StartWorld(World.World world, string saveFileName, string adminNickname)
@@ -53,6 +46,12 @@ public abstract class BaseGameStarter
                 Net.DoClient(() => GoToMenuAndShowError(loadException.Message));
             }
         }
+    }
+
+    protected void StartSyncOnClient(WorldSynchronizerService synchronizerService)
+    {
+        PlayerSettings playerSettings = Services.PlayerSettings.GetPlayerSettings();
+        synchronizerService.StartSyncOnClient(playerSettings.Nick, playerSettings.Color);
     }
 
     /// <summary>
