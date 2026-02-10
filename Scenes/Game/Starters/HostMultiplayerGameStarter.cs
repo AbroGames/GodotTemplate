@@ -25,12 +25,10 @@ public class HostMultiplayerGameStarter(int? port = null, string saveFileName = 
             game.AddChild(clientDeadChecker);
         }
         
-        PlayerSettings playerSettings = Services.PlayerSettings.GetPlayerSettings();
         World.World world = game.AddWorld();
-        Synchronizer synchronizer = game.AddSynchronizer(playerSettings);
-        Net.DoClient(() => ConnectToClientSynchronizerEvents(synchronizer));
         Net.DoClient(() => game.AddHud());
         Network.Network network = game.AddNetwork();
+        Net.DoClient(() => ConnectToClientSynchronizerEvents(world.SynchronizerService));
         
         Error error = network.HostServer(port ?? DefaultPort, true);
         if (error != Error.Ok)
@@ -41,7 +39,7 @@ public class HostMultiplayerGameStarter(int? port = null, string saveFileName = 
 
         StartWorld(world, saveFileName, adminNickname);
         network.OpenServer();
-        Net.DoClient(synchronizer.StartSyncOnClient);
+        Net.DoClient(() => StartSyncOnClient(world.SynchronizerService));
     }
 
     private void HostingFailedEventOnClient(Error error) => GoToMenuAndShowError(HostingFailedMessage.FormatWith(error));

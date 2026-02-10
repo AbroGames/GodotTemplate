@@ -48,7 +48,9 @@ public partial class WorldStartStopService : Node
         
         //Init WorldTemporaryData
         _worldTemporaryData.MainAdminNick = adminNickname;
-        GetMultiplayer().PeerDisconnected += id => _worldTemporaryData.PlayerNickByPeerId.Remove((int) id);
+        GetMultiplayer().PeerDisconnected += id => _worldTemporaryData.PlayerNickByPeerId.Remove((int) id); //TODO Отписаться от ивента при выключении сервера!
+        //TODO И проверить в целом как-то утечки памяти, если теория, что после выхода с сервера и отвязки World, он никогда не удаляется из C# памяти, только C++ ноды очищаются
+        //TODO Бронуху в Четверг?
     }
 
     private void NewGameServerInit()
