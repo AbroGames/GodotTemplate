@@ -25,9 +25,9 @@ public class HostMultiplayerGameStarter(int? port = null, string saveFileName = 
             game.AddChild(clientDeadChecker);
         }
         
+        Network.Network network = game.AddNetwork();
         World.World world = game.AddWorld();
         Net.DoClient(() => game.AddHud());
-        Network.Network network = game.AddNetwork();
         Net.DoClient(() => ConnectToClientSynchronizerEvents(world.SynchronizerService));
         
         Error error = network.HostServer(port ?? DefaultPort, true);

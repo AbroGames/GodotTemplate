@@ -1,5 +1,4 @@
 ﻿using Godot;
-using GodotTemplate.Scenes.World.Services;
 using GodotTemplate.Scripts.Content.LoadingScreen;
 
 namespace GodotTemplate.Scenes.Game.Starters;
@@ -15,9 +14,9 @@ public class ConnectToMultiplayerGameStarter(string host = null, int? port = nul
         base.Init(game);
         Services.LoadingScreen.SetLoadingScreen(LoadingScreenTypes.Type.Connecting);
         
+        Network.Network network = game.AddNetwork();
         World.World world = game.AddWorld();
         game.AddHud();
-        Network.Network network = game.AddNetwork();
         ConnectToClientSynchronizerEvents(world.SynchronizerService);
         
         game.GetMultiplayer().ConnectedToServer += () => StartSyncOnClient(world.SynchronizerService);
