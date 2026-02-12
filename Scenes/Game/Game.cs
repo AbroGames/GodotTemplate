@@ -45,7 +45,7 @@ public partial class Game : Node2D
     public Network.Network AddNetwork()
     {
         _network?.QueueFree();
-        _network = new Network.Network();
+        _network = new Network.Network(this);
         this.AddChildWithName(_network, "Network");
         return _network;
     }

@@ -4,7 +4,7 @@ using Serilog;
 
 namespace GodotTemplate.Scenes.Game.Network;
 
-public partial class Network : Node
+public partial class Network(Node multiplayerRoot) : Node
 {
 
     public static readonly int MaxSyncPacketSize = 1350 * 100;
@@ -17,6 +17,10 @@ public partial class Network : Node
     public override void _Ready()
     {
         Di.Process(this);
+        
+        // Setup new Multiplayer object for guaranteed removing all old links and lambdas to old Multiplayer
+        // This multiplayer link to node Game (multiplayerRoot) and will be removed after move to MainMenu
+        GetTree().SetMultiplayer(new SceneMultiplayer(), multiplayerRoot.GetPath());
         
         Api = GetMultiplayer();
         Api.ConnectedToServer += ConnectedToServerEvent;
