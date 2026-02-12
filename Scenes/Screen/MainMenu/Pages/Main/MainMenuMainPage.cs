@@ -10,6 +10,7 @@ public partial class MainMenuMainPage : MainMenuPage
     [Child] public Button CreateServerButton { get; private set; }
     [Child] public Button ConnectToServerButton { get; private set; }
     [Child] public Button SettingsButton { get; private set; }
+    [Child] public Button ExitButton { get; private set; }
     
     public override void _Ready()
     {
@@ -19,5 +20,6 @@ public partial class MainMenuMainPage : MainMenuPage
         CreateServerButton.Pressed += () => ChangeMenuPage(PackedScenes.CreateServer);
         ConnectToServerButton.Pressed += () => ChangeMenuPage(PackedScenes.ConnectToServer);
         SettingsButton.Pressed += () => ChangeMenuPage(PackedScenes.Settings);
+        ExitButton.Pressed += () => Services.MainScene.Shutdown();
     }
 }
