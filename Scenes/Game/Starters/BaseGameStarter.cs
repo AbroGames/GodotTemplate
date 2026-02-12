@@ -17,7 +17,9 @@ public abstract class BaseGameStarter
 
     public virtual void Init(Game game)
     {
-        
+        //TODO Это по идее должно быть не тут, а, например, в Network, но мы ловим ошибки, если вызываем эту штуку в Network._ready() или shutdown(),
+        // т.к. в тот момент уже созданы SceneSync классы в World. Поменять местами порядок создания?
+        game.GetTree().SetMultiplayer(new SceneMultiplayer());
     }
 
     protected void ConnectToClientSynchronizerEvents(WorldSynchronizerService synchronizerService)

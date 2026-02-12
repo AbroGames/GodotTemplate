@@ -19,52 +19,21 @@ public class ConnectToMultiplayerGameStarter(string host = null, int? port = nul
         game.AddHud();
         Network.Network network = game.AddNetwork();
         ConnectToClientSynchronizerEvents(world.SynchronizerService);
-
-        //TODO
-        // game.GetMultiplayer().ConnectedToServer += () => StartSyncOnClient(world.SynchronizerService);
-        // game.GetMultiplayer().ConnectionFailed += ConnectionFailedEvent;
-        // game.GetMultiplayer().ServerDisconnected += ServerDisconnectedEvent;
         
-        AddMultiplayerEventListeners(game, world.SynchronizerService);
+        game.GetMultiplayer().ConnectedToServer += () => StartSyncOnClient(world.SynchronizerService);
+        game.GetMultiplayer().ConnectionFailed += ConnectionFailedEvent;
+        game.GetMultiplayer().ServerDisconnected += ServerDisconnectedEvent;
         
         Error error = network.ConnectToServer(host ?? DefaultHost, port ?? DefaultPort);
         if (error != Error.Ok)
         {
-            //ConnectionFailedEvent();
+            ConnectionFailedEvent();
         }
     }
     
-    private void AddMultiplayerEventListeners(Game game, WorldSynchronizerService synchronizerService)
-    {
-        void ConnectionSuccessEvent()
-        {
-            StartSyncOnClient(synchronizerService);
-        }
-
-        // Failed attempt to connect to the server (did not receive a response from the server within the timeout).
-        void ConnectionFailedEvent()
-        {
-            GD.Print("Connection failed"); //TODO
-            GoToMenuAndShowError(ConnectionFailedMessage);
-            RemoveMultiplayerEventListeners();
-        }
-        
-        // Server disconnected (the connection was successful, but the server disconnected us). This may also happen several hours after the connection.
-        void ServerDisconnectedEvent()
-        {
-            GoToMenuAndShowError(DisconnectedFromServerMessage);
-            RemoveMultiplayerEventListeners();
-        }
-        
-        void RemoveMultiplayerEventListeners()
-        {
-            game.GetMultiplayer().ConnectedToServer -= ConnectionSuccessEvent;
-            game.GetMultiplayer().ConnectionFailed -= ConnectionFailedEvent;
-            game.GetMultiplayer().ServerDisconnected -= ServerDisconnectedEvent;
-        }
-        
-        game.GetMultiplayer().ConnectedToServer += ConnectionSuccessEvent;
-        game.GetMultiplayer().ConnectionFailed += ConnectionFailedEvent;
-        game.GetMultiplayer().ServerDisconnected += ServerDisconnectedEvent;
-    }
+    // Failed attempt to connect to the server (did not receive a response from the server within the timeout).
+    private void ConnectionFailedEvent() => GoToMenuAndShowError(ConnectionFailedMessage);
+    
+    // Server disconnected (the connection was successful, but the server disconnected us). This may also happen several hours after the connection.
+    private void ServerDisconnectedEvent() => GoToMenuAndShowError(DisconnectedFromServerMessage);
 }
