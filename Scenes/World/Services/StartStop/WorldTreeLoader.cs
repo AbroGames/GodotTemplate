@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 
 namespace GodotTemplate.Scenes.World.Services.StartStop;
 
@@ -10,8 +9,7 @@ public class WorldTreeLoader
     public void RunAllLoaders(World world)
     {
         // Get all classes implementing IWorldLoader
-        List<IWorldTreeLoader> loaders = Assembly.GetExecutingAssembly()
-            .GetTypes()
+        List<IWorldTreeLoader> loaders = Scripts.Services.ExecutingAssemblyCache.Types
             .Where(t => typeof(IWorldTreeLoader).IsAssignableFrom(t) && t.IsClass && !t.IsAbstract)
             .Select(t => (IWorldTreeLoader) Activator.CreateInstance(t))
             .ToList();

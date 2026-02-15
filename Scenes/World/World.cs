@@ -114,6 +114,6 @@ public partial class World : Node2D, IServiceProvider
     private void TestSaveRpc(string saveFileName)
     {
         _log.Warning("TestSave RPC called");
-        DataSaveLoadService.Save(saveFileName); //TODO Обработка SaveException()
+        DataSaveLoadService.Save(saveFileName); //TODO Обработка SaveException(). Ошибка уже залогирована, надо только отобразить, если это клиент.
     }
 }

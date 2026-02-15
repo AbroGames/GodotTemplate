@@ -13,24 +13,25 @@ namespace GodotTemplate.Scripts;
 public static class Services
 {
     // Services from KludgeBox
-    public static readonly DependencyInjector Di = new DependencyInjector();
-    public static readonly ExceptionHandlerService ExceptionHandler = new ExceptionHandlerService();
-    public static readonly RandomService Rand = new RandomService();
-    public static readonly MathService Math = new MathService();
-    public static readonly StringCompressionService StringCompression = new StringCompressionService();
-    public static readonly NodeTreeService NodeTree = new NodeTreeService();
-    public static readonly TypesStorageService TypesStorage = new TypesStorageService();
+    public static readonly DependencyInjector Di = new();
+    public static readonly ExceptionHandlerService ExceptionHandler = new();
+    public static readonly RandomService Rand = new();
+    public static readonly MathService Math = new();
+    public static readonly StringCompressionService StringCompression = new();
+    public static readonly NodeTreeService NodeTree = new();
+    public static readonly TypesStorageService TypesStorage = new();
+    public static readonly ExecutingAssemblyCacheService ExecutingAssemblyCache = new();
     public static MembersScanner MembersScanner => Di.MembersScanner;
     
     // Services from game, but extended KludgeBox services
-    public static readonly CmdArgsService CmdArgs = new CmdArgsService();
-    public static readonly NetworkService Net = new NetworkService();
+    public static readonly CmdArgsService CmdArgs = new();
+    public static readonly NetworkService Net = new();
     
     // Services from game
-    public static readonly ProcessService Process = new ProcessService();
-    public static readonly LoadingScreenService LoadingScreen = new LoadingScreenService();
-    public static readonly MainSceneService MainScene = new MainSceneService();
-    public static readonly PlayerSettingsService PlayerSettings = new PlayerSettingsService();
+    public static readonly ProcessService Process = new();
+    public static readonly LoadingScreenService LoadingScreen = new();
+    public static readonly MainSceneService MainScene = new();
+    public static readonly PlayerSettingsService PlayerSettings = new();
     
     public static class Global
     {

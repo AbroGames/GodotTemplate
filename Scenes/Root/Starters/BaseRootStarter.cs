@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Reflection;
+using Godot;
 using KludgeBox.DI.Requests.LoggerInjection;
 using KludgeBox.Logging;
 using Serilog;
@@ -20,7 +21,8 @@ public abstract class BaseRootStarter
         Services.CmdArgs.LogCmdArgs();
         
         _log.Information("Initializing base...");
-        Services.TypesStorage.AddTypes(Assembly.GetExecutingAssembly().GetTypes().ToList());
+        Services.ExecutingAssemblyCache.Init(Assembly.GetExecutingAssembly());
+        Services.TypesStorage.AddTypes(Services.ExecutingAssemblyCache.Types.ToList());
         Services.Net.Init(rootData.SceneTree, Services.CmdArgs.IsDedicatedServer);
         Services.LoadingScreen.Init(rootData.LoadingScreenContainer, rootData.PackedScenes.LoadingScreen);
         Services.MainScene.Init(rootData.MainSceneContainer, rootData.PackedScenes.Game, rootData.PackedScenes.MainMenu);
