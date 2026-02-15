@@ -42,16 +42,13 @@ layout_mode = 2
 size_flags_vertical = 3
 text = "Connect to server"
 
-[node name="Separator1" type="Label" parent="VBoxContainer" unique_id=723708564]
+[node name="Separator" type="Label" parent="VBoxContainer" unique_id=723708564]
 layout_mode = 2
 
 [node name="SettingsButton" type="Button" parent="VBoxContainer" unique_id=636044712]
 layout_mode = 2
 size_flags_vertical = 3
 text = "Settings"
-
-[node name="Separator2" type="Label" parent="VBoxContainer" unique_id=89207623]
-layout_mode = 2
 
 [node name="ExitButton" type="Button" parent="VBoxContainer" unique_id=884625529]
 layout_mode = 2
