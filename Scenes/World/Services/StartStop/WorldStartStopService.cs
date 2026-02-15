@@ -43,14 +43,20 @@ public partial class WorldStartStopService : Node
     {
         _log.Information("World starting...");
         
-        //Init node for server shutdown process in the future
-        AddChild(new WorldServerShutdowner());
-        
         //Init WorldTemporaryData
         _worldTemporaryData.MainAdminNick = adminNickname;
-        GetMultiplayer().PeerDisconnected += id => _worldTemporaryData.PlayerNickByPeerId.Remove((int) id); //TODO Отписаться от ивента при выключении сервера!
-        //TODO И проверить в целом как-то утечки памяти, если теория, что после выхода с сервера и отвязки World, он никогда не удаляется из C# памяти, только C++ ноды очищаются
-        //TODO Бронуху в Четверг?
+        // Use inner function for detach this function after server shutdown,
+        // otherwise we can have memory leak for this function
+        void PeerDisconnectedEvent(long id)
+        {
+            _worldTemporaryData.PlayerNickByPeerId.Remove((int) id);
+        }
+        GetMultiplayer().PeerDisconnected += PeerDisconnectedEvent;
+        
+        //Init node for server shutdown process in the future
+        WorldServerShutdowner worldServerShutdowner = new WorldServerShutdowner();
+        worldServerShutdowner.AddCustomShutdownAction(() => GetMultiplayer().PeerDisconnected -= PeerDisconnectedEvent);
+        AddChild(worldServerShutdowner);
     }
 
     private void NewGameServerInit()
