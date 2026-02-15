@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using Godot;
-using GodotTemplate.Scripts.Service.CmdArgs;
+using GodotTemplate.Scripts.Content.CmdArgs;
 
 namespace GodotTemplate.Scenes.Root.Starters;
 
@@ -28,6 +28,8 @@ public class RootStarterManager
 
     private BaseRootStarter ChooseStarter()
     {
-        return OS.GetCmdlineArgs().Contains(DedicatedServerArgs.DedicatedServerFlag) ? new DedicatedServerRootStarter() : new ClientRootStarter();
+        return OS.GetCmdlineArgs().Contains(DedicatedServerArgs.DedicatedServerFlag) ? 
+            new DedicatedServerRootStarter() : 
+            new ClientRootStarter();
     }
 }

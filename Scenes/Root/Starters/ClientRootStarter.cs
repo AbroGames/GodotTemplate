@@ -1,4 +1,5 @@
-﻿using GodotTemplate.Scripts.Content.LoadingScreen;
+﻿using GodotTemplate.Scripts.Content.CmdArgs;
+using GodotTemplate.Scripts.Content.LoadingScreen;
 using KludgeBox.DI.Requests.LoggerInjection;
 using Serilog;
 
@@ -7,6 +8,7 @@ namespace GodotTemplate.Scenes.Root.Starters;
 public class ClientRootStarter : BaseRootStarter
 {
 
+	private ClientArgs _clientArgs;
 	[Logger] private ILogger _log;
 	
     public override void Init(RootData rootData)
@@ -14,12 +16,15 @@ public class ClientRootStarter : BaseRootStarter
 	    base.Init(rootData);
         _log.Information("Initializing Client...");
         
+        _clientArgs = ClientArgs.GetFromCmd(CmdArgsService);
+        
+        Services.Net.Init(rootData.SceneTree, false);
         Services.LoadingScreen.SetLoadingScreen(LoadingScreenTypes.Type.Loading);
         
         Services.PlayerSettings.Init();
-        if (Services.CmdArgs.Client.Nick != null)
+        if (_clientArgs.Nick != null)
         {
-	        Services.PlayerSettings.SetNickTemporarily(Services.CmdArgs.Client.Nick);
+	        Services.PlayerSettings.SetNickTemporarily(_clientArgs.Nick);
         }
     }
 
@@ -29,13 +34,13 @@ public class ClientRootStarter : BaseRootStarter
         _log.Information("Starting Client...");
 
 
-        if (Services.CmdArgs.Client.AutoStart)
+        if (_clientArgs.AutoStart)
         {
 	        Services.MainScene.StartSingleplayerGame();
         } 
-        else if (Services.CmdArgs.Client.AutoConnect)
+        else if (_clientArgs.AutoConnect)
         {
-	        Services.MainScene.ConnectToMultiplayerGame(Services.CmdArgs.Client.AutoConnectIp, Services.CmdArgs.Client.AutoConnectPort);
+	        Services.MainScene.ConnectToMultiplayerGame(_clientArgs.AutoConnectIp, _clientArgs.AutoConnectPort);
         }
         else
         {

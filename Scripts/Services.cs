@@ -5,7 +5,6 @@ using KludgeBox.Core.Random;
 using KludgeBox.DI;
 using KludgeBox.Godot.Services;
 using KludgeBox.Reflection.Access;
-using CmdArgsService = GodotTemplate.Scripts.Service.CmdArgs.CmdArgsService;
 using NetworkService = GodotTemplate.Scripts.Service.NetworkService;
 
 namespace GodotTemplate.Scripts;
@@ -24,7 +23,6 @@ public static class Services
     public static MembersScanner MembersScanner => Di.MembersScanner;
     
     // Services from game, but extended KludgeBox services
-    public static readonly CmdArgsService CmdArgs = new();
     public static readonly NetworkService Net = new();
     
     // Services from game

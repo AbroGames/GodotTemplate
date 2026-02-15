@@ -1,4 +1,5 @@
-﻿using KludgeBox.DI.Requests.LoggerInjection;
+﻿using GodotTemplate.Scripts.Content.CmdArgs;
+using KludgeBox.DI.Requests.LoggerInjection;
 using Serilog;
 
 namespace GodotTemplate.Scenes.Root.Starters;
@@ -6,6 +7,7 @@ namespace GodotTemplate.Scenes.Root.Starters;
 public class DedicatedServerRootStarter : BaseRootStarter
 {
     
+    private DedicatedServerArgs _dedicatedServerArgs;
     [Logger] private ILogger _log;
     
     public override void Init(RootData rootData)
@@ -13,6 +15,9 @@ public class DedicatedServerRootStarter : BaseRootStarter
         base.Init(rootData);
         _log.Information("Initializing DedicatedServer...");
         
+        _dedicatedServerArgs = DedicatedServerArgs.GetFromCmd(CmdArgsService);
+        
+        Services.Net.Init(rootData.SceneTree, true);
         rootData.SceneTree.Root.Title = $"[SERVER] {rootData.SceneTree.Root.Title}";
     }
 
@@ -22,10 +27,10 @@ public class DedicatedServerRootStarter : BaseRootStarter
         _log.Information("Starting DedicatedServer...");
 
         Services.MainScene.HostMultiplayerGameAsDedicatedServer(
-            Services.CmdArgs.DedicatedServer.Port,
-            Services.CmdArgs.DedicatedServer.SaveFileName,
-            Services.CmdArgs.DedicatedServer.Admin,
-            Services.CmdArgs.DedicatedServer.ParentPid,
-            Services.CmdArgs.DedicatedServer.IsRender);
+            _dedicatedServerArgs.Port,
+            _dedicatedServerArgs.SaveFileName,
+            _dedicatedServerArgs.Admin,
+            _dedicatedServerArgs.ParentPid,
+            _dedicatedServerArgs.IsRender);
     }
 }
