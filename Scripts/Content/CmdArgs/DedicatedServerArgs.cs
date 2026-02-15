@@ -1,15 +1,15 @@
 using System.Collections.Generic;
 
-namespace GodotTemplate.Scripts.Service.CmdArgs;
+namespace GodotTemplate.Scripts.Content.CmdArgs;
 
 public readonly record struct DedicatedServerArgs(
+    CommonArgs CommonArgs,
     bool IsHeadless, 
     int? Port, 
     string SaveFileName, 
     string Admin, 
     int? ParentPid, 
-    bool IsRender, 
-    bool GodotLogPush)
+    bool IsRender)
 {
     public static readonly string DedicatedServerFlag = "--server";
     
@@ -19,18 +19,17 @@ public readonly record struct DedicatedServerArgs(
     public static readonly string AdminParam = "--admin";
     public static readonly string ParentPidParam = "--parent-pid";
     public static readonly string RenderParam = "--render";
-    public static readonly string GodotLogPushParam = "--godot-log-push";
     
     public static DedicatedServerArgs GetFromCmd(KludgeBox.Core.CmdArgsService argsService)
     {
         return new DedicatedServerArgs(
+            CommonArgs.GetFromCmd(argsService),
             argsService.ContainsInCmdArgs(HeadlessFlag),
             argsService.GetIntFromCmdArgs(PortParam),
             argsService.GetStringFromCmdArgs(SaveFileNameParam),
             argsService.GetStringFromCmdArgs(AdminParam),
             argsService.GetIntFromCmdArgs(ParentPidParam),
-            argsService.ContainsInCmdArgs(RenderParam),
-            argsService.ContainsInCmdArgs(GodotLogPushParam)
+            argsService.ContainsInCmdArgs(RenderParam)
         );
     }
 
@@ -46,7 +45,7 @@ public readonly record struct DedicatedServerArgs(
         if (Admin != null) listParams.AddRange([AdminParam, Admin]);
         if (ParentPid.HasValue) listParams.AddRange([ParentPidParam, ParentPid.ToString()]);
         if (IsRender) listParams.Add(RenderParam);
-        if (GodotLogPush) listParams.Add(GodotLogPushParam);
+        if (CommonArgs.GodotLogPush) listParams.Add(CommonArgs.GodotLogPushParam);
 
         return listParams.ToArray();
     }
