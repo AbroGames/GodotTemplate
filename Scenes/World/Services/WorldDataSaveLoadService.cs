@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using Godot;
 using GodotTemplate.Scenes.World.Data.PersistenceData;
 using GodotTemplate.Scenes.World.Services.DataSerializer;
+using GodotTemplate.Scripts.Service;
 using KludgeBox.DI.Requests.LoggerInjection;
 using KludgeBox.DI.Requests.SceneServiceInjection;
 using Serilog;
@@ -12,13 +11,6 @@ namespace GodotTemplate.Scenes.World.Services;
 
 public partial class WorldDataSaveLoadService : Node
 {
-
-    public class SaveException(string message, Exception innerException = null) : Exception(message, innerException);
-    public class LoadException(string message, Exception innerException = null) : Exception(message, innerException);
-    
-    private const string SaveDirPath = "user://saves/";
-    private const string SaveExtension = ".bin";
-    private const string AutoSaveName = "auto";
     
     [SceneService] private WorldPersistenceData _worldData;
     [SceneService] private WorldDataSerializerService _serializerService;
@@ -33,37 +25,19 @@ public partial class WorldDataSaveLoadService : Node
     {
         _worldData.General.GeneralData.SaveFileName = saveFileName;
         byte[] data = TrySerializeWorldData();
-        SaveToDisk(data, saveFileName);
+        Scripts.Services.SaveLoad.SaveToDisk(data, saveFileName);
     }
     
     public void AutoSave()
     {
         byte[] data = TrySerializeWorldData();
-        SaveToDisk(data, AutoSaveName);
+        Scripts.Services.SaveLoad.SaveToDisk(data, Scripts.Services.SaveLoad.AutoSaveName);
     }
 
     public void Load(string saveFileName)
     {
-        byte[] data = LoadFromDisk(saveFileName);
+        byte[] data = Scripts.Services.SaveLoad.LoadFromDisk(saveFileName);
         TryDeserializeWorldData(data);
-    }
-
-    public static List<string> GetAllSaveFiles()
-    {
-        return DirAccess.GetFilesAt(SaveDirPath)
-            .Where(filename => filename.EndsWith(SaveExtension))
-            .Select(filename => (
-                Name: filename,
-                Size: FileAccess.GetModifiedTime(SaveDirPath + filename)))
-            .OrderByDescending(file => file.Size)
-            .Select(file => System.IO.Path.GetFileNameWithoutExtension(file.Name))
-            .ToList();
-    }
-
-    public static bool CheckFileExists(string saveFileName)
-    {
-        string fullPath = GetFullPath(saveFileName);
-        return FileAccess.FileExists(fullPath);
     }
     
     private byte[] TrySerializeWorldData()
@@ -75,7 +49,7 @@ public partial class WorldDataSaveLoadService : Node
         catch (Exception e)
         {
             _log.Error("Failed to serialize world data: {error}", e.Message);
-            throw new LoadException($"Failed to serialize world data: {e.Message}", e);
+            throw new SaveLoadService.SaveException($"Failed to serialize world data: {e.Message}", e);
         }
     }
 
@@ -88,50 +62,7 @@ public partial class WorldDataSaveLoadService : Node
         catch (Exception e)
         {
             _log.Error("Failed to deserialize world data: {error}", e.Message);
-            throw new LoadException($"Failed to deserialize world data: {e.Message}", e);
+            throw new SaveLoadService.LoadException($"Failed to deserialize world data: {e.Message}", e);
         }
-    }
-
-    private void SaveToDisk(byte[] data, string saveFileName)
-    {
-        DirAccess.MakeDirRecursiveAbsolute(SaveDirPath);
-        string fullPath = GetFullPath(saveFileName);
-        using var file = FileAccess.Open(fullPath, FileAccess.ModeFlags.Write);
-        if (file == null)
-        {
-            _log.Error("Failed to save file '{fullPath}': {error}", fullPath, FileAccess.GetOpenError());
-            throw new SaveException($"Failed to save file '{fullPath}': {FileAccess.GetOpenError()}");
-        }
-        
-        file.StoreBuffer(data);
-        file.Close();
-        _log.Information("Successfully save file '{fullPath}'", fullPath);
-    }
-    
-    private byte[] LoadFromDisk(string saveFileName)
-    {
-        string fullPath = GetFullPath(saveFileName);
-        using var file = FileAccess.Open(fullPath, FileAccess.ModeFlags.Read);
-        if (file == null)
-        {
-            _log.Error("Failed to load file '{fullPath}': {error}", fullPath, FileAccess.GetOpenError());
-            throw new LoadException($"Failed to load file '{fullPath}': {FileAccess.GetOpenError()}");
-        }
-
-        byte[] data = file.GetBuffer((long) file.GetLength());
-        file.Close();
-        if (data == null)
-        {
-            _log.Error("Failed to load data from file '{fullPath}'", fullPath);
-            throw new LoadException($"Failed to load data from file '{fullPath}'");
-        }
-        _log.Information("Successfully load file '{fullPath}'", fullPath);
-        
-        return data;
-    }
-
-    private static string GetFullPath(string saveFileName)
-    {
-        return SaveDirPath + saveFileName + SaveExtension;
     }
 }

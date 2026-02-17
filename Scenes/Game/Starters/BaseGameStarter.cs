@@ -2,6 +2,7 @@
 using Godot;
 using GodotTemplate.Scenes.World.Services;
 using GodotTemplate.Scripts.Content.LoadingScreen;
+using GodotTemplate.Scripts.Service;
 using GodotTemplate.Scripts.Service.Settings;
 using Humanizer;
 
@@ -38,7 +39,7 @@ public abstract class BaseGameStarter
             {
                 world.StartStopService.LoadGame(saveFileName, adminNickname);
             }
-            catch (WorldDataSaveLoadService.LoadException loadException)
+            catch (SaveLoadService.LoadException loadException)
             {
                 Net.DoClient(() => GoToMenuAndShowError(loadException.Message));
             }

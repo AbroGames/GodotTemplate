@@ -30,6 +30,7 @@ public static class Services
     public static readonly LoadingScreenService LoadingScreen = new();
     public static readonly MainSceneService MainScene = new();
     public static readonly PlayerSettingsService PlayerSettings = new();
+    public static readonly SaveLoadService SaveLoad = new();
     
     public static class Global
     {
