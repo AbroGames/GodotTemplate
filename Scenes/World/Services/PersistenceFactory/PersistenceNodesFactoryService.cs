@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using Godot;
 using KludgeBox.DI.Requests.LoggerInjection;
 using KludgeBox.DI.Requests.ParentInjection;
@@ -21,7 +22,7 @@ public partial class PersistenceNodesFactoryService : Node
         Di.Process(this);
         
         // Get all classes implementing IPersistenceNodeFactory
-        _factories = Scripts.Services.ExecutingAssemblyCache.Types
+        _factories = Scripts.Services.AssemblyCache.GetTypes(Assembly.GetExecutingAssembly())
             .Where(t => typeof(IPersistenceNodeFactory).IsAssignableFrom(t) && t.IsClass && !t.IsAbstract)
             .Select(t => (IPersistenceNodeFactory) Activator.CreateInstance(t))
             .ToDictionary(t => t.CreatedType(), t => t);

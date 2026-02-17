@@ -29,8 +29,8 @@ public abstract class BaseRootStarter
         CmdArgsService.LogCmdArgs();
         
         _log.Information("Initializing base...");
-        Services.ExecutingAssemblyCache.Init(Assembly.GetExecutingAssembly());
-        Services.TypesStorage.AddTypes(Services.ExecutingAssemblyCache.Types.ToList());
+        Services.AssemblyCache.AddAssembly(Assembly.GetExecutingAssembly());
+        Services.TypesMapping.AddTypes(Services.AssemblyCache.GetTypes(Assembly.GetExecutingAssembly()).ToList());
         Services.LoadingScreen.Init(rootData.LoadingScreenContainer, rootData.PackedScenes.LoadingScreen);
         Services.MainScene.Init(rootData.MainSceneContainer, rootData.PackedScenes.Game, rootData.PackedScenes.MainMenu);
     }
