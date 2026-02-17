@@ -107,13 +107,4 @@ public partial class World : Node2D, IServiceProvider
     {
         _log.Warning("Test 3 RPC called");
     }
-    
-    //TODO Переделать на нормальный метод запроса сохранения с клиента на сервер, с проверкой прав
-    public void TestSave(string saveFileName) => RpcId(ServerId, MethodName.TestSaveRpc, saveFileName);
-    [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true)]
-    private void TestSaveRpc(string saveFileName)
-    {
-        _log.Warning("TestSave RPC called");
-        DataSaveLoadService.Save(saveFileName); //TODO Обработка SaveException(). Ошибка уже залогирована, надо только отобразить, если это клиент.
-    }
 }

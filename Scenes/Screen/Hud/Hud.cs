@@ -42,11 +42,12 @@ public partial class Hud : Control
         LogButton.Pressed += () => { Services.NodeTree.LogFullTree(_world); };
 
         ExitButton.Pressed += () => { Services.MainScene.StartMainMenu(); };
-        SaveButton.Pressed += () => { _world.TestSave(SaveTextEdit.Text); };
+        SaveButton.Pressed += () => { _world.DataSaveLoadService.Save(SaveTextEdit.Text); };
     }
 
     public override void _Process(double delta)
     {
+        //TODO В отдельный PerformanceAnalyzerWorldService, с генерацией строк текста нескольких видов: построчно или в 2 строках сжато. Туда же PingChecker и пересылку с клиентов на сервер инфы о пинге?
         InfoLabel.Text = $"FPS: {Engine.GetFramesPerSecond():N0}";
         InfoLabel.Text += $"\nTPS: {Mathf.Min(1.0/Performance.GetMonitor(Performance.Monitor.TimePhysicsProcess), Engine.PhysicsTicksPerSecond):N0}";
         
