@@ -31,7 +31,7 @@ public partial class WorldDataSaveLoadService : Node
     private void SaveRpc(string saveFileName)
     {
         int peerId = GetMultiplayer().GetRemoteSenderId();
-        if (_facadeService.IsAdmin(peerId))
+        if (!_facadeService.IsAdmin(peerId))
         {
             SaveReject(peerId, NotRightsForSaveMessage);
             return;
