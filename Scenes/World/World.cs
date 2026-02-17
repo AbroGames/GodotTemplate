@@ -36,6 +36,7 @@ public partial class World : Node2D, IServiceProvider
     [Child] public WorldSynchronizerService SynchronizerService { get; private set; }
     [Child] public WorldDataSaveLoadService DataSaveLoadService { get; private set; }
     [Child] public WorldDataSerializerService DataSerializerService { get; private set; }
+    [Child] public WorldFacadeService FacadeService { get; private set; }
     
     [Child] public SyncedPackedScenes SyncedPackedScenes { get; private set; }
     [Child] public ClientPackedScenes ClientPackedScenes { get; private set; }
@@ -59,6 +60,7 @@ public partial class World : Node2D, IServiceProvider
         AddService(SynchronizerService);
         AddService(DataSaveLoadService);
         AddService(DataSerializerService);
+        AddService(FacadeService);
         
         AddService(SyncedPackedScenes);
         AddService(ClientPackedScenes);

@@ -17,8 +17,8 @@ public partial class WorldDataSaveLoadService : Node
     private const string NotRightsForSaveMessage = "You don't have the rights for saving";
     
     [SceneService] private WorldPersistenceData _persistenceData;
-    [SceneService] private WorldTemporaryData _temporaryData;
     [SceneService] private WorldDataSerializerService _serializerService;
+    [SceneService] private WorldFacadeService _facadeService;
     [Logger] private ILogger _log;
 
     public override void _Ready()
@@ -30,11 +30,8 @@ public partial class WorldDataSaveLoadService : Node
     [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true)]
     private void SaveRpc(string saveFileName)
     {
-        //TODO Фасад для этого? Прям в World? Но лучше в Facade. Причем два разных метода: получить PlayerData и проверка на Admin (т.к. peer = 1 может не иметь PlayerData, но он admin)
         int peerId = GetMultiplayer().GetRemoteSenderId();
-        String playerNick = _temporaryData.PlayerNickByPeerId[peerId];
-        PlayerData playerData = _persistenceData.Players.PlayerByNick[playerNick];
-        if (peerId != 1 && !playerData.IsAdmin)
+        if (_facadeService.IsAdmin(peerId))
         {
             SaveReject(peerId, NotRightsForSaveMessage);
             return;

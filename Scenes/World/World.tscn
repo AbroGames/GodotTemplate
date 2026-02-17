@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://buxateh143bl3" path="res://Scenes/World/Scenes/ClientScenes/ClientPackedScenes.tscn" id="9_p7pgw"]
 [ext_resource type="Script" uid="uid://ecnv5a1mg0fu" path="res://Scenes/World/Services/WorldDataSaveLoadService.cs" id="10_x5sp8"]
 [ext_resource type="Script" uid="uid://xg00p1epx55n" path="res://Scenes/World/Services/DataSerializer/WorldDataSerializerService.cs" id="11_lp0bp"]
+[ext_resource type="Script" uid="uid://dm8kr1s86wu7q" path="res://Scenes/World/Services/WorldFacadeService.cs" id="12_lp0bp"]
 
 [node name="World" type="Node2D" unique_id=943238609]
 script = ExtResource("1_0nbjp")
@@ -44,6 +45,9 @@ script = ExtResource("10_x5sp8")
 
 [node name="DataSerializerService" type="Node" parent="." unique_id=145867701]
 script = ExtResource("11_lp0bp")
+
+[node name="FacadeService" type="Node" parent="." unique_id=200665927]
+script = ExtResource("12_lp0bp")
 
 [node name="SyncedPackedScenes" parent="." unique_id=1365667924 instance=ExtResource("2_xf6vi")]
 
