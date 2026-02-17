@@ -1,5 +1,4 @@
 ﻿using System;
-using Godot;
 using GodotTemplate.Scenes.World.Services;
 using GodotTemplate.Scripts.Content.LoadingScreen;
 using GodotTemplate.Scripts.Service;

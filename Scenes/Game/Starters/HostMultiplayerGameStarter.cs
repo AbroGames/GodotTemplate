@@ -1,6 +1,5 @@
 ﻿using Godot;
 using GodotTemplate.Scripts.Content.LoadingScreen;
-using GodotTemplate.Scripts.Service.Settings;
 using Humanizer;
 using KludgeBox.Godot.Nodes.Process;
 

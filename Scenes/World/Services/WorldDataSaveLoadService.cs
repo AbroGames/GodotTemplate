@@ -1,8 +1,6 @@
 ﻿using System;
 using Godot;
 using GodotTemplate.Scenes.World.Data.PersistenceData;
-using GodotTemplate.Scenes.World.Data.PersistenceData.Player;
-using GodotTemplate.Scenes.World.Data.TemporaryData;
 using GodotTemplate.Scenes.World.Services.DataSerializer;
 using GodotTemplate.Scripts.Service;
 using KludgeBox.DI.Requests.LoggerInjection;
