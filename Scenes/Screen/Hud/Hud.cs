@@ -1,4 +1,5 @@
-﻿using Godot;
+﻿using System.Linq;
+using Godot;
 using GodotTemplate.Scenes.Game;
 using GodotTemplate.Scripts.Content.LoadingScreen;
 using KludgeBox.DI.Requests.ChildInjection;
@@ -10,14 +11,14 @@ namespace GodotTemplate.Scenes.Screen.Hud;
 public partial class Hud : Control
 {
     
-    [Child] public Button Test1Button { get; set; }
-    [Child] public Button Test2Button { get; set; }
-    [Child] public Button Test3Button { get; set; }
-    [Child] public Button LogButton { get; set; }
-    [Child] public Label InfoLabel { get; set; }
-    [Child] public Button SaveButton { get; set; }
-    [Child] public Button ExitButton { get; set; }
-    [Child] public TextEdit SaveTextEdit { get; set; }
+    [Child] private Button Test1Button { get; set; }
+    [Child] private Button Test2Button { get; set; }
+    [Child] private Button Test3Button { get; set; }
+    [Child] private Button LogButton { get; set; }
+    [Child] private Label InfoLabel { get; set; }
+    [Child] private Button SaveButton { get; set; }
+    [Child] private Button ExitButton { get; set; }
+    [Child] private TextEdit SaveTextEdit { get; set; }
     
     private World.World _world;
     [Logger] private ILogger _log;
@@ -50,7 +51,7 @@ public partial class Hud : Control
         InfoLabel.Text += $"\nTPS: {Mathf.Min(1.0/Performance.GetMonitor(Performance.Monitor.TimePhysicsProcess), Engine.PhysicsTicksPerSecond):N0}";
         
         InfoLabel.Text += $"\n\nNodes: {Performance.GetMonitor(Performance.Monitor.ObjectNodeCount)}";
-        InfoLabel.Text += $"\nMapSurface 1-level nodes: {_world.Tree.MapSurface.GetChildCount()}";
+        InfoLabel.Text += $"\nSurfaces 1-level nodes: {_world.Tree.MapSurface?.GetChildCount() + _world.Tree.BattleSurfaces.ToList().Select(surf => surf.GetChildCount()).Sum()}";
         InfoLabel.Text += $"\nFrame time process: {Performance.GetMonitor(Performance.Monitor.TimeProcess)*1000:N1}ms";
         InfoLabel.Text += $"\nPhysics time process: {Performance.GetMonitor(Performance.Monitor.TimePhysicsProcess)*1000:N1}ms ({Performance.GetMonitor(Performance.Monitor.TimePhysicsProcess) * Engine.PhysicsTicksPerSecond * 100:N0} %)";
         InfoLabel.Text += $"\nNavigation time process: {Performance.GetMonitor(Performance.Monitor.TimeNavigationProcess)*1000:N1}ms";
