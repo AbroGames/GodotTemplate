@@ -1,7 +1,5 @@
 ﻿using System.Linq;
 using Godot;
-using GodotTemplate.Scenes.Game;
-using GodotTemplate.Scripts.Content.LoadingScreen;
 using KludgeBox.DI.Requests.ChildInjection;
 using KludgeBox.DI.Requests.LoggerInjection;
 using Serilog;
@@ -47,14 +45,7 @@ public partial class Hud : Control
 
     public override void _Process(double delta)
     {
-        //TODO В отдельный PerformanceAnalyzerWorldService, с генерацией строк текста нескольких видов: построчно или в 2 строках сжато. Туда же PingChecker и пересылку с клиентов на сервер инфы о пинге?
-        InfoLabel.Text = $"FPS: {Engine.GetFramesPerSecond():N0}";
-        InfoLabel.Text += $"\nTPS: {Mathf.Min(1.0/Performance.GetMonitor(Performance.Monitor.TimePhysicsProcess), Engine.PhysicsTicksPerSecond):N0}";
-        
-        InfoLabel.Text += $"\n\nNodes: {Performance.GetMonitor(Performance.Monitor.ObjectNodeCount)}";
-        InfoLabel.Text += $"\nSurfaces 1-level nodes: {_world.Tree.MapSurface?.GetChildCount() + _world.Tree.BattleSurfaces.ToList().Select(surf => surf.GetChildCount()).Sum()}";
-        InfoLabel.Text += $"\nFrame time process: {Performance.GetMonitor(Performance.Monitor.TimeProcess)*1000:N1}ms";
-        InfoLabel.Text += $"\nPhysics time process: {Performance.GetMonitor(Performance.Monitor.TimePhysicsProcess)*1000:N1}ms ({Performance.GetMonitor(Performance.Monitor.TimePhysicsProcess) * Engine.PhysicsTicksPerSecond * 100:N0} %)";
-        InfoLabel.Text += $"\nNavigation time process: {Performance.GetMonitor(Performance.Monitor.TimeNavigationProcess)*1000:N1}ms";
+        InfoLabel.Text = _world.PerformanceService.Godot.GetManyLinesString() + "\n" + 
+                         _world.PerformanceService.Ping.GetManyLinesString();
     }
 }
