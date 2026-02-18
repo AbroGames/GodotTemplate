@@ -1,11 +1,9 @@
 ﻿using System;
 using Godot;
-using GodotTemplate.Scenes.Game;
 using GodotTemplate.Scenes.World.Data.PersistenceData;
 using GodotTemplate.Scenes.World.Data.PersistenceData.Player;
 using GodotTemplate.Scenes.World.Data.TemporaryData;
 using GodotTemplate.Scenes.World.Services.DataSerializer;
-using GodotTemplate.Scripts.Service.Settings;
 using KludgeBox.DI.Requests.LoggerInjection;
 using KludgeBox.DI.Requests.SceneServiceInjection;
 using Serilog;
@@ -92,6 +90,10 @@ public partial class WorldSynchronizerService : Node
         _log.Information("Received serialized world data from server");
         _dataSerializerService.DeserializeWorldData(serializableData);
         SyncEndedOnClientEvent?.Invoke();
+        
+        //TODO Создать два StartStop сервиса: клиент и сервер? Из GameStarter дергать его (у клиента и сервера), а с него у клиента уже синхронайзер дергать. С него же пинг запускать.
+        // Или пинг от ивента синхронайзера? Но привязка в StartStop по идее
+        GetParent<World>().PerformanceService.Ping.Start();
     }
     
     private void RejectSyncOnClient(long peerId, string errorMessage) => RpcId(peerId, MethodName.RejectSyncOnClientRpc, errorMessage);

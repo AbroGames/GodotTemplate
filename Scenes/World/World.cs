@@ -15,6 +15,7 @@ using GodotTemplate.Scenes.World.Tree.Entity.Building;
 using KludgeBox.DI.Requests.ChildInjection;
 using KludgeBox.DI.Requests.LoggerInjection;
 using Serilog;
+using WorldPerformanceService = GodotTemplate.Scenes.World.Services.Performance.WorldPerformanceService;
 
 namespace GodotTemplate.Scenes.World;
 
@@ -36,6 +37,7 @@ public partial class World : Node2D, IServiceProvider
     [Child] public WorldSynchronizerService SynchronizerService { get; private set; }
     [Child] public WorldDataSaveLoadService DataSaveLoadService { get; private set; }
     [Child] public WorldDataSerializerService DataSerializerService { get; private set; }
+    [Child] public WorldPerformanceService PerformanceService { get; private set; }
     [Child] public WorldFacadeService FacadeService { get; private set; }
     
     [Child] public SyncedPackedScenes SyncedPackedScenes { get; private set; }
@@ -60,6 +62,7 @@ public partial class World : Node2D, IServiceProvider
         AddService(SynchronizerService);
         AddService(DataSaveLoadService);
         AddService(DataSerializerService);
+        AddService(PerformanceService);
         AddService(FacadeService);
         
         AddService(SyncedPackedScenes);
