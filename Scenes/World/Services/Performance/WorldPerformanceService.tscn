@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://brvvl85t7ap0w" path="res://Scenes/World/Services/Performance/WorldGodotPerformance.cs" id="1_gvkqi"]
 [ext_resource type="Script" uid="uid://cr23gy71mges6" path="res://Scenes/World/Services/Performance/WorldPerformanceService.cs" id="1_pd84j"]
-[ext_resource type="Script" uid="uid://3k0k4e0emdgj" path="res://Scenes/World/Services/Performance/WorldPingPerformance.cs" id="2_xrnxi"]
+[ext_resource type="Script" uid="uid://dde2sb8hswjet" path="res://Scenes/World/Services/Performance/WorldPingPerformance.cs" id="2_xrnxi"]
 
 [node name="PerformanceService" type="Node" unique_id=743159716]
 script = ExtResource("1_pd84j")
