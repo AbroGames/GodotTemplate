@@ -2,6 +2,7 @@
 using GodotTemplate.Scenes.Game.Starters;
 using GodotTemplate.Scenes.KludgeBox;
 using GodotTemplate.Scenes.Screen.Hud;
+using GodotTemplate.Scenes.Screen.ServerHud;
 using KludgeBox.DI.Requests.ChildInjection;
 
 namespace GodotTemplate.Scenes.Game;
@@ -40,6 +41,15 @@ public partial class Game : Node2D
         hud.SetName("Hud");
         HudContainer.ChangeStoredNode(hud);
         return hud;
+    }
+    
+    public ServerHud AddServerHud()
+    {
+        ServerHud serverHud = PackedScenes.ServerHud.Instantiate<ServerHud>()
+            .InitPreReady(WorldContainer.GetCurrentStoredNode<World.World>());
+        serverHud.SetName("ServerHud");
+        HudContainer.ChangeStoredNode(serverHud);
+        return serverHud;
     }
 
     public Network.Network AddNetwork()

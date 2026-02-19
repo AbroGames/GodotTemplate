@@ -94,7 +94,7 @@ public class MainSceneService
         Services.LoadingScreen.Clear();
         if (!gameRender.HasValue || !gameRender.Value)
         {
-            //TODO Show GUI with stats. game.addServerHud? Common logic to some class/service in the world
+            game.AddServerHud();
         }
     }
 
