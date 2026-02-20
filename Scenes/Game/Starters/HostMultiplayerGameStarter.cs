@@ -5,7 +5,7 @@ using KludgeBox.Godot.Nodes.Process;
 
 namespace GodotTemplate.Scenes.Game.Starters;
 
-public class HostMultiplayerGameStarter(int? port = null, string saveFileName = null, string adminNickname = null, int? parentPid = null) : BaseGameStarter
+public class HostMultiplayerGameStarter(int? port = null, string saveFileName = null, string adminNickname = null, int? parentPid = null, bool? serverHud = null) : BaseGameStarter
 {
     
     private const string HostingFailedMessage = "Failed to start server: {0}";
@@ -28,6 +28,12 @@ public class HostMultiplayerGameStarter(int? port = null, string saveFileName = 
         World.World world = game.AddWorld();
         Net.DoClient(() => game.AddHud());
         Net.DoClient(() => ConnectToClientSynchronizerEvents(world.SynchronizerService));
+
+        if (serverHud.HasValue && serverHud.Value)
+        {
+            world.SetVisible(false);
+            game.AddServerHud();
+        }
         
         Error error = network.HostServer(port ?? DefaultPort, true);
         if (error != Error.Ok)

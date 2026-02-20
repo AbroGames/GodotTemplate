@@ -89,13 +89,8 @@ public class MainSceneService
         game.SetName("Game");
         _mainSceneContainer.ChangeStoredNode(game);
         
-        game.Init(new HostMultiplayerGameStarter(port, saveFileName, adminNickname, parentPid));
-        
+        game.Init(new HostMultiplayerGameStarter(port, saveFileName, adminNickname, parentPid, !gameRender));
         Services.LoadingScreen.Clear();
-        if (!gameRender.HasValue || !gameRender.Value)
-        {
-            game.AddServerHud();
-        }
     }
 
     public bool MainSceneIsMainMenu()
