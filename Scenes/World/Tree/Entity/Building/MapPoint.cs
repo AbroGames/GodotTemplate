@@ -23,8 +23,12 @@ public partial class MapPoint : Node2D
     {
         Di.Process(this);
         
-        // Init on client side
-        if (Data == null) InitPreReady(_worldPersistenceData.MapPoint.MapPointById[_id]);
+        // Init on client side while client in the game
+        // We need second condition, because when client is connecting to the game, Persistence data not synced yet
+        if (Data == null && _worldPersistenceData.MapPoint.MapPointById.TryGetValue(_id, out var data))
+        {
+            InitPreReady(data);
+        }
     }
 
     private void InitPreReady(MapPointData data)
