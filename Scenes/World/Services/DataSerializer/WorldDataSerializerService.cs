@@ -11,7 +11,7 @@ namespace GodotTemplate.Scenes.World.Services.DataSerializer;
 public partial class WorldDataSerializerService : Node
 {
     
-    [SceneService] private WorldPersistenceData _worldPersistenceData;
+    [SceneService] private WorldPersistenceData _persistenceData;
 
     public override void _Ready()
     {
@@ -46,10 +46,10 @@ public partial class WorldDataSerializerService : Node
 
     private void ProcessSerializableMembers(Action<IMemberAccessor, ISerializableStorage> action)
     {
-        var memberAccessors = Scripts.Services.MembersScanner.ScanMembers(_worldPersistenceData.GetType());
+        var memberAccessors = Scripts.Services.MembersScanner.ScanMembers(_persistenceData.GetType());
         foreach (var memberAccessor in memberAccessors)
         {
-            var value = memberAccessor.GetValue(_worldPersistenceData);
+            var value = memberAccessor.GetValue(_persistenceData);
             if (value is ISerializableStorage serializable)
             {
                 action(memberAccessor, serializable);

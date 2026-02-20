@@ -19,8 +19,8 @@ public partial class WorldTree : Node2D
     public List<BattleSurface> BattleSurfaces => _battleSurfacesNames.Select(name => GetNodeOrNull<BattleSurface>(name)).ToList();
     [Export] [Sync] private Array<string> _battleSurfacesNames = new();
     
-    [SceneService] private SyncedPackedScenes _worldPackedScenes;
-    [SceneService] private Services.WorldMultiplayerSpawnerService _worldMultiplayerSpawner;
+    [SceneService] private SyncedPackedScenes _syncedPackedScenes;
+    [SceneService] private Services.WorldMultiplayerSpawnerService _multiplayerSpawner;
 
     public override void _Ready()
     {
@@ -29,10 +29,10 @@ public partial class WorldTree : Node2D
     
     public BattleSurface AddBattleSurface()
     {
-        BattleSurface battleSurface = _worldPackedScenes.BattleSurface.Instantiate<BattleSurface>();
+        BattleSurface battleSurface = _syncedPackedScenes.BattleSurface.Instantiate<BattleSurface>();
         this.AddChildWithUniqueName(battleSurface, "BattleSurface");
         _battleSurfacesNames.Add(battleSurface.Name);
-        _worldMultiplayerSpawner.AddSpawnerToNode(battleSurface);
+        _multiplayerSpawner.AddSpawnerToNode(battleSurface);
         return battleSurface;
     }
 }

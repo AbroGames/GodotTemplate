@@ -17,7 +17,7 @@ public partial class MapPoint : Node2D
     public MapPointData Data { get; private set; } 
 
     [Export] [Sync(Never)] private long _id;
-    [SceneService] private WorldPersistenceData _worldPersistenceData; 
+    [SceneService] private WorldPersistenceData _persistenceData; 
     
     public override void _EnterTree()
     {
@@ -25,7 +25,7 @@ public partial class MapPoint : Node2D
         
         // Init on client side while client in the game
         // We need second condition, because when client is connecting to the game, Persistence data not synced yet
-        if (Data == null && _worldPersistenceData.MapPoint.MapPointById.TryGetValue(_id, out var data))
+        if (Data == null && _persistenceData.MapPoint.MapPointById.TryGetValue(_id, out var data))
         {
             InitPreReady(data);
         }
