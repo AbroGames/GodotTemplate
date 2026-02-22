@@ -3,6 +3,7 @@ using System.Linq;
 using System.Text;
 using Godot;
 using GodotTemplate.Scenes.World.Tree;
+using GodotTemplate.Scenes.World.Tree.Surface.Battle;
 using KludgeBox.DI.Requests.SceneServiceInjection;
 using GPerf = Godot.Performance;
 
@@ -21,7 +22,7 @@ public partial class WorldGodotPerformance : Node
     public double NavigationTime => GPerf.GetMonitor(GPerf.Monitor.TimeNavigationProcess) * 1000;
     
     public int NodeCount => (int) GPerf.GetMonitor(GPerf.Monitor.ObjectNodeCount);
-    public int SurfacesChildCount => _tree.BattleSurfaces.ToList().Cast<Node>().Prepend(_tree.MapSurface).Sum(surf => surf.GetChildCount());
+    public int SurfacesChildCount => GetSurfacesChildCount();
     
     [SceneService] private WorldTree _tree;
 
@@ -55,5 +56,15 @@ public partial class WorldGodotPerformance : Node
         sb.Append($"Time (frame/physics/navi): {FrameTime:N1}/{TickTime:N1}({TickTimePercent:N0}%)/{NavigationTime:N1}ms");
 
         return sb.ToString();
+    }
+
+    private int GetSurfacesChildCount()
+    {
+        // Using for-loop instead of LINQ, because otherwise we take memory leak.
+        // Also, it is decrease work for GC.
+        int count = _tree.MapSurface.GetChildCount();
+        foreach (BattleSurface battleSurface in _tree.BattleSurfaces) count += battleSurface.GetChildCount();
+        
+        return count;
     }
 }
