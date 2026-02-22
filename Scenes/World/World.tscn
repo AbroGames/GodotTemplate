@@ -8,8 +8,9 @@
 [ext_resource type="Script" uid="uid://b1sdp82lmtr2r" path="res://Scenes/World/Services/PersistenceFactory/PersistenceNodesFactoryService.cs" id="4_kuxid"]
 [ext_resource type="Script" uid="uid://b1lvv7kolowbi" path="res://Scenes/World/Data/TemporaryData/WorldTemporaryData.cs" id="4_x5sp8"]
 [ext_resource type="Script" uid="uid://dup0k3cek5wg" path="res://Scenes/World/Services/WorldMultiplayerSpawnerService.cs" id="6_87yka"]
-[ext_resource type="Script" uid="uid://fbb6ibpssx62" path="res://Scenes/World/Services/StartStop/WorldStartStopService.cs" id="6_p7pgw"]
 [ext_resource type="Script" uid="uid://dphgcbar3udj1" path="res://Scenes/World/Services/WorldSynchronizerService.cs" id="7_ng1ea"]
+[ext_resource type="Script" uid="uid://fbb6ibpssx62" path="res://Scenes/World/Services/StartStop/WorldServerStartStopService.cs" id="8_30wmc"]
+[ext_resource type="Script" uid="uid://qyoo2ficvvsa" path="res://Scenes/World/Services/StartStop/WorldClientStartStopService.cs" id="9_nfd2q"]
 [ext_resource type="PackedScene" uid="uid://buxateh143bl3" path="res://Scenes/World/Scenes/ClientScenes/ClientPackedScenes.tscn" id="9_p7pgw"]
 [ext_resource type="Script" uid="uid://ecnv5a1mg0fu" path="res://Scenes/World/Services/WorldDataSaveLoadService.cs" id="10_x5sp8"]
 [ext_resource type="Script" uid="uid://xg00p1epx55n" path="res://Scenes/World/Services/DataSerializer/WorldDataSerializerService.cs" id="11_lp0bp"]
@@ -35,8 +36,11 @@ script = ExtResource("4_kuxid")
 script = ExtResource("6_87yka")
 WorldMultiplayerSpawnerPackedScene = ExtResource("2_ouhkt")
 
-[node name="StartStopService" type="Node" parent="." unique_id=1732706405]
-script = ExtResource("6_p7pgw")
+[node name="ServerStartStopService" type="Node" parent="." unique_id=1732706405]
+script = ExtResource("8_30wmc")
+
+[node name="ClientStartStopService" type="Node" parent="." unique_id=1465394900]
+script = ExtResource("9_nfd2q")
 
 [node name="SynchronizerService" type="Node" parent="." unique_id=1144656672]
 script = ExtResource("7_ng1ea")

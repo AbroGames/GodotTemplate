@@ -33,7 +33,8 @@ public partial class World : Node2D, IServiceProvider
     
     [Child] public PersistenceNodesFactoryService FactoryService { get; private set; }
     [Child] public WorldMultiplayerSpawnerService MultiplayerSpawnerService { get; private set; }
-    [Child] public WorldStartStopService StartStopService { get; private set; }
+    [Child] public WorldServerStartStopService ServerStartStopService { get; private set; }
+    [Child] public WorldClientStartStopService ClientStartStopService { get; private set; }
     [Child] public WorldSynchronizerService SynchronizerService { get; private set; }
     [Child] public WorldDataSaveLoadService DataSaveLoadService { get; private set; }
     [Child] public WorldDataSerializerService DataSerializerService { get; private set; }
@@ -42,8 +43,6 @@ public partial class World : Node2D, IServiceProvider
     
     [Child] public SyncedPackedScenes SyncedPackedScenes { get; private set; }
     [Child] public ClientPackedScenes ClientPackedScenes { get; private set; }
-    
-    public readonly WorldEvents Events = new();
     
     private readonly Dictionary<Type, object> _services = new();
     [Logger] private ILogger _log;
@@ -58,7 +57,8 @@ public partial class World : Node2D, IServiceProvider
         
         AddService(FactoryService);
         AddService(MultiplayerSpawnerService);
-        AddService(StartStopService);
+        AddService(ServerStartStopService);
+        AddService(ClientStartStopService);
         AddService(SynchronizerService);
         AddService(DataSaveLoadService);
         AddService(DataSerializerService);
