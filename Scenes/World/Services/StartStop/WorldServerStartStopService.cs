@@ -1,6 +1,7 @@
 ﻿using System;
 using Godot;
 using GodotTemplate.Scenes.World.Data.PersistenceData;
+using GodotTemplate.Scenes.World.Data.TemporaryData;
 using KludgeBox.DI.Requests.LoggerInjection;
 using KludgeBox.DI.Requests.ParentInjection;
 using KludgeBox.DI.Requests.SceneServiceInjection;
@@ -9,13 +10,13 @@ using Serilog;
 namespace GodotTemplate.Scenes.World.Services.StartStop;
 
 
-public partial class WorldStartStopService : Node
+public partial class WorldServerStartStopService : Node
 {
     
     [Parent] private World _world;
     [SceneService] private WorldDataSaveLoadService _dataSaveLoadService;
     [SceneService] private WorldPersistenceData _persistenceData;
-    [SceneService] private Data.TemporaryData.WorldTemporaryData _temporaryData;
+    [SceneService] private WorldTemporaryData _temporaryData;
     [Logger] private ILogger _log;
 
     public override void _Ready()
