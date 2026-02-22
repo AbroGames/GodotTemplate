@@ -1,9 +1,5 @@
 ﻿using System;
-using GodotTemplate.Scenes.World.Services;
-using GodotTemplate.Scripts.Content.LoadingScreen;
 using GodotTemplate.Scripts.Service;
-using GodotTemplate.Scripts.Service.Settings;
-using Humanizer;
 
 namespace GodotTemplate.Scenes.Game.Starters;
 
