@@ -23,7 +23,8 @@ public partial class WorldFacadeService : Node
     
     [SceneService] private PersistenceNodesFactoryService _factoryService;
     [SceneService] private WorldMultiplayerSpawnerService _multiplayerSpawnerService;
-    [SceneService] private WorldStartStopService _startStopService;
+    [SceneService] private WorldServerStartStopService _serverStartStopService;
+    [SceneService] private WorldClientStartStopService _clientStartStopService;
     [SceneService] private WorldSynchronizerService _synchronizerService;
     [SceneService] private WorldDataSaveLoadService _dataSaveLoadService;
     [SceneService] private WorldDataSerializerService _dataSerializerService;
