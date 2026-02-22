@@ -17,13 +17,12 @@ public class ConnectToMultiplayerGameStarter(string host = null, int? port = nul
         Network.Network network = game.AddNetwork();
         World.World world = game.AddWorld();
         game.AddHud();
-        ConnectToClientSynchronizerEvents(world.SynchronizerService);
 
         // Use inner function for detach this function after connecting to server,
         // otherwise we have memory leak for world.SynchronizerService
         void ConnectedToServerEvent()
         {
-            StartSyncOnClient(world.SynchronizerService);
+            ClientStartWorld(world);
             game.GetMultiplayer().ConnectedToServer -= ConnectedToServerEvent;
         }
 
