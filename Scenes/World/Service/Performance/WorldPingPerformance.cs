@@ -3,7 +3,7 @@ using System.Text;
 using Godot;
 using KludgeBox.Core.Ping;
 
-namespace GodotTemplate.Scenes.World.Services.Performance;
+namespace GodotTemplate.Scenes.World.Service.Performance;
 
 public partial class WorldPingPerformance : Node
 {

@@ -7,7 +7,7 @@ using KludgeBox.DI.Requests.ParentInjection;
 using KludgeBox.DI.Requests.SceneServiceInjection;
 using Serilog;
 
-namespace GodotTemplate.Scenes.World.Services.StartStop;
+namespace GodotTemplate.Scenes.World.Service.StartStop;
 
 
 public partial class WorldServerStartStopService : Node

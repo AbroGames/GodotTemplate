@@ -1,5 +1,5 @@
 ﻿using Godot;
-using GodotTemplate.Scenes.World.Services.DataSerializer;
+using GodotTemplate.Scenes.World.Service.DataSerializer;
 using MessagePack;
 using static MessagePack.MessagePackSerializer;
 

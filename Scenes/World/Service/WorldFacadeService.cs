@@ -6,13 +6,13 @@ using GodotTemplate.Scenes.World.Data.PersistenceData.Player;
 using GodotTemplate.Scenes.World.Data.TemporaryData;
 using GodotTemplate.Scenes.World.Scenes.ClientScenes;
 using GodotTemplate.Scenes.World.Scenes.SyncedScenes;
-using GodotTemplate.Scenes.World.Services.DataSerializer;
-using GodotTemplate.Scenes.World.Services.PersistenceFactory;
-using GodotTemplate.Scenes.World.Services.StartStop;
+using GodotTemplate.Scenes.World.Service.DataSerializer;
+using GodotTemplate.Scenes.World.Service.PersistenceFactory;
+using GodotTemplate.Scenes.World.Service.StartStop;
 using GodotTemplate.Scenes.World.Tree;
 using KludgeBox.DI.Requests.SceneServiceInjection;
 
-namespace GodotTemplate.Scenes.World.Services;
+namespace GodotTemplate.Scenes.World.Service;
 
 public partial class WorldFacadeService : Node
 {

@@ -4,7 +4,7 @@ using KludgeBox.DI.Requests.LoggerInjection;
 using KludgeBox.DI.Requests.SceneServiceInjection;
 using Serilog;
 
-namespace GodotTemplate.Scenes.World.Services.StartStop;
+namespace GodotTemplate.Scenes.World.Service.StartStop;
 
 /// <summary>
 /// In shutdown process (<see cref="Node.NotificationExitTree"/>) we can't use <c>Node.GetMultiplayer().IsServer()</c> for checking, because after TreeExit <c>Node.GetMultiplayer()</c> returns null.<br/>

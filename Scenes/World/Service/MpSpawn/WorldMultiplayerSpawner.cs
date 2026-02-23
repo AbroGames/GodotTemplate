@@ -4,7 +4,7 @@ using Godot;
 using GodotTemplate.Scenes.World.Scenes.SyncedScenes;
 using KludgeBox.Godot.Nodes;
 
-namespace GodotTemplate.Scenes.World.Services.MpSpawn;
+namespace GodotTemplate.Scenes.World.Service.MpSpawn;
 
 public partial class WorldMultiplayerSpawner : AbstractMultiplayerSpawner
 {

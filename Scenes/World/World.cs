@@ -6,16 +6,16 @@ using GodotTemplate.Scenes.World.Data.PersistenceData.MapPoint;
 using GodotTemplate.Scenes.World.Data.TemporaryData;
 using GodotTemplate.Scenes.World.Scenes.ClientScenes;
 using GodotTemplate.Scenes.World.Scenes.SyncedScenes;
-using GodotTemplate.Scenes.World.Services;
-using GodotTemplate.Scenes.World.Services.DataSerializer;
-using GodotTemplate.Scenes.World.Services.PersistenceFactory;
-using GodotTemplate.Scenes.World.Services.StartStop;
+using GodotTemplate.Scenes.World.Service;
+using GodotTemplate.Scenes.World.Service.DataSerializer;
+using GodotTemplate.Scenes.World.Service.Performance;
+using GodotTemplate.Scenes.World.Service.PersistenceFactory;
+using GodotTemplate.Scenes.World.Service.StartStop;
 using GodotTemplate.Scenes.World.Tree;
 using GodotTemplate.Scenes.World.Tree.Entity.Building;
 using KludgeBox.DI.Requests.ChildInjection;
 using KludgeBox.DI.Requests.LoggerInjection;
 using Serilog;
-using WorldPerformanceService = GodotTemplate.Scenes.World.Services.Performance.WorldPerformanceService;
 
 namespace GodotTemplate.Scenes.World;
 

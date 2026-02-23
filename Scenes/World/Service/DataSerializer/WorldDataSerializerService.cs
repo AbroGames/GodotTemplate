@@ -6,7 +6,7 @@ using KludgeBox.DI.Requests.SceneServiceInjection;
 using KludgeBox.Reflection.Access;
 using static MessagePack.MessagePackSerializer;
 
-namespace GodotTemplate.Scenes.World.Services.DataSerializer;
+namespace GodotTemplate.Scenes.World.Service.DataSerializer;
 
 public partial class WorldDataSerializerService : Node
 {

@@ -6,7 +6,7 @@ using GodotTemplate.Scenes.World.Tree.Surface.Battle;
 using KludgeBox.DI.Requests.SceneServiceInjection;
 using GPerf = Godot.Performance;
 
-namespace GodotTemplate.Scenes.World.Services.Performance;
+namespace GodotTemplate.Scenes.World.Service.Performance;
 
 public partial class WorldGodotPerformance : Node
 {

@@ -3,12 +3,12 @@ using Godot;
 using GodotTemplate.Scenes.World.Data.PersistenceData;
 using GodotTemplate.Scenes.World.Data.PersistenceData.Player;
 using GodotTemplate.Scenes.World.Data.TemporaryData;
-using GodotTemplate.Scenes.World.Services.DataSerializer;
+using GodotTemplate.Scenes.World.Service.DataSerializer;
 using KludgeBox.DI.Requests.LoggerInjection;
 using KludgeBox.DI.Requests.SceneServiceInjection;
 using Serilog;
 
-namespace GodotTemplate.Scenes.World.Services;
+namespace GodotTemplate.Scenes.World.Service;
 
 /// <summary>
 /// Use for send player data (like nick, color etc.) to server.<br/>

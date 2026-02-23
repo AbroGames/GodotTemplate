@@ -1,13 +1,13 @@
 ﻿using System;
 using Godot;
 using GodotTemplate.Scenes.World.Data.PersistenceData;
-using GodotTemplate.Scenes.World.Services.DataSerializer;
+using GodotTemplate.Scenes.World.Service.DataSerializer;
 using GodotTemplate.Scripts.Service;
 using KludgeBox.DI.Requests.LoggerInjection;
 using KludgeBox.DI.Requests.SceneServiceInjection;
 using Serilog;
 
-namespace GodotTemplate.Scenes.World.Services;
+namespace GodotTemplate.Scenes.World.Service;
 
 public partial class WorldDataSaveLoadService : Node
 {

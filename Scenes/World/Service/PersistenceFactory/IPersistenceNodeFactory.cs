@@ -1,7 +1,7 @@
 ﻿using System;
 using Godot;
 
-namespace GodotTemplate.Scenes.World.Services.PersistenceFactory;
+namespace GodotTemplate.Scenes.World.Service.PersistenceFactory;
 
 public interface IPersistenceNodeFactory
 {

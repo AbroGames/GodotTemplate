@@ -1,6 +1,6 @@
 ﻿using System;
 using Godot;
-using GodotTemplate.Scenes.World.Services.Performance;
+using GodotTemplate.Scenes.World.Service.Performance;
 using GodotTemplate.Scripts.Content.LoadingScreen;
 using GodotTemplate.Scripts.Service.Settings;
 using Humanizer;
@@ -8,7 +8,7 @@ using KludgeBox.DI.Requests.LoggerInjection;
 using KludgeBox.DI.Requests.SceneServiceInjection;
 using Serilog;
 
-namespace GodotTemplate.Scenes.World.Services.StartStop;
+namespace GodotTemplate.Scenes.World.Service.StartStop;
 
 public partial class WorldClientStartStopService : Node
 {
