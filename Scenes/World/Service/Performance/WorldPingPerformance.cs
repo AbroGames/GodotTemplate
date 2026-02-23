@@ -10,7 +10,7 @@ public partial class WorldPingPerformance : Node
 
     public static class Settings
     {
-        public const double PingCooldown = 0.25;
+        public const double PingCooldown = 0.5;
         public const double MaxPingTimeout = 1;
 
         public const int MaxTimeOfAnalyticalSlidingWindowForPing = 60 * 1000;
