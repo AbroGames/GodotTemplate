@@ -10,7 +10,7 @@ public class WorldTreeLoader
     public void RunAllLoaders(World world)
     {
         // Get all classes implementing IWorldLoader
-        List<IWorldTreeLoader> loaders = Scripts.Services.AssemblyCache.GetTypes(Assembly.GetExecutingAssembly())
+        List<IWorldTreeLoader> loaders = Services.AssemblyCache.GetTypes(Assembly.GetExecutingAssembly())
             .Where(t => typeof(IWorldTreeLoader).IsAssignableFrom(t) && t.IsClass && !t.IsAbstract)
             .Select(t => (IWorldTreeLoader) Activator.CreateInstance(t))
             .ToList();

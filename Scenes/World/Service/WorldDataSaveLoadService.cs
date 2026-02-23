@@ -40,7 +40,7 @@ public partial class WorldDataSaveLoadService : Node
         {
             _persistenceData.General.GeneralData.SaveFileName = saveFileName;
             byte[] data = TrySerializeWorldData();
-            Scripts.Services.SaveLoad.SaveToDisk(data, saveFileName);
+            Services.SaveLoad.SaveToDisk(data, saveFileName);
         }
         catch (SaveLoadService.SaveException saveException)
         {
@@ -60,12 +60,12 @@ public partial class WorldDataSaveLoadService : Node
     public void AutoSave()
     {
         byte[] data = TrySerializeWorldData();
-        Scripts.Services.SaveLoad.SaveToDisk(data, Scripts.Services.SaveLoad.AutoSaveName);
+        Services.SaveLoad.SaveToDisk(data, Services.SaveLoad.AutoSaveName);
     }
 
     public void Load(string saveFileName)
     {
-        byte[] data = Scripts.Services.SaveLoad.LoadFromDisk(saveFileName);
+        byte[] data = Services.SaveLoad.LoadFromDisk(saveFileName);
         TryDeserializeWorldData(data);
     }
     

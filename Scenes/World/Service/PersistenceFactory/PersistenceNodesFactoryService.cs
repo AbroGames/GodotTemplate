@@ -22,7 +22,7 @@ public partial class PersistenceNodesFactoryService : Node
         Di.Process(this);
         
         // Get all classes implementing IPersistenceNodeFactory
-        _factories = Scripts.Services.AssemblyCache.GetTypes(Assembly.GetExecutingAssembly())
+        _factories = Services.AssemblyCache.GetTypes(Assembly.GetExecutingAssembly())
             .Where(t => typeof(IPersistenceNodeFactory).IsAssignableFrom(t) && t.IsClass && !t.IsAbstract)
             .Select(t => (IPersistenceNodeFactory) Activator.CreateInstance(t))
             .ToDictionary(t => t.CreatedType(), t => t);

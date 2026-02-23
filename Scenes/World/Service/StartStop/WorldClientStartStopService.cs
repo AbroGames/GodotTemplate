@@ -33,18 +33,18 @@ public partial class WorldClientStartStopService : Node
         _synchronizerService.SyncStartedOnClientEvent += OnSyncStarted;
         _synchronizerService.SyncEndedOnClientEvent += OnSyncEnded; //TODO Проверить утечки памяти и двойные синхронизации
         
-        PlayerSettings playerSettings = Scripts.Services.PlayerSettings.GetPlayerSettings();
+        PlayerSettings playerSettings = Services.PlayerSettings.GetPlayerSettings();
         _synchronizerService.StartSyncOnClient(playerSettings.Nick, playerSettings.Color);
     }
     
     private void OnSyncStarted()
     {
-        Scripts.Services.LoadingScreen.SetLoadingScreen(LoadingScreenTypes.Type.Loading);
+        Services.LoadingScreen.SetLoadingScreen(LoadingScreenTypes.Type.Loading);
     }
 
     private void OnSyncEnded()
     {
         _performanceService.Ping.Start();
-        Scripts.Services.LoadingScreen.Clear();
+        Services.LoadingScreen.Clear();
     }
 }

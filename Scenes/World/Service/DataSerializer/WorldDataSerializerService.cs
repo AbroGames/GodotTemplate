@@ -46,7 +46,7 @@ public partial class WorldDataSerializerService : Node
 
     private void ProcessSerializableMembers(Action<IMemberAccessor, ISerializableStorage> action)
     {
-        var memberAccessors = Scripts.Services.MembersScanner.ScanMembers(_persistenceData.GetType());
+        var memberAccessors = Services.MembersScanner.ScanMembers(_persistenceData.GetType());
         foreach (var memberAccessor in memberAccessors)
         {
             var value = memberAccessor.GetValue(_persistenceData);
