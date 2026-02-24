@@ -13,6 +13,8 @@ public partial class WorldDataSaveLoadService : Node
 {
     
     private const string NotRightsForSaveMessage = "You don't have the rights for saving";
+
+    public event Action<string> SaveRejected;
     
     [SceneService] private WorldPersistenceData _persistenceData;
     [SceneService] private WorldDataSerializerService _serializerService;
@@ -54,7 +56,7 @@ public partial class WorldDataSaveLoadService : Node
     [Rpc(CallLocal = true)]
     private void SaveRejectRpc(string errorMessage)
     {
-        //TODO NotificationService.ShowWindowLocal? Но зачем? Лучше сразу Hud дергать. Через events, видимо.
+        SaveRejected?.Invoke(errorMessage);
     }
     
     public void AutoSave()
