@@ -29,9 +29,10 @@ public partial class WorldClientStartStopService : Node
         if (!Net.IsClient()) throw new InvalidOperationException("Can only be executed on the client");
         _log.Information("World starting...");
         
-        _synchronizerService.SyncRejectOnClientEvent += errorMessage => goToMenuAndShowErrorAction.Invoke(SyncRejectedMessage.FormatWith(errorMessage));
         _synchronizerService.SyncStartedOnClientEvent += OnSyncStarted;
-        _synchronizerService.SyncEndedOnClientEvent += OnSyncEnded; //TODO Проверить утечки памяти и двойные синхронизации
+        _synchronizerService.SyncEndedOnClientEvent += OnSyncEnded;
+        _synchronizerService.SyncRejectOnClientEvent += 
+            errorMessage => goToMenuAndShowErrorAction.Invoke(SyncRejectedMessage.FormatWith(errorMessage));
         
         PlayerSettings playerSettings = Services.PlayerSettings.GetPlayerSettings();
         _synchronizerService.StartSyncOnClient(playerSettings.Nick, playerSettings.Color);
