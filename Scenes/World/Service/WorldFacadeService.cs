@@ -37,6 +37,11 @@ public partial class WorldFacadeService : Node
         Di.Process(this);
     }
 
+    public PlayerData GetClientPlayerData()
+    {
+        return GetPlayerData(GetMultiplayer().GetUniqueId());
+    }
+
     public PlayerData GetPlayerData(long peerId)
     {
         String playerNick = _temporaryData.PlayerNickByPeerId.GetValueOrDefault(peerId, null);
