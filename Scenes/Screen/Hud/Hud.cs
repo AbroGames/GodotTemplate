@@ -1,4 +1,5 @@
-﻿using Godot;
+﻿using System.Linq;
+using Godot;
 using KludgeBox.DI.Requests.ChildInjection;
 using KludgeBox.DI.Requests.LoggerInjection;
 using Serilog;
@@ -8,14 +9,19 @@ namespace GodotTemplate.Scenes.Screen.Hud;
 public partial class Hud : Control
 {
     
+    [Child] private Label InfoLabel { get; set; }
+    
+    [Child] private Label ChatLabel { get; set; }
+    [Child] private LineEdit ChatLineEdit { get; set; }
+    [Child] private Button ChatSendButton { get; set; }
+    
     [Child] private Button Test1Button { get; set; }
     [Child] private Button Test2Button { get; set; }
     [Child] private Button Test3Button { get; set; }
     [Child] private Button LogButton { get; set; }
-    [Child] private Label InfoLabel { get; set; }
     [Child] private Button SaveButton { get; set; }
     [Child] private Button ExitButton { get; set; }
-    [Child] private TextEdit SaveTextEdit { get; set; }
+    [Child] private LineEdit SaveLineEdit { get; set; }
     
     private World.World _world;
     [Logger] private ILogger _log;
@@ -39,7 +45,10 @@ public partial class Hud : Control
         LogButton.Pressed += () => { Services.NodeTree.LogFullTree(_world); };
 
         ExitButton.Pressed += () => { Services.MainScene.StartMainMenu(); };
-        SaveButton.Pressed += () => { _world.DataSaveLoadService.Save(SaveTextEdit.Text); };
+        SaveButton.Pressed += () => { _world.DataSaveLoadService.Save(SaveLineEdit.Text); };
+
+        _world.ChatService.SentNewMessageEvent += message => ChatLabel.Text += $"[{message.Nick}]: {message.Text}\n"; 
+        ChatSendButton.Pressed += () => { _world.ChatService.TrySendNewMessage(ChatLineEdit.Text); ChatLineEdit.Clear(); };
     }
 
     public override void _Process(double delta)
