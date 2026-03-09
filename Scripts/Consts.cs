@@ -13,6 +13,6 @@ public static class Consts
     
     public enum TransferChannel
     {
-
+        Chat
     }
 }
