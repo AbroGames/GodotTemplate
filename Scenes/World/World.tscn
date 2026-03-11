@@ -16,6 +16,8 @@
 [ext_resource type="Script" uid="uid://xg00p1epx55n" path="res://Scenes/World/Service/DataSerializer/WorldDataSerializerService.cs" id="11_lp0bp"]
 [ext_resource type="PackedScene" uid="uid://biptteqr0dt30" path="res://Scenes/World/Service/Performance/WorldPerformanceService.tscn" id="12_0phyg"]
 [ext_resource type="Script" uid="uid://dm8kr1s86wu7q" path="res://Scenes/World/Service/WorldFacadeService.cs" id="12_lp0bp"]
+[ext_resource type="Script" uid="uid://dtv76e7pfc4w8" path="res://Scenes/World/Service/Chat/WorldChatService.cs" id="14_liy54"]
+[ext_resource type="Script" uid="uid://cjus2vroiwp63" path="res://Scenes/World/Service/Command/WorldCommandService.cs" id="15_c1bjq"]
 
 [node name="World" type="Node2D" unique_id=943238609]
 script = ExtResource("1_0nbjp")
@@ -52,6 +54,12 @@ script = ExtResource("10_x5sp8")
 script = ExtResource("11_lp0bp")
 
 [node name="PerformanceService" parent="." unique_id=743159716 instance=ExtResource("12_0phyg")]
+
+[node name="ChatService" type="Node" parent="." unique_id=1828481289]
+script = ExtResource("14_liy54")
+
+[node name="CommandService" type="Node" parent="." unique_id=673940175]
+script = ExtResource("15_c1bjq")
 
 [node name="FacadeService" type="Node" parent="." unique_id=200665927]
 script = ExtResource("12_lp0bp")

@@ -7,6 +7,7 @@ using GodotTemplate.Scenes.World.Data.TemporaryData;
 using GodotTemplate.Scenes.World.Scenes.ClientScenes;
 using GodotTemplate.Scenes.World.Scenes.SyncedScenes;
 using GodotTemplate.Scenes.World.Service;
+using GodotTemplate.Scenes.World.Service.Command;
 using GodotTemplate.Scenes.World.Service.DataSerializer;
 using GodotTemplate.Scenes.World.Service.Performance;
 using GodotTemplate.Scenes.World.Service.PersistenceFactory;
@@ -16,6 +17,7 @@ using GodotTemplate.Scenes.World.Tree.Entity.Building;
 using KludgeBox.DI.Requests.ChildInjection;
 using KludgeBox.DI.Requests.LoggerInjection;
 using Serilog;
+using WorldChatService = GodotTemplate.Scenes.World.Service.Chat.WorldChatService;
 
 namespace GodotTemplate.Scenes.World;
 
@@ -39,6 +41,8 @@ public partial class World : Node2D, IServiceProvider
     [Child] public WorldDataSaveLoadService DataSaveLoadService { get; private set; }
     [Child] public WorldDataSerializerService DataSerializerService { get; private set; }
     [Child] public WorldPerformanceService PerformanceService { get; private set; }
+    [Child] public WorldChatService ChatService { get; private set; }
+    [Child] public WorldCommandService CommandService { get; private set; }
     [Child] public WorldFacadeService FacadeService { get; private set; }
     
     [Child] public SyncedPackedScenes SyncedPackedScenes { get; private set; }
@@ -63,6 +67,8 @@ public partial class World : Node2D, IServiceProvider
         AddService(DataSaveLoadService);
         AddService(DataSerializerService);
         AddService(PerformanceService);
+        AddService(ChatService);
+        AddService(CommandService);
         AddService(FacadeService);
         
         AddService(SyncedPackedScenes);
