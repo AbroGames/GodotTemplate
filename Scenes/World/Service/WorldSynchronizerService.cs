@@ -20,6 +20,7 @@ public partial class WorldSynchronizerService : Node
     private const int NicknameMaxLength = 25;
     private static readonly string LengthOfNicknameErrorMessage = $"Length of nickname must be between {NicknameMinLength} and {NicknameMaxLength} characters";
     private const string NicknameAlreadyUsedErrorMessage = "Nickname is already used";
+    private const string NicknameContainsSpaceErrorMessage = "Nickname contains space";
     
     public event Action SyncStartedOnClientEvent;
     public event Action SyncEndedOnClientEvent;
@@ -59,6 +60,12 @@ public partial class WorldSynchronizerService : Node
             _log.Warning("Syncing peer {peer} was rejected with error: {error}", connectedClientId, LengthOfNicknameErrorMessage);
             RejectSyncOnClient(connectedClientId, LengthOfNicknameErrorMessage);
         }
+        if (nick.Contains(' '))
+        {
+            _log.Warning("Syncing peer {peer} was rejected with error: {error}", connectedClientId, NicknameContainsSpaceErrorMessage);
+            RejectSyncOnClient(connectedClientId, NicknameContainsSpaceErrorMessage);
+        }
+        
         _temporaryData.PlayerNickByPeerId.Add(connectedClientId, nick);
 
         if (!_persistenceData.Players.PlayerByNick.ContainsKey(nick))
