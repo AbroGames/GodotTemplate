@@ -73,14 +73,14 @@ public partial class WorldPingPerformance : Node
     
     private void SendPingToServer(long pingId) => RpcId(ServerId, MethodName.SendPingToServerRpc, pingId);
     [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true, TransferMode = MultiplayerPeer.TransferModeEnum.Unreliable)]
-    public void SendPingToServerRpc(long pingId)
+    private void SendPingToServerRpc(long pingId)
     {
         ReturnPingToClient(GetMultiplayer().GetRemoteSenderId(), pingId);
     }
 
     private void ReturnPingToClient(long peerId, long pingId) => RpcId(peerId, MethodName.ReturnPingToClientRpc, pingId);    
     [Rpc(CallLocal = true, TransferMode = MultiplayerPeer.TransferModeEnum.Unreliable)]
-    public void ReturnPingToClientRpc(long pingId)
+    private void ReturnPingToClientRpc(long pingId)
     {
         _pingChecker.OnReceivedPingPacket(pingId);
     }
