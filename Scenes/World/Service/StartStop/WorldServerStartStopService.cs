@@ -2,6 +2,7 @@
 using Godot;
 using GodotTemplate.Scenes.World.Data.PersistenceData;
 using GodotTemplate.Scenes.World.Data.TemporaryData;
+using GodotTemplate.Scenes.World.Service.Command;
 using KludgeBox.DI.Requests.LoggerInjection;
 using KludgeBox.DI.Requests.ParentInjection;
 using KludgeBox.DI.Requests.SceneServiceInjection;
@@ -14,9 +15,10 @@ public partial class WorldServerStartStopService : Node
 {
     
     [Parent] private World _world;
-    [SceneService] private WorldDataSaveLoadService _dataSaveLoadService;
     [SceneService] private WorldPersistenceData _persistenceData;
     [SceneService] private WorldTemporaryData _temporaryData;
+    [SceneService] private WorldDataSaveLoadService _dataSaveLoadService;
+    [SceneService] private WorldCommandService _commandService;
     [Logger] private ILogger _log;
 
     public override void _Ready()
@@ -53,6 +55,9 @@ public partial class WorldServerStartStopService : Node
             _temporaryData.PlayerNickByPeerId.Remove((int) id);
         }
         GetMultiplayer().PeerDisconnected += PeerDisconnectedEvent;
+        
+        //Init command system
+        _commandService.InitOnServer();
         
         //Init node for server shutdown process in the future
         WorldServerShutdowner worldServerShutdowner = new WorldServerShutdowner();
