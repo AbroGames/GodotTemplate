@@ -38,7 +38,7 @@ public partial class WorldChatService : Node
         string senderNick = senderId == 1 ? ServerNick : _facadeService.GetPlayerData(senderId).Nick;
         ChatMessage chatMessage = new ChatMessage
         {
-            PeerId = senderId,
+            SenderId = senderId,
             Nick = senderNick,
             Text = text
         };
