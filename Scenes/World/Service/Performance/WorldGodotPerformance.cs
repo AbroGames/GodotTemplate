@@ -23,6 +23,10 @@ public partial class WorldGodotPerformance : Node
     public int NodeCount => (int) GPerf.GetMonitor(GPerf.Monitor.ObjectNodeCount);
     public int SurfacesChildCount => GetSurfacesChildCount();
     
+    public int MemoryStaticMb => (int) GPerf.GetMonitor(GPerf.Monitor.MemoryStatic) / 1024 / 1024;
+    public int MemoryStaticMaxMb => (int) GPerf.GetMonitor(GPerf.Monitor.MemoryStaticMax) / 1024 / 1024;
+    public int VideoMemUsedMb => (int) GPerf.GetMonitor(GPerf.Monitor.RenderVideoMemUsed) / 1024 / 1024;
+    
     [SceneService] private WorldTree _tree;
 
     public override void _Ready()
@@ -39,9 +43,11 @@ public partial class WorldGodotPerformance : Node
         sb.Append("\n");
         sb.Append($"Nodes: {NodeCount}\n");
         sb.Append($"Surfaces 1-level nodes: {SurfacesChildCount}\n");
-        sb.Append($"Frame time process: {FrameTime:N1}ms\n");
-        sb.Append($"Physics time process: {TickTime:N1}ms ({TickTimePercent:N0} %)\n");
-        sb.Append($"Navigation time process: {NavigationTime:N1}ms\n");
+        sb.Append($"Frame time process: {FrameTime:N1} ms\n");
+        sb.Append($"Physics time process: {TickTime:N1} ms ({TickTimePercent:N0} %)\n");
+        sb.Append($"Navigation time process: {NavigationTime:N1} ms\n");
+        sb.Append($"Static memory: {MemoryStaticMb}/{MemoryStaticMaxMb} mb\n");
+        sb.Append($"Video memory: {VideoMemUsedMb} mb\n");
 
         return sb.ToString();
     }
@@ -52,7 +58,8 @@ public partial class WorldGodotPerformance : Node
         
         sb.Append($"FPS/TPS: {FramePerSecond:N0}/{TickPerSecond:N0}    ");
         sb.Append($"Nodes (1-level/all): {SurfacesChildCount}/{NodeCount}\n");
-        sb.Append($"Time (frame/physics/navi): {FrameTime:N1}/{TickTime:N1}({TickTimePercent:N0}%)/{NavigationTime:N1}ms");
+        sb.Append($"Time (frame/physics/navi): {FrameTime:N1}/{TickTime:N1}({TickTimePercent:N0}%)/{NavigationTime:N1}     ");
+        sb.Append($"Memory (static/max/video): {MemoryStaticMb}/{MemoryStaticMaxMb}/{VideoMemUsedMb} mb");
 
         return sb.ToString();
     }
