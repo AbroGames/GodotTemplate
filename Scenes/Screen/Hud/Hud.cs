@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using Godot;
+﻿using Godot;
 using KludgeBox.DI.Requests.ChildInjection;
 using KludgeBox.DI.Requests.LoggerInjection;
 using Serilog;

@@ -72,12 +72,12 @@ public partial class WorldSynchronizerService : Node
         {
             _persistenceData.Players.AddPlayer(new PlayerData
             {
-                Nick = nick
+                Nick = nick,
+                Color = color
             });
         }
         PlayerData playerData = _persistenceData.Players.PlayerByNick[nick];
-        playerData.Color = color;
-        playerData.IsAdmin = nick.Equals(_temporaryData.MainAdminNick);
+        playerData.IsAdmin |= nick.Equals(_temporaryData.MainAdminNick);
         _log.Information("Player data from peer {peer} was synced", connectedClientId);
         
         _log.Information("Sending serialized world data to peer {peer}", connectedClientId);
