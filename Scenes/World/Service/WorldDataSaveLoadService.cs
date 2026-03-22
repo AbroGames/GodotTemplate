@@ -12,7 +12,8 @@ namespace GodotTemplate.Scenes.World.Service;
 public partial class WorldDataSaveLoadService : Node
 {
     
-    private const string NotRightsForSaveMessage = "You don't have the rights for saving";
+    private const string SaveFilenameMustBeNotEmptyErrorMessage = "Filename for saving must be not empty";
+    private const string NotRightsForSaveErrorMessage = "You don't have the rights for saving";
 
     public event Action<string> SaveRejectedEvent;
     
@@ -33,7 +34,13 @@ public partial class WorldDataSaveLoadService : Node
         int peerId = GetMultiplayer().GetRemoteSenderId();
         if (!_facadeService.IsAdmin(peerId))
         {
-            SaveReject(peerId, NotRightsForSaveMessage);
+            SaveReject(peerId, NotRightsForSaveErrorMessage);
+            return;
+        }
+
+        if (string.IsNullOrEmpty(saveFileName))
+        {
+            SaveReject(peerId, SaveFilenameMustBeNotEmptyErrorMessage);
             return;
         }
 
