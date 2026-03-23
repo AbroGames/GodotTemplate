@@ -53,6 +53,7 @@ public partial class Hud : Control
     public override void _Process(double delta)
     {
         InfoLabel.Text = _world.PerformanceService.Godot.GetManyLinesString() + "\n" + 
+                         _world.PerformanceService.Sharp.GetTwoLinesString() + "\n" + 
                          _world.PerformanceService.Ping.GetManyLinesString();
     }
 }

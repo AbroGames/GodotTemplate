@@ -59,7 +59,7 @@ public partial class WorldGodotPerformance : Node
         sb.Append($"FPS/TPS: {FramePerSecond:N0}/{TickPerSecond:N0}    ");
         sb.Append($"Nodes (1-level/all): {SurfacesChildCount}/{NodeCount}\n");
         sb.Append($"Time (frame/physics/navi): {FrameTime:N1}/{TickTime:N1}({TickTimePercent:N0}%)/{NavigationTime:N1}     ");
-        sb.Append($"Memory (static/max/video): {MemoryStaticMb}/{MemoryStaticMaxMb}/{VideoMemUsedMb} mb");
+        sb.Append($"Memory (static/max/video): {MemoryStaticMb}/{MemoryStaticMaxMb}/{VideoMemUsedMb} mb\n");
 
         return sb.ToString();
     }

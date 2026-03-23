@@ -53,7 +53,9 @@ public partial class ServerHud : Control
 
     public override void _Process(double delta)
     {
-        InfoLabel.Text = _world.PerformanceService.Godot.GetManyLinesString() + "\n" + GetPlayersInfo();
+        InfoLabel.Text = _world.PerformanceService.Godot.GetManyLinesString() + "\n" +
+                         _world.PerformanceService.Sharp.GetTwoLinesString() + "\n" + 
+                         GetPlayersInfo();
     }
     
     private String GetPlayersInfo()
