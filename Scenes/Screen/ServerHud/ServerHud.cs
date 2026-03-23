@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Godot;
+using GodotTemplate.Scenes.World.Service.Performance;
 using KludgeBox.DI.Requests.ChildInjection;
 using KludgeBox.DI.Requests.LoggerInjection;
 using Serilog;
@@ -55,12 +56,17 @@ public partial class ServerHud : Control
     {
         InfoLabel.Text = _world.PerformanceService.Godot.GetManyLinesString() + "\n" +
                          _world.PerformanceService.Sharp.GetTwoLinesString() + "\n" + 
-                         GetPlayersInfo();
+                         _world.PerformanceService.ENet.GetTotalInfoOneLineString() + "\n" +
+                         GetPlayersENetInfo();
     }
     
-    private String GetPlayersInfo()
+    private String GetPlayersENetInfo()
     {
-        IEnumerable<String> playersInfo = _world.TemporaryData.PlayerNickByPeerId.Select(kv => $"{kv.Key}: {kv.Value}");
+        WorldENetPerformance.PeerInfo defaultPeerInfo = new WorldENetPerformance.PeerInfo(0, 0);
+        IEnumerable<String> playersInfo = _world.TemporaryData.PlayerNickByPeerId
+            .Select(kv => $"{kv.Value} ({kv.Key}): " + 
+                          $"ping {_world.PerformanceService.ENet.InfoByPeerId.GetValueOrDefault((int) kv.Key, defaultPeerInfo).Ping} ms, " + 
+                          $"packet-loss {_world.PerformanceService.ENet.InfoByPeerId.GetValueOrDefault((int) kv.Key, defaultPeerInfo).PacketLoss:N2}%");
         return "Players:\n" + string.Join("\n", playersInfo);
     }
 }
