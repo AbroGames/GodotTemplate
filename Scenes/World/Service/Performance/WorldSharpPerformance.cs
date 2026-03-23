@@ -6,7 +6,7 @@ using KludgeBox.Core.Cooldown;
 
 namespace GodotTemplate.Scenes.World.Service.Performance;
 
-public partial class WorldShardPerformance : Node
+public partial class WorldSharpPerformance : Node
 {
 
     public int TotalManagedMemoryMb { get; private set; }

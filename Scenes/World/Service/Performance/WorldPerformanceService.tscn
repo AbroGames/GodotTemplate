@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://brvvl85t7ap0w" path="res://Scenes/World/Service/Performance/WorldGodotPerformance.cs" id="1_gvkqi"]
 [ext_resource type="Script" uid="uid://cr23gy71mges6" path="res://Scenes/World/Service/Performance/WorldPerformanceService.cs" id="1_pd84j"]
 [ext_resource type="Script" uid="uid://dde2sb8hswjet" path="res://Scenes/World/Service/Performance/WorldPingPerformance.cs" id="2_xrnxi"]
-[ext_resource type="Script" uid="uid://dn1l7ih1iqkdj" path="res://Scenes/World/Service/Performance/WorldShardPerformance.cs" id="3_eeij6"]
+[ext_resource type="Script" path="res://Scenes/World/Service/Performance/WorldSharpPerformance.cs" id="3_eeij6"]
 
 [node name="PerformanceService" type="Node" unique_id=743159716]
 script = ExtResource("1_pd84j")
