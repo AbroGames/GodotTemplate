@@ -49,7 +49,7 @@ public partial class WorldENetPerformance : Node
         
         StringBuilder sb = new();
         
-        sb.Append($"Server: ping {_infoByPeerId[ServerId].Ping} ms, packet-loss {_infoByPeerId[ServerId].PacketLoss:N2}%\n");
+        sb.Append($"Server: ping {_infoByPeerId[ServerId].Ping} ms, packet loss {_infoByPeerId[ServerId].PacketLoss:N2}%\n");
 
         return sb.ToString();
     }
@@ -61,7 +61,7 @@ public partial class WorldENetPerformance : Node
         sb.Append("Peers:\n");
         foreach (KeyValuePair<int, PeerInfo> peerInfo in _infoByPeerId)
         {
-            sb.Append($"{peerInfo.Key}: ping {peerInfo.Value.Ping} ms, packet-loss {peerInfo.Value.PacketLoss:N2}%\n");
+            sb.Append($"{peerInfo.Key}: ping {peerInfo.Value.Ping} ms, packet loss {peerInfo.Value.PacketLoss:N2}%\n");
         }
 
         return sb.ToString();

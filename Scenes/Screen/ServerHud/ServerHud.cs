@@ -55,7 +55,7 @@ public partial class ServerHud : Control
     public override void _Process(double delta)
     {
         InfoLabel.Text = _world.PerformanceService.Godot.GetManyLinesString() + "\n" +
-                         _world.PerformanceService.Sharp.GetTwoLinesString() + "\n" + 
+                         _world.PerformanceService.Sharp.GetTwoLinesString() + 
                          _world.PerformanceService.ENet.GetTotalInfoOneLineString() + "\n" +
                          GetPlayersENetInfo();
     }
@@ -66,7 +66,7 @@ public partial class ServerHud : Control
         IEnumerable<String> playersInfo = _world.TemporaryData.PlayerNickByPeerId
             .Select(kv => $"{kv.Value} ({kv.Key}): " + 
                           $"ping {_world.PerformanceService.ENet.InfoByPeerId.GetValueOrDefault((int) kv.Key, defaultPeerInfo).Ping} ms, " + 
-                          $"packet-loss {_world.PerformanceService.ENet.InfoByPeerId.GetValueOrDefault((int) kv.Key, defaultPeerInfo).PacketLoss:N2}%");
+                          $"packet loss {_world.PerformanceService.ENet.InfoByPeerId.GetValueOrDefault((int) kv.Key, defaultPeerInfo).PacketLoss:N2}%");
         return "Players:\n" + string.Join("\n", playersInfo);
     }
 }
