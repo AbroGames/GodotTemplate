@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bsuiei0dw2utj"]
 
-[ext_resource type="Script" path="res://Scenes/Screen/MainMenu/Pages/StartSingleplayer/MainMenuSingleplayerPage.cs" id="1_b4j5p"]
+[ext_resource type="Script" uid="uid://bs3a2ifrod6bp" path="res://Scenes/Screen/MainMenu/Pages/StartSingleplayer/MainMenuSingleplayerPage.cs" id="1_b4j5p"]
 
 [node name="MainMenuSingleplayerPage" type="Control" unique_id=538273988]
 layout_mode = 3
@@ -33,7 +33,7 @@ size_flags_vertical = 3
 
 [node name="SaveNameLabel" type="Label" parent="VBoxContainer/HBoxContainer" unique_id=729252660]
 layout_mode = 2
-text = "Save Name:"
+text = "SINGLEPLAYER_MENU__SAVE_NAME"
 
 [node name="SaveNameTextEdit" type="TextEdit" parent="VBoxContainer/HBoxContainer" unique_id=1366191796]
 layout_mode = 2
@@ -43,4 +43,4 @@ size_flags_vertical = 3
 [node name="StartGameButton" type="Button" parent="VBoxContainer" unique_id=697909950]
 layout_mode = 2
 size_flags_vertical = 3
-text = "Start game"
+text = "SINGLEPLAYER_MENU__START_BUTTON"

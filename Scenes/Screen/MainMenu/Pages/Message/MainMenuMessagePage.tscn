@@ -29,7 +29,7 @@ theme_override_constants/separation = 10
 
 [node name="MessageLabel" type="Label" parent="VBoxContainer" unique_id=932611225]
 layout_mode = 2
-text = "Unknown error"
+text = "MESSAGE_MENU__DEFAULT_ERROR"
 horizontal_alignment = 1
 
 [node name="Separator" type="Label" parent="VBoxContainer" unique_id=2041307921]
@@ -38,4 +38,4 @@ layout_mode = 2
 [node name="OkButton" type="Button" parent="VBoxContainer" unique_id=896642135]
 layout_mode = 2
 size_flags_vertical = 3
-text = "Ok"
+text = "MESSAGE_MENU__OK_BUTTON"

@@ -30,17 +30,17 @@ theme_override_constants/separation = 10
 [node name="StartSingleplayerButton" type="Button" parent="VBoxContainer" unique_id=914173962]
 layout_mode = 2
 size_flags_vertical = 3
-text = "Start singleplayer "
+text = "MAIN_MENU__START_SINGLEPLAYER_BUTTON"
 
 [node name="CreateServerButton" type="Button" parent="VBoxContainer" unique_id=1986401531]
 layout_mode = 2
 size_flags_vertical = 3
-text = "Create server"
+text = "MAIN_MENU__CREATE_SERVER_BUTTON"
 
 [node name="ConnectToServerButton" type="Button" parent="VBoxContainer" unique_id=515674449]
 layout_mode = 2
 size_flags_vertical = 3
-text = "Connect to server"
+text = "MAIN_MENU__CONNECT_TO_SERVER_BUTTON"
 
 [node name="Separator" type="Label" parent="VBoxContainer" unique_id=723708564]
 layout_mode = 2
@@ -48,9 +48,9 @@ layout_mode = 2
 [node name="SettingsButton" type="Button" parent="VBoxContainer" unique_id=636044712]
 layout_mode = 2
 size_flags_vertical = 3
-text = "Settings"
+text = "MAIN_MENU__SETTINGS_BUTTON"
 
 [node name="ExitButton" type="Button" parent="VBoxContainer" unique_id=884625529]
 layout_mode = 2
 size_flags_vertical = 3
-text = "Exit"
+text = "MAIN_MENU__EXIT_BUTTON"
