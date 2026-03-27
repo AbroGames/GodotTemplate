@@ -41,11 +41,11 @@ layout_mode = 2
 [node name="ChatLineEdit" type="LineEdit" parent="VBoxContainer/ChatLineHBoxContainer" unique_id=1560523431]
 layout_mode = 2
 size_flags_horizontal = 3
-placeholder_text = "Type a message or command starting with /"
+placeholder_text = "HUD__CHAT_PLACEHOLDER"
 
 [node name="ChatSendButton" type="Button" parent="VBoxContainer/ChatLineHBoxContainer" unique_id=1451285496]
 layout_mode = 2
-text = "Send"
+text = "HUD__CHAT_SEND_BUTTON"
 
 [node name="ControlHBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1375383768]
 layout_mode = 2
@@ -53,11 +53,11 @@ layout_mode = 2
 [node name="SaveLineEdit" type="LineEdit" parent="VBoxContainer/ControlHBoxContainer" unique_id=646051832]
 layout_mode = 2
 size_flags_horizontal = 3
-placeholder_text = "Filename"
+placeholder_text = "HUD__SAVE_FILENAME_PLACEHOLDER"
 
 [node name="SaveButton" type="Button" parent="VBoxContainer/ControlHBoxContainer" unique_id=1728725173]
 layout_mode = 2
-text = "Save"
+text = "HUD__SAVE_BUTTON"
 
 [node name="VSeparator1" type="VSeparator" parent="VBoxContainer/ControlHBoxContainer" unique_id=164614131]
 custom_minimum_size = Vector2(20, 0)
@@ -65,7 +65,7 @@ layout_mode = 2
 
 [node name="ExitButton" type="Button" parent="VBoxContainer/ControlHBoxContainer" unique_id=1612198714]
 layout_mode = 2
-text = "Exit"
+text = "HUD__EXIT_BUTTON"
 
 [node name="VSeparator2" type="VSeparator" parent="VBoxContainer/ControlHBoxContainer" unique_id=1043746063]
 custom_minimum_size = Vector2(20, 0)
@@ -73,16 +73,16 @@ layout_mode = 2
 
 [node name="Test1Button" type="Button" parent="VBoxContainer/ControlHBoxContainer" unique_id=1673923636]
 layout_mode = 2
-text = "Test 1"
+text = "HUD__TEST_1_BUTTON"
 
 [node name="Test2Button" type="Button" parent="VBoxContainer/ControlHBoxContainer" unique_id=1547842000]
 layout_mode = 2
-text = "Test 2"
+text = "HUD__TEST_2_BUTTON"
 
 [node name="Test3Button" type="Button" parent="VBoxContainer/ControlHBoxContainer" unique_id=1214648125]
 layout_mode = 2
-text = "Test 3"
+text = "HUD__TEST_3_BUTTON"
 
 [node name="LogButton" type="Button" parent="VBoxContainer/ControlHBoxContainer" unique_id=1734919301]
 layout_mode = 2
-text = "Log"
+text = "HUD__LOG_BUTTON"
