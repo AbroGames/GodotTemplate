@@ -33,6 +33,7 @@ public abstract class BaseRootStarter
         Services.TypesMapping.AddTypes(Services.AssemblyCache.GetTypes(Assembly.GetExecutingAssembly()).ToList());
         Services.LoadingScreen.Init(rootData.LoadingScreenContainer, rootData.PackedScenes.LoadingScreen);
         Services.MainScene.Init(rootData.MainSceneContainer, rootData.PackedScenes.Game, rootData.PackedScenes.MainMenu);
+        Services.I18N.Init(rootData.SceneTree);
     }
 
     public virtual void Start(RootData rootData)

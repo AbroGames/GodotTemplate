@@ -26,3 +26,7 @@ project/assembly_name="GodotTemplate"
 [editor]
 
 run/main_run_args="--godot-log-push"
+
+[internationalization]
+
+locale/translations=PackedStringArray("res://Assets/Locales/en.po", "res://Assets/Locales/ru.po")
