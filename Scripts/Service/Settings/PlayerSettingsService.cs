@@ -8,15 +8,20 @@ public class PlayerSettingsService
 {
 
     private readonly string _playerSettingsPath = "user://player-settings.json";
-    
-    private string _nick = "Player";
-    private Color _color = new Color(1, 1, 1);
-    private string _language = I18NService.DefaultLocale;
 
-    private string _temporalNick = null; 
+    private string _nick;
+    private Color _color;
+    private string _language;
+
+    private string _temporalNick; 
 
     public void Init()
     {
+        // Set default values (here, because we must do it only in Init method, not early)
+        _nick = "Player";
+        _color = new Color(1, 1, 1);
+        _language = Services.I18N.GetUserOsLocaleInfoOrDefault().Code;
+        
         Load();
     }
 
