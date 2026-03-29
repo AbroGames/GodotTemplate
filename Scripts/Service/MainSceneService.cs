@@ -1,6 +1,7 @@
 ﻿using Godot;
 using GodotTemplate.Scenes.Game;
 using GodotTemplate.Scenes.Game.Starters;
+using GodotTemplate.Scenes.KludgeBox;
 using GodotTemplate.Scenes.Screen.MainMenu;
 using GodotTemplate.Scenes.Screen.MainMenu.Pages.Message;
 
@@ -9,28 +10,31 @@ namespace GodotTemplate.Scripts.Service;
 public class MainSceneService
 {
     
-    private Scenes.KludgeBox.NodeContainer _mainSceneContainer;
+    private NodeContainer _mainSceneContainer;
     private PackedScene _gamePackedScene;
     private PackedScene _mainMenuPackedScene;
 
-    public void Init(Scenes.KludgeBox.NodeContainer mainSceneContainer, PackedScene gamePackedScene, PackedScene mainMenuPackedScene)
+    public void Init(NodeContainer mainSceneContainer, PackedScene gamePackedScene, PackedScene mainMenuPackedScene)
     {
         _mainSceneContainer = mainSceneContainer;
         _gamePackedScene = gamePackedScene;
         _mainMenuPackedScene = mainMenuPackedScene;
     }
     
-    public void StartMainMenu(string message = null)
+    public void StartMainMenu()
     {
         MainMenu mainMenu = _mainMenuPackedScene.Instantiate<MainMenu>();
         _mainSceneContainer.ChangeStoredNode(mainMenu);
+    }
+
+    public void StartMainMenu(string message)
+    {
+        StartMainMenu();
+        MainMenu mainMenu = _mainSceneContainer.GetCurrentStoredNode<MainMenu>();
         
         // We must call this section after adding MainMenu to tree, because otherwise we can't access mainMenu.PackedScenes field
-        if (message != null)
-        {
-            mainMenu.ChangeMenuPage(mainMenu.PackedScenes.Message);
-            mainMenu.MenuContainer.GetCurrentStoredNode<MainMenuMessagePage>().MessageLabel.Text = message;
-        }
+        mainMenu.ChangeMenuPage(mainMenu.PackedScenes.Message);
+        mainMenu.MenuContainer.GetCurrentStoredNode<MainMenuMessagePage>().MessageLabel.Text = message;
     }
     
     public void StartSingleplayerGame(string saveFileName = null)
