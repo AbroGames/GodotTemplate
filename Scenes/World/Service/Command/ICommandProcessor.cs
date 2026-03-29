@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace GodotTemplate.Scenes.World.Service.Command;
+﻿namespace GodotTemplate.Scenes.World.Service.Command;
 
 public interface ICommandProcessor
 {

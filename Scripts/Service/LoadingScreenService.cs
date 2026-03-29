@@ -1,4 +1,5 @@
 ﻿using Godot;
+using GodotTemplate.Scenes.KludgeBox;
 using GodotTemplate.Scenes.Screen.LoadingScreen;
 using GodotTemplate.Scripts.Content.LoadingScreen;
 
@@ -7,10 +8,10 @@ namespace GodotTemplate.Scripts.Service;
 public class LoadingScreenService
 {
     
-    private Scenes.KludgeBox.NodeContainer _loadingScreenContainer;
+    private NodeContainer _loadingScreenContainer;
     private PackedScene _loadingScreenPackedScene;
 
-    public void Init(Scenes.KludgeBox.NodeContainer loadingScreenContainer, PackedScene loadingScreenPackedScene)
+    public void Init(NodeContainer loadingScreenContainer, PackedScene loadingScreenPackedScene)
     {
         _loadingScreenContainer = loadingScreenContainer;
         _loadingScreenPackedScene = loadingScreenPackedScene;

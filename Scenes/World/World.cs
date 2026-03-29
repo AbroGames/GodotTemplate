@@ -7,6 +7,7 @@ using GodotTemplate.Scenes.World.Data.TemporaryData;
 using GodotTemplate.Scenes.World.Scenes.ClientScenes;
 using GodotTemplate.Scenes.World.Scenes.SyncedScenes;
 using GodotTemplate.Scenes.World.Service;
+using GodotTemplate.Scenes.World.Service.Chat;
 using GodotTemplate.Scenes.World.Service.Command;
 using GodotTemplate.Scenes.World.Service.DataSerializer;
 using GodotTemplate.Scenes.World.Service.Performance;
@@ -17,7 +18,6 @@ using GodotTemplate.Scenes.World.Tree.Entity.Building;
 using KludgeBox.DI.Requests.ChildInjection;
 using KludgeBox.DI.Requests.LoggerInjection;
 using Serilog;
-using WorldChatService = GodotTemplate.Scenes.World.Service.Chat.WorldChatService;
 
 namespace GodotTemplate.Scenes.World;
 
