@@ -19,13 +19,16 @@ public class ClientRootStarter : BaseRootStarter
         _clientArgs = ClientArgs.GetFromCmd(CmdArgsService);
         
         Services.Net.Init(rootData.SceneTree, false);
-        Services.LoadingScreen.SetLoadingScreen(LoadingScreenTypes.Type.Loading);
         
         Services.PlayerSettings.Init();
         if (_clientArgs.Nick != null)
         {
 	        Services.PlayerSettings.SetNickTemporarily(_clientArgs.Nick);
         }
+        Services.I18N.SetCurrentLocale(Services.PlayerSettings.GetPlayerSettings().Language);
+        
+        // Activate loading screen after setting up locale
+        Services.LoadingScreen.SetLoadingScreen(LoadingScreenTypes.Type.Loading);
     }
 
     public override void Start(RootData rootData)
