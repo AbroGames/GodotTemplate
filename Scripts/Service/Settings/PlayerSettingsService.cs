@@ -32,9 +32,9 @@ public class PlayerSettingsService
 
     public void SetPlayerSettings(PlayerSettings playerSettings)
     {
-        _nick = playerSettings.Nick;
+        _nick ??= playerSettings.Nick;
         _color = playerSettings.Color;
-        _language = playerSettings.Language;
+        _language ??= playerSettings.Language;
         Save();
     }
 
