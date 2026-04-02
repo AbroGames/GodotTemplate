@@ -1,8 +1,8 @@
-﻿using KludgeBox.Godot.Nodes;
+﻿using GodotTemplate.Scenes.KludgeBox;
 
 namespace GodotTemplate.Scenes.World.Scenes.ClientScenes;
 
-public partial class ClientPackedScenes : AbstractStorage
+public partial class ClientPackedScenes : CheckedAbstractStorage
 {
     
 }

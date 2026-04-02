@@ -1,10 +1,10 @@
 ﻿using Godot;
+using GodotTemplate.Scenes.KludgeBox;
 using KludgeBox.DI.Requests.NotNullCheck;
-using KludgeBox.Godot.Nodes;
 
 namespace GodotTemplate.Scenes.World.Scenes.SyncedScenes;
 
-public partial class SyncedPackedScenes : AbstractStorage
+public partial class SyncedPackedScenes : CheckedAbstractStorage
 {
     
     [ExportGroup("Surfaces")]
