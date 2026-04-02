@@ -1,6 +1,5 @@
 ﻿using System.Text.Json;
 using Godot;
-using KludgeBox.Godot.Services;
 
 namespace GodotTemplate.Scripts.Service.Settings;
 
