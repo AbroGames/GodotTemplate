@@ -25,6 +25,8 @@ public partial class WorldSynchronizerService : Node
     public event Action SyncStartedOnClientEvent;
     public event Action SyncEndedOnClientEvent;
     public event Action<string> SyncRejectOnClientEvent;
+    
+    public event Action<int> SyncEndedOnServerEvent;
 
     [SceneService] private WorldPersistenceData _persistenceData;
     [SceneService] private WorldTemporaryData _temporaryData;
@@ -90,6 +92,9 @@ public partial class WorldSynchronizerService : Node
     {
         _log.Information("Received serialized world data from server");
         _dataSerializerService.DeserializeWorldData(serializableData);
+        EndSyncOnServer();
+        _log.Information("Syncing complete successfully");
+        
         SyncEndedOnClientEvent?.Invoke();
     }
     
@@ -99,5 +104,15 @@ public partial class WorldSynchronizerService : Node
     {
         _log.Error("Syncing with the server was rejected with error: {error}", errorMessage);
         SyncRejectOnClientEvent?.Invoke(errorMessage);
+    }
+    
+    private void EndSyncOnServer() => RpcId(ServerId, MethodName.EndSyncOnServerRpc);
+    [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true)] 
+    private void EndSyncOnServerRpc()
+    {
+        int connectedClientId = GetMultiplayer().GetRemoteSenderId();
+        _log.Information("Syncing peer {peer} completed successfully", connectedClientId );
+        
+        SyncEndedOnServerEvent?.Invoke(connectedClientId);
     }
 }
