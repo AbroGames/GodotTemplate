@@ -1,18 +1,19 @@
 ﻿using Godot;
+using GodotTemplate.Scenes.World.Service;
 using GodotTemplate.Scripts.Content.LoadingScreen;
+using GodotTemplate.Scripts.Service.Settings;
 using Humanizer;
 using KludgeBox.Godot.Nodes.Process;
 
 namespace GodotTemplate.Scenes.Game.Starters;
 
-public class HostMultiplayerGameStarter(int? port = null, string saveFileName = null, string adminNickname = null, int? parentPid = null, bool? serverHud = true, bool? worldRender = true) : BaseGameStarter
+public class HostMultiplayerGameStarter(int? port = null, string saveFileName = null, string adminNickname = null, int? parentPid = null, bool? serverHudRender = false, bool? worldRender = true, bool? mustSetLastGame = null, bool? startedAsDedicated = null) : BaseGameStarter
 {
     
     private const string HostingFailedMessage = "Failed to start server: {0}";
     
     public override void Init(Game game)
     {
-        base.Init(game);
         Services.LoadingScreen.SetLoadingScreen(LoadingScreenTypes.Type.Loading);
 
         if (parentPid.HasValue)
@@ -28,7 +29,7 @@ public class HostMultiplayerGameStarter(int? port = null, string saveFileName = 
         World.World world = game.AddWorld();
         Net.DoClient(() => game.AddHud());
 
-        if (serverHud.HasValue && serverHud.Value)
+        if (serverHudRender.HasValue && serverHudRender.Value)
         {
             game.AddServerHud();
         }
@@ -36,7 +37,15 @@ public class HostMultiplayerGameStarter(int? port = null, string saveFileName = 
         {
             world.SetVisible(false);
         }
+
         
+        if (mustSetLastGame.HasValue && mustSetLastGame.Value)
+        {
+            var lastGame = ResumableGame.GetCreateServer(saveFileName, port ?? 0, startedAsDedicated ?? false);
+            SetLastGame(lastGame);
+            AddLastGameUpdaterToSaveEvent(world, lastGame);
+        }
+
         Error error = network.HostServer(port ?? DefaultPort, true);
         if (error != Error.Ok)
         {

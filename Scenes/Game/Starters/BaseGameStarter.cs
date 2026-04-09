@@ -1,5 +1,7 @@
 ﻿using System;
+using GodotTemplate.Scenes.World.Service;
 using GodotTemplate.Scripts.Service;
+using GodotTemplate.Scripts.Service.Settings;
 
 namespace GodotTemplate.Scenes.Game.Starters;
 
@@ -9,8 +11,29 @@ public abstract class BaseGameStarter
     protected const string DefaultHost = Localhost;
     protected const int DefaultPort = 25566;
 
-    public virtual void Init(Game game) { }
+    public abstract void Init(Game game);
 
+    protected void SetLastGame(ResumableGame lastGame)
+    {
+        Services.GameSettings.SetSettings(Services.GameSettings.GetSettings() with { LastGame = lastGame });
+    }
+
+    protected void AddLastGameUpdaterToSaveEvent(World.World world, ResumableGame lastGame)
+    {
+        world.DataSaveLoadService.SaveSuccessServerEvent += saveName =>
+        {
+            Services.GameSettings.SetSettings(Services.GameSettings.GetSettings() 
+                with { LastGame = lastGame with { SaveName = saveName } });
+        };
+        //TODO надо проверить утечки памяти потом! И/или сделать авто-отвязку.
+        //TODO Сразу реализовать обязательный выбор имени сохранения для игры при старте? Дефолтный забитый вариант: дата и время (без секунд)
+        //TODO В HostMultiplayerGameStarter четкие флаги: ServerHud (его же в параметры дедика как no-hud), SetLastGame
+        //TODO Убрать все ? = null из конструкторов стартеров, в MainScene постараться тоже убрать
+        //TODO Сделать кнопку
+        //TODO Скопировать ResumableGame (отдельный файл) из неонки, скопировать логику из MainSceneService 
+        //TODO Коммент <param name="worldRender">Show not the GUI, but the game scene</param>
+    }
+    
     protected void ServerStartWorld(World.World world, string saveFileName, string adminNickname)
     {
         if (saveFileName == null)
