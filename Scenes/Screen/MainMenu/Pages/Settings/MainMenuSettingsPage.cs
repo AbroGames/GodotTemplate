@@ -17,10 +17,10 @@ public partial class MainMenuSettingsPage : MainMenuPage
     {
         Di.Process(this);
 
-        PlayerSettings playerSettings = Services.PlayerSettings.GetPlayerSettings();
-        NickTextEdit.Text = playerSettings.Nick;
-        ColorTextEdit.Text = playerSettings.Color.ToHtml(false);
-        LanguageOptionButton.Text = Services.I18N.GetLocaleInfoByCode(playerSettings.Language).Name;
+        GameSettings gameSettings = Services.GameSettings.GetSettings();
+        NickTextEdit.Text = gameSettings.PlayerNick;
+        ColorTextEdit.Text = gameSettings.PlayerColor.ToHtml(false);
+        LanguageOptionButton.Text = Services.I18N.GetLocaleInfoByCode(gameSettings.Locale).Name;
         
         foreach (I18NService.LocaleInfo localeInfo in Services.I18N.Locales)
         {
@@ -37,7 +37,12 @@ public partial class MainMenuSettingsPage : MainMenuPage
         Color color = Color.FromHtml(ColorTextEdit.Text);
         string locale = GetLocaleCodeFromOptionButton();
         
-        Services.PlayerSettings.SetPlayerSettings(new PlayerSettings(nick, color, locale));
+        Services.GameSettings.SetSettings(Services.GameSettings.GetSettings() with
+        {
+            PlayerNick = nick,
+            PlayerColor = color,
+            Locale = locale
+        });
         Services.I18N.SetCurrentLocale(locale);
         ChangeMenuPage(PackedScenes.Main);
     }

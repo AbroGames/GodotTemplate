@@ -67,7 +67,7 @@ public class MainSceneService
         game.SetName("Game");
         _mainSceneContainer.ChangeStoredNode(game);
 
-        string adminNickname = Services.PlayerSettings.GetPlayerSettings().Nick;
+        string adminNickname = Services.GameSettings.GetSettings().PlayerNick;
         
         if (createDedicatedServerProcess ?? false)
         {
