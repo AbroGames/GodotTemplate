@@ -3,7 +3,9 @@ using GodotTemplate.Scripts.Service.Settings;
 
 namespace GodotTemplate.Scenes.Game.Starters;
 
-public class SingleplayerGameStarter(string saveFileName = null) : BaseGameStarter
+public class SingleplayerGameStarter(
+    string saveFileName
+    ) : BaseGameStarter
 {
     
     public override void Init(Game game)

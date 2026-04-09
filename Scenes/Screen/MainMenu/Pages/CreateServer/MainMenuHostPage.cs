@@ -23,6 +23,6 @@ public partial class MainMenuHostPage : MainMenuPage
         int? port = PortTextEdit.Text.Length != 0 ? PortTextEdit.Text.ToInt() : null;
         string saveFileName = SaveNameTextEdit.Text.Length != 0 ? SaveNameTextEdit.Text : null;
         bool isDedicated = IsDedicatedCheckBox.ButtonPressed;
-        Services.MainScene.HostMultiplayerGameAsClient(port, saveFileName, isDedicated);
+        Services.MainScene.HostMultiplayerGameAsClient(saveFileName, port, isDedicated);
     }
 }
