@@ -28,8 +28,6 @@ script = ExtResource("1_0nbjp")
 
 [node name="TemporaryData" type="Node" parent="." unique_id=1505366897]
 script = ExtResource("4_x5sp8")
-MainAdminNick = null
-PlayerNickByPeerId = null
 
 [node name="FactoryService" type="Node" parent="." unique_id=1851041012]
 script = ExtResource("4_kuxid")
@@ -70,4 +68,3 @@ script = ExtResource("12_lp0bp")
 
 [node name="Tree-MultiplayerSpawner" parent="." unique_id=1958817782 instance=ExtResource("2_ouhkt")]
 spawn_path = NodePath("../Tree")
-_selfSync = null
