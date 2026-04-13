@@ -1,4 +1,4 @@
-﻿using GodotTemplate.Scripts.Service.Settings;
+﻿using GodotTemplate.Scripts.Service.ResumableGame;
 using KludgeBox.Godot.Nodes.Process;
 
 namespace GodotTemplate.Scenes.Game.Starters;

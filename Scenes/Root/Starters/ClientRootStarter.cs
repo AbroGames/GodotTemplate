@@ -19,6 +19,7 @@ public class ClientRootStarter : BaseRootStarter
         _clientArgs = ClientArgs.GetFromCmd(CmdArgsService);
         
         Services.Net.Init(false);
+        Services.LastGame.Init();
         
         Services.GameSettings.Init();
         if (_clientArgs.Nick != null)

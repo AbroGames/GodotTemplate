@@ -1,4 +1,5 @@
 ﻿using GodotTemplate.Scripts.Service;
+using GodotTemplate.Scripts.Service.ResumableGame;
 using GodotTemplate.Scripts.Service.Settings;
 using KludgeBox.Core;
 using KludgeBox.Core.Random;
@@ -31,6 +32,7 @@ public static class Services
     public static readonly LoadingScreenService LoadingScreen = new();
     public static readonly MainSceneService MainScene = new();
     public static readonly GameSettingsService GameSettings = new();
+    public static readonly ResumableGameService LastGame = new();
     public static readonly SaveLoadService SaveLoad = new();
     
     public static class Global

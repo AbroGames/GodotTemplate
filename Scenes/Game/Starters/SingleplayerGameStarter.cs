@@ -1,4 +1,5 @@
 ﻿using GodotTemplate.Scripts.Content.LoadingScreen;
+using GodotTemplate.Scripts.Service.ResumableGame;
 using GodotTemplate.Scripts.Service.Settings;
 
 namespace GodotTemplate.Scenes.Game.Starters;
