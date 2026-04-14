@@ -27,6 +27,14 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 10
 
+[node name="StartLastGameButton" type="Button" parent="VBoxContainer" unique_id=888442415]
+layout_mode = 2
+size_flags_vertical = 3
+text = "MAIN_MENU__START_LAST_GAME_BUTTON"
+
+[node name="Separator" type="Label" parent="VBoxContainer" unique_id=1589050563]
+layout_mode = 2
+
 [node name="StartSingleplayerButton" type="Button" parent="VBoxContainer" unique_id=914173962]
 layout_mode = 2
 size_flags_vertical = 3
@@ -42,7 +50,7 @@ layout_mode = 2
 size_flags_vertical = 3
 text = "MAIN_MENU__CONNECT_TO_SERVER_BUTTON"
 
-[node name="Separator" type="Label" parent="VBoxContainer" unique_id=723708564]
+[node name="Separator2" type="Label" parent="VBoxContainer" unique_id=723708564]
 layout_mode = 2
 
 [node name="SettingsButton" type="Button" parent="VBoxContainer" unique_id=636044712]
