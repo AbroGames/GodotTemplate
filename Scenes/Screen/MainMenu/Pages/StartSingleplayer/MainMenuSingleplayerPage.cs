@@ -13,6 +13,7 @@ public partial class MainMenuSingleplayerPage : MainMenuPage
     {
         Di.Process(this);
 
+        SaveNameTextEdit.Text = Services.SaveLoad.GenNewSaveFileName();
         StartGameButton.Pressed += ParseAndStartServer;
     }
 

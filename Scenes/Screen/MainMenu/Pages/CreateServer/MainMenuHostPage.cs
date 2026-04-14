@@ -14,7 +14,8 @@ public partial class MainMenuHostPage : MainMenuPage
     public override void _Ready()
     {
         Di.Process(this);
-
+        
+        SaveNameTextEdit.Text = Services.SaveLoad.GenNewSaveFileName();
         CreateServerButton.Pressed += ParseAndStartServer;
     }
 
