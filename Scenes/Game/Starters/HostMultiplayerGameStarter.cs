@@ -9,7 +9,7 @@ namespace GodotTemplate.Scenes.Game.Starters;
 public class HostMultiplayerGameStarter(
     string saveFileName,
     int? port,
-    string adminNickname,
+    string adminUid,
     int? parentPid,
     bool serverHudRender,
     bool worldRender,
@@ -59,7 +59,7 @@ public class HostMultiplayerGameStarter(
             return;
         }
 
-        ServerStartWorld(world, saveFileName, adminNickname);
+        ServerStartWorld(world, saveFileName, adminUid);
         network.OpenServer();
         Net.DoClient(() => ClientStartWorld(world));
     }

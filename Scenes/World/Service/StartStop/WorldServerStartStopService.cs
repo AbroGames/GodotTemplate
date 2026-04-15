@@ -28,23 +28,23 @@ public partial class WorldServerStartStopService : Node
         Di.Process(this);
     }
 
-    public void StartNewGame(string saveFileName, string adminNickname)
+    public void StartNewGame(string saveFileName, string adminUid)
     {
         if (!Net.IsServer()) throw new InvalidOperationException("Can only be executed on the server");
         
-        CommonServerInit(adminNickname);
+        CommonServerInit(adminUid);
         NewGameServerInit(saveFileName);
     }
     
-    public void LoadGame(string saveFileName, string adminNickname)
+    public void LoadGame(string saveFileName, string adminUid)
     {
         if (!Net.IsServer()) throw new InvalidOperationException("Can only be executed on the server");
         
-        CommonServerInit(adminNickname);
+        CommonServerInit(adminUid);
         LoadServerInit(saveFileName);
     }
 
-    private void CommonServerInit(string adminNickname)
+    private void CommonServerInit(string adminUid)
     {
         _log.Information("World starting...");
         
@@ -58,7 +58,7 @@ public partial class WorldServerStartStopService : Node
         GetMultiplayer().PeerDisconnected += PeerDisconnectedEvent;
         
         // Init WorldSynchronizerService
-        _synchronizerService.InitOnServer(adminNickname);
+        _synchronizerService.InitOnServer(adminUid);
         
         // Init command system
         _commandService.InitOnServer();

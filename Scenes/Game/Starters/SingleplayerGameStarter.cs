@@ -21,7 +21,7 @@ public class SingleplayerGameStarter(
         SetLastGame(lastGame);
         AddLastGameUpdaterToSaveEvent(world, lastGame);
         
-        ServerStartWorld(world, saveFileName, gameSettings.PlayerNick);
+        ServerStartWorld(world, saveFileName, gameSettings.PlayerUid);
         ClientStartWorld(world);
     }
 }
