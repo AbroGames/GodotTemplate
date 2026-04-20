@@ -1,4 +1,5 @@
 ﻿using Godot;
+using Godot.Collections;
 using KludgeBox.Godot.Nodes.MpSync;
 
 namespace GodotTemplate.Scenes.World.Data.TemporaryData;
@@ -13,7 +14,7 @@ public partial class WorldTemporaryData : Node
     /// <summary>
     /// List of current connected players.
     /// </summary>
-    [Export] [Sync] public Godot.Collections.Dictionary<long, string> PlayerUidByPeerId = new();
+    [Export] [Sync] public Dictionary<long, string> PlayerUidByPeerId = new();
     
     public override void _Ready()
     {
