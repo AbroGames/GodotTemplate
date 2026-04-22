@@ -27,7 +27,7 @@ public abstract class BaseGameStarter
     
     protected void ServerStartWorld(World.World world, string saveFileName, string adminUid)
     {
-        saveFileName ??= Services.SaveLoad.GenNewSaveFileName();
+        if (saveFileName == null) throw new ArgumentNullException(nameof(saveFileName));
 
         if (!Services.SaveLoad.CheckFileExists(saveFileName))
         {
