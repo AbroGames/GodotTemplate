@@ -4,9 +4,7 @@
 
 ### Предварительная настройка Godot
 
-
-1. Чтобы в Godot настроить интеграцию с Rider, необходимо зайти в Editor -> Editor Settings -> Dotnet -> Editor. В списке External Editor выбрать JetBrains Rider и очистить значение Custom Exec Path Args.  
-2. [Опционально] Чтобы иметь возможность при экспорте изменять свойства exe файла, необходимо указать путь до [rcedit](https://github.com/electron/rcedit/releases) в Editor -> Editor Settings -> Export -> Windows -> rcedit.
+1. Чтобы в Godot настроить интеграцию с Rider, необходимо зайти в Editor -> Editor Settings -> Dotnet -> Editor. В списке External Editor выбрать JetBrains Rider и очистить значение Custom Exec Path Args.
 
 ### Создание проектов в Godot и Rider 
 
@@ -35,56 +33,15 @@
 
 <img width="800" height="777" alt="image" src="https://github.com/user-attachments/assets/93f1fc80-bd9f-405e-bfbd-e07db2847812" />
 
-В этот файл внутрь блока Project добавляем блок Target с настройками пре-билда.  
-Пример, как должно получиться:
-```
-<Project Sdk="Godot.NET.Sdk/4.4.1">
-  ...
-  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-    <ItemGroup>
-      <DirectoriesToCreate Include="$(ProjectDir)bin\win-64" />
-      <DirectoriesToCreate Include="$(ProjectDir)bin\android" />
-      <FilesToCreate Include="$(ProjectDir)bin\.gdignore" />
-    </ItemGroup>
-    <MakeDir Directories="@(DirectoriesToCreate)" />
-    <WriteLinesToFile File="@(FilesToCreate)" Lines="" Overwrite="true" />
-  </Target>
-  ...
-</Project>
-```
-
 ### Копирование файлов
-Создать папки Scripts, Scenes, Assets
 
-Заменить файлы из GodotTemplate:  
-.editorconfig  
-.gitignore  
-
-Перенести icon.svg в Assets/Textures/icon.svg  
-Перенести исходники из папки Lib проекта GodotTemplate в новый проект.
-
-Если был перенос исходников, то необходимо во всех исходниках переименовать GodotTemplate в название проекта.
+1. Копируем всё содержимое `GodotTemplate.csproj` в новый `*.csproj`.
+2. Копируем папки Scripts, Scenes, Assets.
+3. Копируем файлы .editorconfig и .gitignore.
+4. Перенести icon.svg в Assets/Textures/icon.svg.
+5. Во всех исходниках переименовать GodotTemplate в название нового проекта.
 
 ### Настройка проекта в Godot
 
 Project -> Project Settings -> Application -> Run -> Main Scene = Scenes/Root/Root.tscn  
 Project -> Project Settings -> Application -> Config -> Icon = res://Assets/Textures/icon.svg
-
-### Настройка зависимости Lib в Rider
-
-Сделаем так, чтобы основной проект мог ссылаться на классы из Lib, но не наоборот.  
-Если Lib попытается использовать класс из основного проекта, то получим ошибку компиляции и в Rider и в Godot.  
-При билде в Godot также происходит полный ребилд проекта Lib.  
-
-Создаем новый проект "Lib".  
-<img width="800" height="684" alt="image" src="https://github.com/user-attachments/assets/ae790d62-2930-4c7f-a218-17ea0218e36a" />
-
-В настройках указываем имя "Lib", больше ничего не меняем.  
-<img width="800" height="600" alt="image" src="https://github.com/user-attachments/assets/40a03166-a43c-44ec-8a19-b74a040a2500" />
-
-Открываем файл проекта (*.csproj).  
-В этом файле первую строку заменяем на ```<Project Sdk="Godot.NET.Sdk/4.4.1">```  
-<img width="800" height="717" alt="image" src="https://github.com/user-attachments/assets/3311b613-cc4e-4556-b933-edd1031e26f2" />
-
-Переключаем в Rider Explorer в режим File System (сверху). В папке Lib удаляем папки bin и obj.   
-<img width="400" height="523" alt="image" src="https://github.com/user-attachments/assets/1384cb55-733e-4c49-9a1b-b489f27b5c7f" />
